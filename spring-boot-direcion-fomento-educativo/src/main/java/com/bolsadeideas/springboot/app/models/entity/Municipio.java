@@ -2,7 +2,7 @@ package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +28,7 @@ public class Municipio implements Serializable {
 	@Column(length = 40)
 	private String municipio;
 	
-	@ManyToOne(targetEntity = Region.class,cascade = CascadeType.ALL,fetch =FetchType.LAZY )
+	@ManyToOne(targetEntity = Region.class,fetch =FetchType.LAZY )
 	private Region region;
 
 	public Long getId_municipio() {
