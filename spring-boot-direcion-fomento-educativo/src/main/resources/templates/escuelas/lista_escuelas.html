@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<table class="table table-light">
+					<thead>
+						<tr>
+							<th>Clave</th>
+							<th>Escuela</th>
+							<th>Region</th>
+							<th>Telefono</th>
+							<th>Fecha registro</th>
+							<th>Detalles</th>
+
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="escuela: ${escuelas}">
+
+							<td th:text="${escuela.clave}"></td>
+							<td th:text="${escuela.nombre_escuela}"></td>
+							<td th:text="${escuela.region}"></td>
+							<td th:text="${escuela.telefono}"></td>
+							<td th:text="${escuela.fecha_registro}"></td>
+
+
+
+							<td><a class="btn btn-xs btn-primary"
+								th:href="@{/escuelas/form}+${escuela.clave}" th:text="'Editar'"></a></td>
+							<td><a class="btn btn-xs btn-danger"
+								th:href="@{/escuelas/eliminar/}+${escuela.clave}"
+								th:text="'Eliminar'"
+								onclick="return confirm('�Estas seguro que quieres eliminar la escuela?')"></a>
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+				<nav th:replace="layout/Paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+
+
+
+	</div>
+	
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

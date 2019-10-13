@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+
+
+		<form class="py-5" th:action="@{/escuelas/form}" th:object="${escuela}"
+			method="post">
+
+			<div class="form-group">
+
+				<label for="clave_escuela" class="control-label">Clave de la
+					escuela</label> <input type="text" class="form-control" th:field="*{clave}"
+					th:errorclass="'form-control alert-danger'" /> <small
+					class="form-text text-danger" th:if="${#fields.hasErrors('clave')}"
+					th:errors="*{clave}"></small>
+			</div>
+
+			<div class="form-group">
+
+				<label class="control-label">Nombre de la escuela </label> <input
+					type="text" class="form-control" th:field="*{nombre_escuela}"
+					th:errorclass="'form-control alert-danger'" /> <small
+					class="form-text text-danger"
+					th:if="${#fields.hasErrors('nombre_escuela')}"
+					th:errors="*{nombre_escuela}"></small>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="nivel_escuela" class="control-label">Nivel</label> <select
+							th:field="*{nivel}" class="form-control" id="nivel_escuela">
+							<option value="Primaria">Primaria</option>
+							<option value="Secundaria">Secundaria</option>
+
+						</select>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="turno_escuela" class="control-label">Turno de
+							la escuela</label> <select class="form-control" th:field="*{turno}">
+							<option value="Matutino">Matutino</option>
+							<option value="Vespertino">Vespertino</option>
+
+						</select>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="street1_id" class="control-label">Telefono</label> <input
+							type="text" class="form-control" th:field="*{telefono}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="street1_id" class="control-label">Nombre del
+							director </label> <input type="text" class="form-control"
+							th:field="*{matricula}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></small>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="escuela_localidad" class="control-label">Localidad
+						</label> <input type="text" class="form-control"
+							th:field="*{direccion.localidad}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('direccion.localidad')}"
+							th:errors="*{direccion.localidad}"></small>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="region_escuela" class="control-label">Region</label> <select
+							class="form-control" th:field="*{direccion.localidad}">
+							<option value="Centro">Centro</option>
+							<option value="Acapulco">Acapulco</option>
+							<option value="Norte">Norte</option>
+							<option value="Tierra caliente">Tierra caliente</option>
+							<option value="Costa chica">Costa chica</option>
+							<option value="Costa grande">Costa grande</option>
+							<option value="Montaña">Montaña</option>
+
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="calle_escuela" class="control-label">Calle </label> <input
+							type="text" class="form-control" th:field="*{direccion.calle}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('direccion.calle')}"
+							th:errors="*{direccion.calle}"></small>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="numero_escuela" class="control-label">Numero </label>
+						<input type="text" class="form-control"
+							th:field="*{direccion.numero}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('direccion.numero')}"
+							th:errors="*{direccion.numero}"></small>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="street1_id" class="control-label">Código
+							postal</label> <input type="text" class="form-control"
+							th:field="*{direccion.codigo_postal}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('direccion.codigo_postal')}"
+							th:errors="*{direccion.codigo_postal}"></small>
+					</div>
+				</div>
+				<div class="col-sm">
+					<div class="form-group">
+
+						<label for="colonia_escuela" class="control-label">Colonia</label>
+						<input type="text" class="form-control"
+							th:field="*{direccion.colonia}"
+							th:errorclass="'form-control alert-danger'" /> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('direccion.colonia')}"
+							th:errors="*{direccion.colonia}"></small>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<input type="hidden" th:field="*{id}" /> <a
+					th:href="@{/escuelas/listar}" class="btn btn-danger">Cancelar</a>
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+
+		</form>
+
+	</div>
+
+	<div th:replace="layout/layout :: js"></div>
+</body>
+</html>

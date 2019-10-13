@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card">
+			<div class="card-tittle"
+				th:text="'Escuela:'+${escuela.nombre_escuela}"></div>
+			<div class="card-body">
+
+
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${escuela.nombre_escuela}"></li>
+					<li class="list-group-item" th:text="${escuela.clave}"></li>
+					<li class="list-group-item" th:text="${escuela.nivel}"></li>
+					<li class="list-group-item" th:text="${escuela.turno}"></li>
+					<li class="list-group-item" th:text="${escuela.telefono}"></li>
+					<li class="list-group-item" th:text="${escuela.director}"></li>
+					<li class="list-group-item"
+						th:text="${escuela.direccion.localidad}"></li>
+					<li class="list-group-item" th:text="${escuela.direccion.region}"></li>
+					<li class="list-group-item" th:text="${escuela.direccion.calle}"></li>
+					<li class="list-group-item" th:text="${escuela.direccion.numero}"></li>
+					<li class="list-group-item"
+						th:text="${escuela.direccion.codigo_postal}"></li>
+					<li class="list-group-item" th:text="${escuela.direccion.colonia}"></li>
+				</ul>
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+	<div th:replace="js"></div>
+</body>
+</html>
