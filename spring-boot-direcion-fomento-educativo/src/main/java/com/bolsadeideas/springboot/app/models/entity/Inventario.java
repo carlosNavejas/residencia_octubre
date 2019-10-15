@@ -34,6 +34,50 @@ public class Inventario implements Serializable {
 	@OneToOne(targetEntity = Cooperativa.class, fetch = FetchType.LAZY)
 	private Cooperativa cooperativa;
 
+	public Long getClave_inventario() {
+		return clave_inventario;
+	}
+
+	public void setClave_inventario(Long clave_inventario) {
+		this.clave_inventario = clave_inventario;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+
+	public Cooperativa getCooperativa() {
+		return cooperativa;
+	}
+
+	public void setCooperativa(Cooperativa cooperativa) {
+		this.cooperativa = cooperativa;
+	}
+
+	public Inventario() {
+		
+	}
+
+	public Inventario(Long clave_inventario, String descripcion, Date fecha_registro, Cooperativa cooperativa) {
+		
+		this.clave_inventario = clave_inventario;
+		this.descripcion = descripcion;
+		this.fecha_registro = fecha_registro;
+		this.cooperativa = cooperativa;
+	}
+
 	
 	// Estos valores pueden ser calculables al momento de generar el reporte
 //private String ciclo_escolar; @Column(length = 45)

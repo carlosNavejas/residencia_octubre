@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,6 +27,9 @@ public class Usuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id_usuario;
+	@Column(length = 19)
 	private String curp;
 	@Column(length = 40)
 	@NotEmpty
@@ -50,4 +55,83 @@ public class Usuario implements Serializable {
 	private Rol rol_usuario;
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Escuela.class)
 	private Escuela escuela;
+	public String getCurp() {
+		return curp;
+	}
+	public void setCurp(String curp) {
+		this.curp = curp;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	public String getContrasena() {
+		return contrasena;
+	}
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido_paterno() {
+		return apellido_paterno;
+	}
+	public void setApellido_paterno(String apellido_paterno) {
+		this.apellido_paterno = apellido_paterno;
+	}
+	public String getApellido_materno() {
+		return apellido_materno;
+	}
+	public void setApellido_materno(String apellido_materno) {
+		this.apellido_materno = apellido_materno;
+	}
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Rol getRol_usuario() {
+		return rol_usuario;
+	}
+	public void setRol_usuario(Rol rol_usuario) {
+		this.rol_usuario = rol_usuario;
+	}
+	public Escuela getEscuela() {
+		return escuela;
+	}
+	public void setEscuela(Escuela escuela) {
+		this.escuela = escuela;
+	}
+	public Usuario() {
+		
+	}
+	public Usuario(String curp, String correo, String contrasena, String nombre, String apellido_paterno,
+			String apellido_materno, Date fecha_registro, String estado, Rol rol_usuario, Escuela escuela) {
+		
+		this.curp = curp;
+		this.correo = correo;
+		this.contrasena = contrasena;
+		this.nombre = nombre;
+		this.apellido_paterno = apellido_paterno;
+		this.apellido_materno = apellido_materno;
+		this.fecha_registro = fecha_registro;
+		this.estado = estado;
+		this.rol_usuario = rol_usuario;
+		this.escuela = escuela;
+	}
+	
+	
 }

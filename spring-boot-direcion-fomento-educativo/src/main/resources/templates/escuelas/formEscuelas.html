@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+
+
+	<!--inicio Container principal -->
+	
+
+	<div class="container bg-light mt-4 py-5">
+		<form>
+			<!--Inicio nombre de la escuela-->
+			<div class="form-group col-sm-12">
+				<label> Nombre de la escuela: </label> <input class="form-control"
+					type="text" />
+			</div>
+			<!--nombre de la escuela fin-->
+			<!--Inicio clave de la escuela y tutno-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Clave de la escuela: </label> <input class="form-control"
+							type="text" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Tipo: </label> <select class="form-control">
+							<option>Primaria</option>
+							<option>Secundaria</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<!--Fin clave de la escuela y turno-->
+			<!--Inicio telefono y turno-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Telefono de la escuela: </label> <input
+							class="form-control" type="text" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Turno: </label> <select class="form-control">
+							<option>Matutino</option>
+							<option>Vespertino</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<!--fin telefono y turno-->
+			<!--Inicio nombre del direcctor-->
+			<div class="row py-5">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Nombre del director: </label> <input class="form-control"
+							type="text" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido parteno: </label> <input class="form-control"
+							type="text" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido materno: </label> <input class="form-control"
+							type="text" />
+					</div>
+				</div>
+			</div>
+			<!--Fin nombre del director-->
+			<!---Inicio direccion( region , municipio, calle y direccion)---->
+			<div class="row py-5">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label> Region: </label> <select class="form-control">
+							<option value="1">Acapulco</option>
+							<option value="2">Costa Chica</option>
+							<option value="3">Costa Grande</option>
+							<option value="4">Centro</option>
+							<option value="5">La Montaña</option>
+							<option value="6">Norte</option>
+							<option value="7">Tierra Caliente</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label> Municipios: </label> <select class="form-control">
+							<option>Tixtla</option>
+							<option>Chilpancingo</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label> Calle: </label> <input class="form-control" type="text" />
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label> Numero: </label> <input class="form-control" type="text" />
+					</div>
+				</div>
+			</div>
+			<!---Fin direccion( region , municipio, calle y direccion)---->
+			<!--Botones cancelar y guardar-->
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<a class="btn btn-info btn-block" href="#"> Cancelar </a>
+				</div>
+				<div class="col-sm-3">
+					<input class="btn btn-info btn-block" disabled type="submit"
+						value="Registrar" />
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<!--Fin botons cancelar guardar-->
+		</form>
+	</div>
+	<!-- Fin container principal -->
+
+	<footer th:replace="layout/layout2 :: footer"></footer>
+	<div th:replace="layout/layout2 :: js"></div>
+</body>
+</html>

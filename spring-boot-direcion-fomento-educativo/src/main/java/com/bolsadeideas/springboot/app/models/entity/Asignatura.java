@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "asignaturas")
+//@Entity
+//@Table(name = "asignaturas")
 public class Asignatura implements Serializable{
 
 	/**

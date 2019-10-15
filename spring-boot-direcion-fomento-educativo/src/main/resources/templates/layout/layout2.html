@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+<meta charset='utf-8'/>
+
+<title th:text="${titulo}"></title>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+
+<link rel="stylesheet" th:href="@{/css/fuentes.css}" />
+
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+
+</head>
+
+<body>
+
+	<header th:fragment="header" style="color: white;">
+
+
+		<div style="text-align: center;">
+			<img th:src="@{/imagenesLogos/seg-principal-zapata.png}"
+				class="img-fluid align-content-center">
+		</div>
+		<nav class="dark-primary-color navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand" href="#">Dirección de Fomento Educativo</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item active"></li>
+					<li class="nav-item active"></li>
+					<li class="nav-item active"></li>
+
+				</ul>
+			</div>
+			<!--
+                <div class="float-left">
+                    <i class="icono fas fa-sign-in-alt"></i>
+                    <a class="btn" href="#" style="color: white; font-size: 20px;">Iniciar Sesión</a>
+                </div>-->
+		</nav>
+
+	</header>
+
+
+
+
+
+	<!-- Footer -->
+
+	<footer th:fragment="footer"
+		class="dark-primary-color py-4 page-footer font-small special-color-dark pt-4  text-light">
+
+		<div class=" row text-center">
+			<div class="col-sm-5">
+				<h5 class="text-uppercase">Dirección</h5>
+
+				<ul class="list-unstyled">
+					<li><a class="text-white"
+						href="https://goo.gl/maps/cZMEhLqyKbohm8ZS8"><i
+							class="fas fa-map-marker"></i> <span>Domicilo:</span> Eduardo
+							neri numero 8, Colonia Cuahutemoc norte CP 39030 Chilpancingo Gro</a>
+
+					</li>
+
+				</ul>
+
+			</div>
+			<div class="col-sm-5 px-0">
+				<h5 class="text-uppercase">Contacto</h5>
+
+				<ul class="list-unstyled">
+					<li><i class="fas fa-phone"></i> 747-109-85-20</li>
+					<li><i class="fas fa-phone"></i> 47-2-03-20</li>
+					<li><i class="far fa-envelope"></i>
+						fomento.educativo.seg.rvsp@gmail.com</li>
+					<li><a class="text-light"
+						href="https://www.facebook.com/FomentoEducativoSEG/"><i
+							class="iconoface fab fa-facebook"></i></a></li>
+					<li><a href="http://www.seg.gob.mx" class="text-white">http://www.seg.gob.mx</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</footer>
+
+	<!-- Footer -->
+	<div th:fragment="js">
+			<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/jquery-ui.min.js}"></script>
+		<script th:src="@{/js/all.js}"></script>
+
+	</div>
+</body>
+
+</html>

@@ -33,4 +33,6 @@ public class Biblioteca implements Serializable {
 	private Date fecha_registro;
 	@OneToOne(fetch = FetchType.LAZY, targetEntity = Escuela.class)
 	private Escuela escuela;
+	
+	
 }

@@ -34,4 +34,36 @@ public class Item_inventario implements Serializable {
 	private Mueble mueble;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_registro;
+	public Long getId_item_inventario() {
+		return id_item_inventario;
+	}
+	public void setId_item_inventario(Long id_item_inventario) {
+		this.id_item_inventario = id_item_inventario;
+	}
+	public Integer getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Mueble getMueble() {
+		return mueble;
+	}
+	public void setMueble(Mueble mueble) {
+		this.mueble = mueble;
+	}
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
+	
+	
 }

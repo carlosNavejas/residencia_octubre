@@ -1,0 +1,57 @@
+.icono {
+    font-size: 20px;
+}
+
+.iconoface {
+    font-size: 30px;
+}
+
+@font-face {
+    font-family: "miFuente";
+    src: ("../fuentes/Gotham-Black.otf");
+}
+
+body {
+    font-family: "miFuente";
+}
+
+.dark-primary-color {
+    background: #455A64;
+}
+
+.default-primary-color {
+    background: #607D8B;
+}
+
+.light-primary-color {
+    background: #CFD8DC;
+}
+
+.text-primary-color {}
+
+.accent-color {
+    background: #9E9E9E;
+}
+
+.primary-text-color {
+    color: #212121;
+}
+
+.secondary-text-color {
+    color: #757575;
+}
+
+.divider-color {
+    border-color: #BDBDBD;
+}
+
+header {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+footer {
+    width: 100%;
+    bottom: 0;
+    
+}
