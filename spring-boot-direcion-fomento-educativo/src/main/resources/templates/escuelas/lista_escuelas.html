@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head">
+<head th:replace="layout/layout2 :: head">
 </head>
 <body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<id th:replace="layout/layout2 :: mensajeinf"></id>
 	<div class="container py-4">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
@@ -25,11 +27,11 @@
 					<tbody>
 						<tr th:each="escuela: ${escuelas}">
 
-							<td th:text="${escuela.clave}"></td>
+							<td th:text="${escuela.claveescuela}"></td>
 							<td th:text="${escuela.nombre_escuela}"></td>
-							<td th:text="${escuela.region}"></td>
+							<td th:text="${escuela.direccion.municipio.region.region}"></td>
 							<td th:text="${escuela.telefono}"></td>
-							<td th:text="${escuela.fecha_registro}"></td>
+							<td></td>
 
 
 
@@ -38,7 +40,7 @@
 							<td><a class="btn btn-xs btn-danger"
 								th:href="@{/escuelas/eliminar/}+${escuela.clave}"
 								th:text="'Eliminar'"
-								onclick="return confirm('�Estas seguro que quieres eliminar la escuela?')"></a>
+								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')"></a>
 							</td>
 						</tr>
 
@@ -53,7 +55,8 @@
 
 
 	</div>
-	
-	<div th:replace="layout/layout :: js"></div>
+
+	<footer th:replace="layout/layout2 :: footer"></footer>
+	<div th:replace="layout/layout2 :: js"></div>
 </body>
 </html>

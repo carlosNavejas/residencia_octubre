@@ -44,5 +44,10 @@ public class Region implements Serializable {
 		this.region = region;
 	}
 
+	@Override
+	public String toString() {
+		return "Region [id=" + id + ", region=" + region + "]";
+	}
+
 	
 }

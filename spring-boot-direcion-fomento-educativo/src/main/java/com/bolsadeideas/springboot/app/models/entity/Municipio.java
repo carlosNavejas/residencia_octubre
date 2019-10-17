@@ -58,6 +58,11 @@ public class Municipio implements Serializable {
 	public Municipio() {
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Municipio [id_municipio=" + id_municipio + ", municipio=" + municipio + ", region=" + region + "]";
+	}
 	
 	
 	

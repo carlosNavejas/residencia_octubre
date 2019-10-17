@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -27,6 +28,8 @@ public class Direccion {
 	private String numero;
 	@ManyToOne(targetEntity = Municipio.class)
 	private Municipio municipio;
+	@OneToOne(targetEntity = Escuela.class)
+	private Escuela escuela;
 
 	public Long getId() {
 		return id;
@@ -70,6 +73,14 @@ public class Direccion {
 
 	public Direccion() {
 
+	}
+
+	public Escuela getEscuela() {
+		return escuela;
+	}
+
+	public void setEscuela(Escuela escuela) {
+		this.escuela = escuela;
 	}
 
 }

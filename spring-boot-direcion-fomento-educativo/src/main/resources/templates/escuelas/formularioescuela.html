@@ -10,8 +10,8 @@
 
 
 
-		<form class="py-5" th:action="@{/escuelas/form}" th:object="${escuela}"
-			method="post">
+		<form class="py-5" th:action="@{/escuelas/form}"
+			th:object="${escuela}" method="post">
 
 			<div class="form-group">
 
@@ -76,7 +76,8 @@
 							th:field="*{matricula}"
 							th:errorclass="'form-control alert-danger'" /> <small
 							class="form-text text-danger"
-							th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></small>
+							th:if="${#fields.hasErrors('matricula')}"
+							th:errors="*{matricula}"></small>
 					</div>
 				</div>
 			</div>
@@ -98,7 +99,7 @@
 					<div class="form-group">
 
 						<label for="region_escuela" class="control-label">Region</label> <select
-							class="form-control" th:field="*{direccion.localidad}">
+							class="form-control" name="regiones" id="regiones">
 							<option value="Centro">Centro</option>
 							<option value="Acapulco">Acapulco</option>
 							<option value="Norte">Norte</option>

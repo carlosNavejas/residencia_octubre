@@ -2,16 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:fragment="head">
-<meta charset='utf-8'/>
+<meta charset='utf-8' />
 
 <title th:text="${titulo}"></title>
-<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta name='viewport' content='width=device-width, initial-scale=1' />
 
 <link rel="stylesheet" th:href="@{/css/fuentes.css}" />
 
 <title th:text="${titulo}"></title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/fuentes.css}" />
+
 
 </head>
 
@@ -46,9 +48,20 @@
                 </div>-->
 		</nav>
 
+
+		<br>
+		
 	</header>
 
-
+<div th:fragment="mensajesinf">
+<div class="alert alert-success" th:if="${success!=null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error!=null}"
+			th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning!=null}"
+			th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+</div>
 
 
 
@@ -93,13 +106,12 @@
 
 	<!-- Footer -->
 	<div th:fragment="js">
-			<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+
+		<script th:src="@{/js/all.js}"></script>
+		<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
 		<script th:src="@{/js/popper.min.js}"></script>
 		<script th:src="@{/js/bootstrap.min.js}"></script>
 		<script th:src="@{/js/jquery-ui.min.js}"></script>
-		<script th:src="@{/js/all.js}"></script>
 
 	</div>
-</body>
-
 </html>
