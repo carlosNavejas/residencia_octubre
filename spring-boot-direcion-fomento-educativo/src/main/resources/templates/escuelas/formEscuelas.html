@@ -3,7 +3,8 @@
 <head th:replace="layout/layout2 :: head">
 
 </head>
-<body>
+<!-- oncopy="return false" onpaste="return false" -->
+<body >
 	<header th:replace="layout/layout2 :: header"></header>
 <div th:replace="layout/layout2 :: mensajesinf"></div>
 
@@ -15,7 +16,7 @@
 			<!--Inicio nombre de la escuela-->
 			<div class="form-group col-sm-12">
 				<label> Nombre de la escuela: </label> <input class="form-control"
-					type="text" th:field="*{nombre_escuela}" />
+					type="text" th:field="*{nombre_escuela}" required maxlength="45" />
 			</div>
 			<!--nombre de la escuela fin-->
 			<!--Inicio clave de la escuela y tutno-->
@@ -42,7 +43,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Telefono de la escuela: </label> <input
-							class="form-control" type="text" th:field="*{telefono}" />
+							class="form-control" type="number" th:field="*{telefono}" />
 					</div>
 				</div>
 				<div class="col-sm-6">
@@ -61,19 +62,19 @@
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Nombre del director: </label> <input class="form-control"
-							type="text" th:field="*{nombre_dir}" />
+							type="text" th:field="*{nombre_dir}" required/>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Apellido parteno: </label> <input class="form-control"
-							type="text" th:field="*{apellido_pdir}" />
+							type="text" th:field="*{apellido_pdir}" required/>
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Apellido materno: </label> <input class="form-control"
-							type="text" th:field="*{apellido_mdir}" />
+							type="text" th:field="*{apellido_mdir}" required/>
 					</div>
 				</div>
 			</div>
@@ -109,13 +110,13 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label> Calle: </label> <input id="calle" name="calle"
-							class="form-control" type="text" />
+							class="form-control" type="text" required />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label> Numero: </label> <input class="form-control" id="numeroc"
-							name="numeroc" type="text" />
+							name="numeroc" type="number" required  />
 					</div>
 				</div>
 			</div>
@@ -124,7 +125,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					<a class="btn btn-info btn-block" href="#"> Cancelar </a>
+					<a class="btn btn-info btn-block" th:href="@{/escuelas/listar}"> Cancelar </a>
 				</div>
 				<div class="col-sm-3">
 					<input class="btn btn-info btn-block"  type="submit"

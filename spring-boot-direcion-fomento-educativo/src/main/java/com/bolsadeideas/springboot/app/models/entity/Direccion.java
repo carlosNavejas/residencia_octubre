@@ -1,7 +1,10 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +19,11 @@ import javax.validation.constraints.NotEmpty;
  */
 @Entity
 @Table(name = "direcciones")
-public class Direccion {
+public class Direccion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,7 +33,7 @@ public class Direccion {
 	@Column(length = 4)
 	@NotEmpty
 	private String numero;
-	@ManyToOne(targetEntity = Municipio.class)
+	@ManyToOne(targetEntity = Municipio.class,fetch = FetchType.LAZY)
 	private Municipio municipio;
 	@OneToOne(targetEntity = Escuela.class)
 	private Escuela escuela;

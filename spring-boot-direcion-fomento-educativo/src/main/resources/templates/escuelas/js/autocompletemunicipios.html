@@ -6,7 +6,7 @@
 		$(document)
 				.ready(
 						function() {
-
+							
 							$("select#region")
 									.change(
 											function() {
@@ -68,8 +68,87 @@
 																	"<select id='municipio' name='municipio' class='form-control'><option value='3'>Ajuchitlán del Progreso</option><option value='7'>Arcelia</option><option value='22'>Coyuca de Catalán</option><option value='27'>Cutzamala de Pinzón</option><option value='50'>Pungarabato</option><option value='54'>San Miguel Totolapan</option><option value='64'>Tlalchapa</option><option value='67'>Tlapehuala</option><option value='73'>Zirándaro</option></select>");
 												}
 											});
+							//Validaciones
+							
+							/*Clave escuela*/
+							$("#claveescuela").keyup(function() {
+								var nombre_Escuela=$("#claveescuela").val();						
+								$("#claveescuela").val(nombre_Escuela.toUpperCase());
+							});
+							
+							
+							$("#claveescuela").keypress(function() {
+								var nombre_Escuela=$("#claveescuela").val();
+								
+								if (nombre_Escuela.length==10){
+									$("#claveescuela").removeClass().addClass("form-control alert-success");
+									return false;
+								}else{
+									$("#claveescuela").removeClass().
+									addClass("form-control alert-danger");		
+									
+								}
+							});
+							
+							$("#claveescuela").keypress(function() {
+								var nombre_Escuela=$("#claveescuela").val();						
+								$("#claveescuela").val(nombre_Escuela.toUpperCase());
+							});
+							$("#claveescuela").keyup(function() {
+								var nombre_Escuela=$("#claveescuela").val();
+								
+								if (nombre_Escuela.length==10){
+									$("#claveescuela").removeClass().addClass("form-control alert-success");
+									return false;
+								}else{
+									$("#claveescuela").removeClass().
+									addClass("form-control alert-danger");		
+									
+								}
+							});
+							/*Fin Clave escuela*/
+							
+
+							function telefono(){
+								return $("#telefono#claveescuela").val().length > 12 ? true : false;
+							}
+							
+							
+							/*Telefono*/
+							
+									$("#telefono").keyup(function() {
+										var nombre_Escuela=$("#telefono").val();
+										
+										if (nombre_Escuela.length==10){
+											$("#telefono").removeClass().addClass("form-control alert-success");
+											return false;
+										}else{
+											$("#telefono").removeClass().
+											addClass("form-control alert-danger");		
+											
+										}
+									});
+									
+							/*fin telefono*/
+							
+							
+							
+							$('#numeroc#telefono').on('input', function(tecla)  { 
+								if(tecla.charCode < 48 || tecla.charCode > 57) return false;
+							});
+							
+							
+							
+							
+							
+							
+							
+							//fin validaciones					
 						});
-		$("#nombre_dir").numeric();
+		
+		
+		
+		
 	</script>
 
 

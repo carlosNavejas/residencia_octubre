@@ -4,8 +4,16 @@
 </head>
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
-	<id th:replace="layout/layout2 :: mensajeinf"></id>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
 	<div class="container py-4">
+		<div class="row">
+			<div class="col-sm-9"></div>
+			<div class="col-sm-3">
+				<a th:href="@{/escuelas/form}" class="btn btn-info btn-block">Agregar
+					Escuela</a>
+			</div>
+
+		</div>
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
@@ -17,8 +25,8 @@
 							<th>Escuela</th>
 							<th>Region</th>
 							<th>Telefono</th>
-							<th>Fecha registro</th>
-							<th>Detalles</th>
+
+							<th>Editar</th>
 
 							<th>Eliminar</th>
 						</tr>
@@ -31,16 +39,24 @@
 							<td th:text="${escuela.nombre_escuela}"></td>
 							<td th:text="${escuela.direccion.municipio.region.region}"></td>
 							<td th:text="${escuela.telefono}"></td>
-							<td></td>
+							
 
 
 
-							<td><a class="btn btn-xs btn-primary"
-								th:href="@{/escuelas/form}+${escuela.clave}" th:text="'Editar'"></a></td>
-							<td><a class="btn btn-xs btn-danger"
-								th:href="@{/escuelas/eliminar/}+${escuela.clave}"
+							<td><a href="#" class="btn btn-info">Editar</a> <!--  
+							<a class="btn btn-xs btn-primary"
+								th:href="@{/escuelas/form}+${escuela.clave}" th:text="'Editar'"></a> -->
+							</td>
+							<td><a
+								th:href="@{/escuelas/eliminar/}+${escuela.id_escuela}"
+								class="btn"
+								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')">
+									<i class="fas fa-trash-alt fa-lg"> </i>
+
+							</a> <!-- <a class="btn btn-xs btn-danger"
+								th:href="@{/escuelas/eliminar/}+${escuela.claveescuela}"
 								th:text="'Eliminar'"
-								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')"></a>
+								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')"></a>-->
 							</td>
 						</tr>
 
