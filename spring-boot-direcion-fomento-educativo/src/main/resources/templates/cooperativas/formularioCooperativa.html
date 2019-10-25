@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
+
+</head>
+
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+
+	<div class="container py-5 bg-light">
+		<form th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
+			method="post">
+			<!-- -->
+			<!--inicio Datos de la escuela -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Nombre de la escuela </label> <input class="form-control"
+							disabled type="text" th:value="${escuela.nombre_escuela}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Clave de la escuela </label> <input class="form-control"
+							disabled type="text" th:value="${escuela.claveescuela}" />
+					</div>
+				</div>
+			</div>
+			<!--Fin Datos de la escuela -->
+			<!--inicio nombre de la cooperativa -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label> Nombre de la cooperativa </label> <input
+							class="form-control" type="text" required="required"
+							th:field="*{nombre_cooperativa}" />
+					</div>
+				</div>
+			</div>
+			<!--fin nombre de la cooperativa -->
+			<!--inicio tipo de cooperativa y monto-->
+			<!--inicio Datos de la escuela -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Tipo de cooperativa </label> <select class="form-control"
+							th:field="*{tipo}">
+							<option th:value="'Consesionada'" th:text="Consesionada"></option>
+							<option th:value="'Consumo'" th:text="Consumo"></option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Monto de consesion </label> <input class="form-control"
+							type="number" th:field="*{monto}" required="required" />
+					</div>
+				</div>
+			</div>
+
+			<input hidden="true" type="number" id="id_escuela" name="id_escuela"
+				th:value="${escuela.id_escuela}" />
+			<!-- fin tipo de cooperativa y monto-->
+			<!--inicio Botones -->
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-2">
+					<a class="btn btn-info btn-block" th:href="@{/cooperativas/cooperativa/}+${escuela.id_escuela}"> Cancelar </a>
+				</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<input class="btn btn-block btn-info" type="submit" value="Guardar" />
+
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<!--Fin  Botones -->
+		</form>
+	</div>
+
+	<footer th:replace="layout/layout2 :: footer"></footer>
+	<div th:replace="layout/layout2 :: js"></div>
+	<script th:replace="cooperativas/js/scriptvalidaciones :: javascript"></script>
+</body>
+</html>

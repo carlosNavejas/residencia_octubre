@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+
+			//
+			$("select#tipo").change(function() {
+				var tipo = $("select#tipo").val();
+				if (tipo == "Consesionada") {
+					//$("input#monto").show();
+					$("input#monto").attr("disabled", false);
+					$("input#monto").attr("required", true);
+				} else {
+					//$("input#monto").hide();
+					$("input#monto").attr("disabled", true);
+					$("input#monto").attr("required", false);
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>

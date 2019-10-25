@@ -18,7 +18,7 @@ import javax.validation.constraints.NotEmpty;
 public class Municipio implements Serializable {
 
 	/**
-	 * Control de v
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id

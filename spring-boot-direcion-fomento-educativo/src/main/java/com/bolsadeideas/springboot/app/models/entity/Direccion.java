@@ -90,4 +90,9 @@ public class Direccion implements Serializable{
 		this.escuela = escuela;
 	}
 
+	@Override
+	public String toString() {
+		return "Calle " + calle + ", numero " + numero + ", " + municipio.getMunicipio() + ",region "+municipio.getRegion().getRegion();
+	}
+
 }

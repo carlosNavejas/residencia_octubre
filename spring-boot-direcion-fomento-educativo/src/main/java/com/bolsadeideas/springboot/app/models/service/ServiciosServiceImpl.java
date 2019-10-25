@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
+import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 
@@ -20,9 +22,12 @@ public class ServiciosServiceImpl implements IServiciosService {
 	IMunicipioDao municipioDao;
 	@Autowired
 	IEscuelaDao escuelaDao;
+	@Autowired
+	ICooperativaDao cooperativaDao;
 
 	public List<Municipio> municipioFindByName(String municipio) {
-		return municipioDao.findByMunicipioRegionId(municipio);
+		//return municipioDao.findByMunicipioRegionId(municipio);
+		return null;
 	}
 
 	@Transactional(readOnly = true)
@@ -51,6 +56,36 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	public Municipio findMunicipioByID(Long id) {
 		return municipioDao.findById(id).orElse(null);
+	}
+
+	
+	//Gesction cooperaticas
+	
+	
+	public List<Cooperativa> findAllCooperativas() {
+		// TODO Auto-generated method stub
+		return (List<Cooperativa>) cooperativaDao.findAll();
+	}
+
+	public Cooperativa findOneCooperativaById(Long id_cooperativa) {
+		// TODO Auto-generated method stub
+		return cooperativaDao.findById(id_cooperativa).orElse(null);
+	}
+
+	public void deleteCooperativaById(Long id_cooperativa) {
+	cooperativaDao.deleteById(id_cooperativa);
+	
+		
+	}
+
+	public void saveCooperativa(Cooperativa cooperativa) {
+		cooperativaDao.save(cooperativa);
+		
+	}
+
+	public void deleteCooperativaByCooperativa(Cooperativa cooperativa) {
+		cooperativaDao.delete(cooperativa);
+		
 	}
 
 }

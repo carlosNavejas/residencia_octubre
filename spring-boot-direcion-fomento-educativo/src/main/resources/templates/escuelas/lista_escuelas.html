@@ -24,8 +24,8 @@
 							<th>Clave</th>
 							<th>Escuela</th>
 							<th>Region</th>
+							<th>Municipio</th>
 							<th>Telefono</th>
-
 							<th>Editar</th>
 
 							<th>Eliminar</th>
@@ -38,12 +38,15 @@
 							<td th:text="${escuela.claveescuela}"></td>
 							<td th:text="${escuela.nombre_escuela}"></td>
 							<td th:text="${escuela.direccion.municipio.region.region}"></td>
+							<td th:text="${escuela.direccion.municipio.municipio}"></td>
 							<td th:text="${escuela.telefono}"></td>
-							
 
 
 
-							<td><a href="#" class="btn btn-info">Editar</a> <!--  
+
+							<td><a href="#" class="btn btn-info"
+								th:href="@{/escuelas/editar/}+${escuela.id_escuela}">Editar</a>
+								<!--  
 							<a class="btn btn-xs btn-primary"
 								th:href="@{/escuelas/form}+${escuela.clave}" th:text="'Editar'"></a> -->
 							</td>

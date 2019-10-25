@@ -6,7 +6,17 @@
 		$(document)
 				.ready(
 						function() {
-							
+							$('input').keypress(function(){
+								
+
+									    $('input').css({
+									        border: "1px solid #999"
+									    });
+										  $("small").remove();
+
+								
+
+							});
 							$("select#region")
 									.change(
 											function() {
@@ -110,8 +120,10 @@
 							
 
 							function telefono(){
-								return $("#telefono#claveescuela").val().length > 12 ? true : false;
+								return $("#telefono#claveescuela").val().length > 10 ? true : false;
 							}
+
+							
 							
 							
 							/*Telefono*/
@@ -145,10 +157,50 @@
 							
 							//fin validaciones					
 						});
+		//funciones validar del video
+		function validarFormulario(){
+    // removemos el div con la clase alert
+$("small").remove();
+
+
+    // declarion de variables
+    var nombre_escuela=$('#nombre_escuela').val(),
+        correo=$('#telefono').val(),
+        asunto=$('#apellido_pdir').val(),
+        mensaje=$('#apellido_mdir').val()
+        asunto=$('#calle').val(),
+        asunto=$('#numeroc').val();
+ ;
+
+    // validamos el campo nombre
+    if(nombre_escuela=="" || nombre_escuela==null){
+
+        cambiarColor("nombre_escuela");
+        // mostramos le mensaje de alerta
+        mostrarAlerta("Campo obligatorio","nombre_escuela");
+        return false;
+    }else{
+        var expresion= /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+        if(!expresion.test(nombre)){
+            // mostrara el mesaje que debe ingresar un nombre válido
+            cambiarColor("nombre_escuela");
+            mostrarAlerta("Campo obligatorio","nombre_escuela");
+            return false;
+        }
+    }
+
+    
 		
-		
-		
-		
+		}
+		function mostrarAlerta(texto,idinput){
+			 
+			    $('#'+idinput).after(' <small class="form-text text-danger">'+texto+'</small>');
+		}
+		function cambiarColor(dato){
+		    $('#' + dato).css({
+		        border: "1px solid #dd5144"
+		    });
+		}
 	</script>
 
 

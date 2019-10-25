@@ -12,7 +12,9 @@
 
 
 	<div class="container bg-light mt-4 py-5">
-		<form th:action="@{/escuelas/form}" th:object="${escuela}"  method="post">
+		<form th:action="@{/escuelas/form}"th:object="${escuela}"  method="post">
+		
+		<input type="hidden" th:field="*{id_escuela}" />
 			<!--Inicio nombre de la escuela-->
 			<div class="form-group col-sm-12">
 				<label> Nombre de la escuela: </label> <input class="form-control"
@@ -109,14 +111,13 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label> Calle: </label> <input id="calle" name="calle"
+						<label> Calle: </label> <input th:field="*{direccion.calle}"
 							class="form-control" type="text" required />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label> Numero: </label> <input class="form-control" id="numeroc"
-							name="numeroc" type="number" required  />
+						<label> Numero: </label> <input class="form-control" th:field="*{direccion.numero}" type="number"  required  />
 					</div>
 				</div>
 			</div>
@@ -129,7 +130,7 @@
 				</div>
 				<div class="col-sm-3">
 					<input class="btn btn-info btn-block"  type="submit"
-						 onclick="validarFormulario()" value="Registrar" />
+						value="Gaurdar Cambios" />
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
