@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+
+	<!-- Formulario para registro -->
+	<div class="container py-5 bg-light">
+		<form>
+			<!-- -->
+			<!--inicio Datos de la escuela -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Nombre de la escuela </label> <input class="form-control"
+							disabled="disabled" type="text" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Clave de la escuela </label> <input class="form-control"
+							disabled="disabled" type="text" />
+					</div>
+				</div>
+			</div>
+			<!--Fin Datos de la escuela -->
+			<!--inicio nombre de la cooperativa -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label> Nombre de la biblioteca</label> <input
+							class="form-control" type="text" />
+					</div>
+				</div>
+			</div>
+			<!--fin nombre de la cooperativa -->
+
+			<!--inicio Botones -->
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-2">
+					<button class="btn btn-block btn-danger">Cancelar</button>
+				</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-2">
+					<input class="btn btn-block btn-info" type="submit" value="Registrar" />
+					
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			<!--Fin  Botones -->
+		</form>
+	</div>
+	<!-- Fin formulario registro -->
+	<div th:replace="layout/layout2 :: js"></div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
+</body>
+</html>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
@@ -31,7 +32,16 @@ public interface IServiciosService {
 	public Cooperativa findOneCooperativaById(Long id_cooperativa);
 
 	public void deleteCooperativaById(Long id_cooperativa);
+
 	public void deleteCooperativaByCooperativa(Cooperativa cooperativa);
 
 	public void saveCooperativa(Cooperativa cooperativa);
+
+	// bibliotecas
+	public void saveBiblioteca(Biblioteca biblioteca);
+
+	public void deleteBibliotecaByID(Long id_biblioteca);
+
+	public Biblioteca findByIdBiblioteca(Long id_biblioteca);
+
 }

@@ -95,27 +95,31 @@ public class CooperativasController {
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
 		if (id > 0) {
-			Escuela escuela = servicios.findbyIdEscuela(id);
-			if (escuela.getCooperativa().getClave_cooperatival() != null) {
-				Cooperativa coperativa = servicios
-						.findOneCooperativaById(escuela.getCooperativa().getClave_cooperatival());
-				servicios.deleteCooperativaById(coperativa.getClave_cooperatival());
+			Cooperativa cooperativa = servicios.findOneCooperativaById(id);
+			if (cooperativa != null) {
+				
+				servicios.deleteCooperativaById(cooperativa.getClave_cooperatival());
 				flash.addFlashAttribute("success", "Cooperativa eliminada con éxito!");
-				return "redirect:/cooperativas/cooperativa/" + id;
+				return "redirect:/cooperativas/cooperativa/" +cooperativa.getEscuela().getId_escuela();
 			}
 		}
 		flash.addFlashAttribute("error", "Ha ocurrido un error al eliminar la cooperativa!");
 		return "redirect:/cooperativas/cooperativa/" + id;
 	}
 	/* Guardar cooperativa */
-
+    
+	
+	
+	
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public String guardar(@Valid Cooperativa cooperativa, BindingResult result, Model model,
 			@RequestParam(name = "id_escuela", required = false) Long id_escuela, RedirectAttributes flash,
 			SessionStatus status) {
 		Escuela escuela = servicios.findbyIdEscuela(id_escuela);
-		escuela.setCooperativa(cooperativa);
-		servicios.guardarEscuela(escuela);
+		//escuela.setCooperativa(cooperativa);
+		
+		cooperativa.setEscuela(escuela);
+		servicios.saveCooperativa(cooperativa);
 		flash.addFlashAttribute("success", "Se ha guardado la cooperativa");
 		return "redirect:/cooperativas/cooperativa/" + escuela.getId_escuela();
 	}

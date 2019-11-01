@@ -50,12 +50,12 @@ public class Escuela implements Serializable {
 	private String tipo;
 	@Column(length = 6)
 	private String matricula;
-	@OneToOne(targetEntity = Biblioteca.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "escuela")
+	@OneToOne(targetEntity = Biblioteca.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "escuela")
 	private Biblioteca biblioteca;
 	@OneToMany(targetEntity = Usuario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "escuela")
 	private List<Usuario> usuarios;
 
-	@OneToOne(targetEntity = Cooperativa.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "escuela", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Cooperativa cooperativa;
 
 	public String getTurno() {

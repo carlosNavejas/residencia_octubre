@@ -41,7 +41,7 @@ public class Cooperativa implements Serializable {
 	private Inventario inventario;
 
 	
-	 @OneToOne(cascade =CascadeType.ALL) 
+	 @OneToOne(fetch = FetchType.LAZY)
 	 private Escuela escuela;
 
 	@PrePersist

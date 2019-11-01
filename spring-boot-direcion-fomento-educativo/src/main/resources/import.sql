@@ -1,3 +1,4 @@
+/*
 INSERT INTO regiones VALUES(1,'Acapulco');
 INSERT INTO regiones VALUES(2,'Costa Chica');
 INSERT INTO regiones VALUES(3,'Costa Grande');
@@ -93,3 +94,11 @@ INSERT INTO municipios VALUES(54,'San Miguel Totolapan',7);
 INSERT INTO municipios VALUES(64,'Tlalchapa',7);
 INSERT INTO municipios VALUES(67,'Tlapehuala',7);
 INSERT INTO municipios VALUES(73,'Zirándaro',7);
+
+
+INSERT INTO `direcciones` VALUES (1,'MORELOS','44',NULL,35),(2,'flor de azar','77',NULL,64),(3,'Insurgentes','90',NULL,69),(4,'Cerrada de lopez','87',NULL,6),(5,'MORELOS','44',NULL,69),(6,'horticultores','23',NULL,73),(7,'cerrada sin nombre','77',NULL,49),(8,'INSURGENTES','127',NULL,61);
+
+INSERT INTO `escuelas` (id_escuela,apellido_mdir,apellido_pdir,clave_escuela,matricula,nombre_dir,nombre_escuela,telefono,tipo,turno,direccion_id) VALUES (1,'Lopez','Salgado','12ACC0001Y',NULL,'Raul','RAFAEL RAMIREZ CASTAÑEDA','7441233344','Primaria','Matutino',1),(2,'Perez','Salgado','12DST0144J',NULL,'Juan','NABOR A. OJEDA CABALLERO','7474577889','Secundaria','Vespertino',2),(3,'Gatica','Gatica','12DJN2801Q',NULL,'Leonardo','NACIONES UNIDAS','7441233344','Primaria','Vespertino',3),(4,'Rebolledo','Nava','12DJN2834H',NULL,'Daniel','NARCISO BASSOLS','7455232412','Secundaria','Vespertino',4),(5,'Lopez','Nava','12DCC0427Z',NULL,'Edgar','NARCISO MENDOZA','7441233344','Primaria','Vespertino',5),(6,'Tizapa','Lopez','12DCC0761C',NULL,'Juan jose','NETZAHUALCOYOTL','7441233345','Secundaria','Vespertino',6),(7,'Salgado','Nuñez','12DBA0029D',NULL,'Roberto','NICOLAS BRAVO','7441245667','Primaria','Vespertino',7),(8,'Sanches','Martinez','12DPR0556Z',NULL,'David','NICOLAS SALINAS SOTELO','7441233344','Secundaria','Matutino',8);
+
+
+*/
