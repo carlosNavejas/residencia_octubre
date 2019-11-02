@@ -3,5 +3,16 @@
 <head>
 
 </head>
-<body></body>
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+			$('#nombre_bibioteca').on('input', function (e) {
+				 if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
+			    	 this.value = this.value.replace(/[^ a-z0-9áéíóúüñ]+/ig,"");
+			    }
+			});
+
+		});
+	</script>
+</body>
 </html>

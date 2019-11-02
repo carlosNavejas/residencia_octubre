@@ -6,9 +6,6 @@
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
-	
-	
-	
 	<div class="container py-5 bg-light">
 		<form th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
 			method="post">
@@ -84,4 +81,4 @@
 	<div th:replace="layout/layout2 :: js"></div>
 </body>
 </html>
->
+

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
 </head>
 <body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
 
+
+	<div th:replace="layout/layout2 :: js"></div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
 </body>
 </html>

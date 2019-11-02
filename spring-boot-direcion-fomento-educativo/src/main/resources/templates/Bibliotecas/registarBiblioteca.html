@@ -9,20 +9,23 @@
 
 	<!-- Formulario para registro -->
 	<div class="container py-5 bg-light">
-		<form>
+		<form th:action="@{/bibliotecas/guardar}" th:object="${biblioteca}"
+			method="post">
 			<!-- -->
 			<!--inicio Datos de la escuela -->
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Nombre de la escuela </label> <input class="form-control"
-							disabled="disabled" type="text" />
+							disabled type="text"
+							th:value="${biblioteca.escuela.nombre_escuela}" />
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Clave de la escuela </label> <input class="form-control"
-							disabled="disabled" type="text" />
+							disabled type="text"
+							th:value="${biblioteca.escuela.claveescuela}" />
 					</div>
 				</div>
 			</div>
@@ -32,10 +35,13 @@
 				<div class="col-sm-12">
 					<div class="form-group">
 						<label> Nombre de la biblioteca</label> <input
-							class="form-control" type="text" />
+							class="form-control" type="text" required="required"
+							th:field="*{nombre_bibioteca}" />
 					</div>
 				</div>
 			</div>
+			<input hidden="true" type="number" id="id_escuela" name="id_escuela"
+				th:value="${escuela.id_escuela}" />
 			<!--fin nombre de la cooperativa -->
 
 			<!--inicio Botones -->
@@ -46,16 +52,19 @@
 				</div>
 				<div class="col-sm-1"></div>
 				<div class="col-sm-2">
-					<input class="btn btn-block btn-info" type="submit" value="Registrar" />
-					
+					<input class="btn btn-block btn-info" type="submit"
+						value="Registrar" />
+
 				</div>
 				<div class="col-sm-4"></div>
 			</div>
 			<!--Fin  Botones -->
 		</form>
 	</div>
+
 	<!-- Fin formulario registro -->
 	<div th:replace="layout/layout2 :: js"></div>
+	<div th:replace="Bibliotecas/js/validaciones :: javascript"></div>
 	<footer th:replace="layout/layout2 :: footer"></footer>
 </body>
 </html>

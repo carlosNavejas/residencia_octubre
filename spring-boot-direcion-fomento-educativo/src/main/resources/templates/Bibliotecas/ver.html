@@ -6,8 +6,151 @@
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
+	<!-- Inicio contenido -->
 
+	<div class="container">
+		<div class="card bg-light">
+			<h3 class="card-title">Escuela</h3>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Escuela </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.nombre_escuela}"></p>
+					</div>
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Clave </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.claveescuela}"></p>
+					</div>
+				</div>
+				<!--row-->
+				<div class="row">
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Tipo </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.tipo}"></p>
+					</div>
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Turno </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.turno}"></p>
+					</div>
+				</div>
+				<!--row-->
+				<div class="row">
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Telefono </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.telefono}"></p>
+					</div>
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Direccion </b>
+						</h5>
+						<p class="card-text" th:text="${escuela.direccion}"></p>
+					</div>
+				</div>
 
+				<!--row-->
+				<div class="row">
+					<div class="col-sm-6">
+						<h5 class="card-title">
+							<b> Director </b>
+						</h5>
+						<p class="card-text"
+							th:text="${escuela.nombre_dir}+'  '+${escuela.apellido_pdir}+'  '+${escuela.apellido_mdir} ">
+
+						</p>
+					</div>
+					<div class="col-sm-6 py-3">
+						<button class="btn-info" hidden="true">Editar datos de la
+							escuela</button>
+					</div>
+				</div>
+
+				<!--row-->
+				<!--row-->
+			</div>
+		</div>
+		<!-- Datos de la cooperativa -->
+
+		<div class="py-5 card bg-light">
+			<h4 class="card-title">Datos de la biblioteca</h4>
+			<!-- inicio por si hay registro de cooperativa -->
+			<div th:if="${escuela.biblioteca!=null}">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<h5 class="card-title">
+								<b> Nombre </b>
+							</h5>
+							<p class="card-text"
+								th:text="${escuela.biblioteca.nombre_bibioteca}"></p>
+						</div>
+						<div class="col-sm-3">
+							<h5 class="card-title">
+								<b> Ciclo escolar </b>
+							</h5>
+							<p class="card-text"
+								th:text="${escuela.biblioteca.obtenerCicloEscolar()}"></p>
+						</div>
+						<div class="col-sm-3">
+							<h5 class="card-title">
+								<b> Periodo escolar </b>
+
+							</h5>
+							<p class="card-text"
+								th:text="${escuela.biblioteca.obtenerPeriodoEscolar()}"></p>
+						</div>
+						<div class="col-sm-3">
+							<h5 class="card-title">
+								<b>Fecha de registro </b>
+							</h5>
+							<p class="card-text"
+								th:text="${escuela.biblioteca.fecha_registro}"></p>
+						</div>
+					</div>
+
+					<!-- -->
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-4 py-4"></div>
+						<div class="col-sm-4 py-4">
+							<a
+								th:href="@{/bibliotecas/eliminar/}+${escuela.biblioteca.clave_biblioteca}"
+								class="btn btn-danger"
+								onclick="return confirm('El registro se eliminara permanentemente\n ¿Estas seguro que quieres eliminar la escuela?')">
+								<!-- 								<i class="fas fa-trash-alt fa-lg"> </i> -->Eliminar
+
+							</a> <a href="#" class="btn btn-info"
+								th:href="@{/bibliotecas/registarBiblioteca/}+${escuela.id_escuela}">Editar
+								cooperativa</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- fin por si hay registro de cooperativa -->
+			<!-- por si no hay registro de cooperativa -->
+			<div class="py-2" th:if="${escuela.biblioteca==null}">
+				<p class="card-text">
+					<b>Aun no haz registrado alguna biblioteca</b>
+				</p>
+				<a href="#" class="btn btn-info"
+					th:href="@{/bibliotecas/form/}+${escuela.id_escuela}">Registar
+					Biblioteca</a>
+
+			</div>
+			<!-- fin por si no hay registro de cooperativa -->
+		</div>
+	</div>
+
+	<!-- fin contenido -->
 	<div th:replace="layout/layout2 :: js"></div>
 	<footer th:replace="layout/layout2 :: footer"></footer>
 </body>
