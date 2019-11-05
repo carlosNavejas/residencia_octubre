@@ -1,7 +1,9 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -40,14 +43,16 @@ public class Cooperativa implements Serializable {
 	@OneToOne(targetEntity = Inventario.class, mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Inventario inventario;
 
-	
-	 @OneToOne(fetch = FetchType.LAZY)
-	 private Escuela escuela;
+	@OneToOne(fetch = FetchType.LAZY)
+	private Escuela escuela;
+	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Socio> lista_socios;
 
 	@PrePersist
 	public void prePersist() {
 		fecha_registro = new Date();
 	}
+
 	public Long getClave_cooperatival() {
 		return clave_cooperatival;
 	}
@@ -108,7 +113,15 @@ public class Cooperativa implements Serializable {
 	}
 
 	public Cooperativa() {
+		lista_socios = new ArrayList<Socio>();
+	}
 
+	public List<Socio> getLista_socios() {
+		return lista_socios;
+	}
+
+	public void setLista_socios(List<Socio> lista_socios) {
+		this.lista_socios = lista_socios;
 	}
 
 	@Override
@@ -117,12 +130,13 @@ public class Cooperativa implements Serializable {
 				+ ", tipo=" + tipo + ", monto=" + monto + ", fecha_registro=" + fecha_registro + ", inventario="
 				+ inventario + "]";
 	}
+
 	public Escuela getEscuela() {
 		return escuela;
 	}
+
 	public void setEscuela(Escuela escuela) {
 		this.escuela = escuela;
 	}
-
 
 }

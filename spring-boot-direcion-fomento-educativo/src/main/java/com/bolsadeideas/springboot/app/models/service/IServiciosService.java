@@ -9,6 +9,7 @@ import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
+import com.bolsadeideas.springboot.app.models.entity.Socio;
 
 public interface IServiciosService {
 
@@ -43,5 +44,16 @@ public interface IServiciosService {
 	public void deleteBibliotecaByID(Long id_biblioteca);
 
 	public Biblioteca findByIdBiblioteca(Long id_biblioteca);
+
+	// Socios de cooperativa
+	public void saveSocioDeCooperativa(Socio socio);
+
+	public void deleteSocioById(Long id_socio);
+
+	public Socio findSocioById(Long id_socio);
+
+	public Page<Socio> findAllSocios(Pageable pageable);
+
+	public Socio findSocioByCurp(String curp);
 
 }

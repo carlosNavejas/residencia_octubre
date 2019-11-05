@@ -13,10 +13,12 @@ import com.bolsadeideas.springboot.app.models.dao.IBibliotecaDao;
 import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
+import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
+import com.bolsadeideas.springboot.app.models.entity.Socio;
 
 @Service
 public class ServiciosServiceImpl implements IServiciosService {
@@ -28,6 +30,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 	ICooperativaDao cooperativaDao;
 	@Autowired
 	IBibliotecaDao bibliotecaDao;
+	@Autowired
+	ISociosDao socioDao;
 
 	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByName(String municipio) {
@@ -117,6 +121,34 @@ public class ServiciosServiceImpl implements IServiciosService {
 	public Biblioteca findByIdBiblioteca(Long id_biblioteca) {
 
 		return bibliotecaDao.findById(id_biblioteca).orElse(null);
+	}
+
+//Socios de cooperativa
+	@Transactional
+	public void saveSocioDeCooperativa(Socio socio) {
+		socioDao.save(socio);
+
+	}
+
+	@Transactional
+	public void deleteSocioById(Long id_socio) {
+		socioDao.deleteById(id_socio);
+
+	}
+
+	@Transactional(readOnly = true)
+	public Socio findSocioById(Long id_socio) {
+		return socioDao.findById(id_socio).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	public Page<Socio> findAllSocios(Pageable pageable) {
+
+		return socioDao.findAll(pageable);
+	}
+
+	public Socio findSocioByCurp(String curp) {
+		return socioDao.fetchByCurp(curp);
 	}
 
 }

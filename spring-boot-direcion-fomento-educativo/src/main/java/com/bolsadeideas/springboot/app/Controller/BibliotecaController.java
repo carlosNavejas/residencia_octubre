@@ -46,12 +46,12 @@ public class BibliotecaController {
 			Biblioteca biblioteca = servicios.findByIdBiblioteca(id);
 			if (biblioteca != null) {
 				servicios.deleteBibliotecaByID(id);
-				flash.addFlashAttribute("success", "Biblioteca eliminada con éxito!" + biblioteca.toString());
+				flash.addFlashAttribute("success", "Biblioteca eliminada con éxito!");
 				return "redirect:/bibliotecas/biblioteca/" + biblioteca.getEscuela().getId_escuela();
 			}
 		}
 		flash.addFlashAttribute("error", "Ha ocurrido un error al eliminar la cooperativa!");
-		return "redirect:/bibliotecas/biblioteca/" + id;
+		return "redirect:/home";
 	}
 
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
@@ -76,7 +76,6 @@ public class BibliotecaController {
 	@RequestMapping(value = "/biblioteca/{id}")
 	public String verDetallesdeLaCooperativa(@PathVariable(value = "id") Long id, Model model,
 			RedirectAttributes flash) {
-
 		Escuela escuela = null;
 		if (id > 0) {
 			escuela = servicios.findbyIdEscuela(id);
@@ -85,7 +84,6 @@ public class BibliotecaController {
 				model.addAttribute("escuela", escuela);
 				model.addAttribute("titulo", "Detalles de la biblioteca");
 				return "/bibliotecas/ver";
-
 			}
 		}
 		flash.addFlashAttribute("error", "Ha ocurrido un error!!");
