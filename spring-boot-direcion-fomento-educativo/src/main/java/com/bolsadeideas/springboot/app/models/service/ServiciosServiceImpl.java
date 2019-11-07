@@ -148,7 +148,7 @@ public class ServiciosServiceImpl implements IServiciosService {
 	}
 
 	public Socio findSocioByCurp(String curp) {
-		return socioDao.fetchByCurp(curp);
+		return null;// socioDao.fetchByCurp(curp);
 	}
 
 }

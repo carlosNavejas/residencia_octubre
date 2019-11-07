@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
 </head>
 <body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+	<div class="container bg-light">
+		<form th:action="@{/socios/guardar}" th:object="${socio}"
+			method="post">
+			<!-- nombre del socio-->
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Nombre </label> <input class="form-control" type="text"
+							th:field="*{nombre}" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido Paterno </label> <input class="form-control"
+							type="text" th:field="*{apellido_p}" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido Materno </label> <input class="form-control"
+							type="text" th:field="*{apellido_m}" />
+					</div>
+				</div>
+			</div>
+			<!-- fin nombre socio-->
+			<div class="row">
+				<div class="col-sm-6">
+					<label> Grado </label> <select class="form-control"
+						th:field="*{grado}">
 
+						<!-- Secundaria
+ Primaria -->
+
+						<option th:if="${socio.cooperativa.escuela.tipo=='Primaria'}"
+							th:each="i : ${#numbers.sequence(1, 6)}" th:value="${i}"
+							th:text="${i}">
+						<option th:if="${socio.cooperativa.escuela.tipo=='Secundaria'}"
+							th:each="i : ${#numbers.sequence(1, 3)}" th:value="${i}"
+							th:text="${i}">
+					</select>
+				</div>
+				<div class="col-sm-6">
+					<label> Grupo </label> <select class="form-control"
+						th:field="*{grupo}">
+						<option th:each="g : ${grupos}" th:value="${g}" th:text="${g}">
+					</select>
+				</div>
+			</div>
+			<!-- grado y grupo-->
+			<!--fin grado y grupo -->
+
+			<!--titular -->
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<label>Titular</label> <input class="form-control" type="text"
+						th:field="*{titular}"></input>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<!-- fin titular-->
+			<input type="number" hidden="true" th:field="*{id_socio}" />
+			<!-- botones-->
+			<div class="row py-5">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4">
+					<button class="btn-danger btn btn-block">Cancelar</button>
+				</div>
+				<div class="col-sm-4">
+					<div th:if="${socio.id_socio != null}">
+						<input type="submit" class="btn btn-block btn-info"
+							value="Guardar Cambios"></input>
+					</div>
+					<div th:if="${socio.id_socio == null}">
+						<input type="submit" class="btn btn-block btn-info"
+							value="Registrar"></input>
+					</div>
+
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<!--Fin botones -->
+		</form>
+	</div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class Socio implements Serializable {
 	private String grupo;
 	@Column(length = 30)
 	private String titular;
-	@Column(length = 18)
+/*	@Column(length = 18)
 	private String curp;
 
 	public String getCurp() {
@@ -48,7 +48,7 @@ public class Socio implements Serializable {
 	public void setCurp(String curp) {
 		this.curp = curp;
 	}
-
+*/
 	private double aproteInicial;
 
 	@ManyToOne(fetch = FetchType.LAZY)
