@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3">
-				<a th:href="@{/socios/form/}" class="btn btn-info btn-block">Agregar
+				<a th:href="@{/socios/form/}+${id}" class="btn btn-info btn-block">Agregar
 					Socio</a>
 			</div>
 
@@ -19,7 +19,6 @@
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
-
 				<table class="table table-light">
 					<thead>
 						<tr>
@@ -29,30 +28,23 @@
 							<th>Titular</th>
 							<th>Editar</th>
 							<th>Eliminar</th>
-
 						</tr>
 					</thead>
-
 					<tbody>
 						<tr th:each="socio : ${socioss}">
-
 							<td
 								th:text="${socio.nombre+' '+socio.apellido_p+' '+socio.apellido_m}"></td>
 							<td th:text="${socio.grado}"></td>
 							<td th:text="${socio.grupo}"></td>
 							<td th:text="${socio.titular}"></td>
-
-							<td><a th:href="@{/socios/editar/1}" class="btn btn-info">Editar</a>
+							<td><a th:href="@{/socios/editar/}+${socio.id_socio}" class="btn btn-info">Editar</a>
 							</td>
 							<td><a th:href="@{/socios/eliminar/}+${socio.id_socio}"
 								class="btn"
 								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')">
 									<i class="fas fa-trash-alt fa-lg"> </i>
-
 							</a></td>
 						</tr>
-
-
 					</tbody>
 				</table>
 				<nav th:replace="layout/Paginator-nav :: paginator"></nav>

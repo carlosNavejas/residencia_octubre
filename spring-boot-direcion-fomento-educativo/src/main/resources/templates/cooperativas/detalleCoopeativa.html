@@ -123,9 +123,12 @@
 <!-- 								<i class="fas fa-trash-alt fa-lg"> </i> -->Eliminar
 
 							</a>
-							<a href="#" class="btn btn-info"
+							<a  class="btn btn-info"
 					th:href="@{/cooperativas/editarCooperativa/}+${escuela.cooperativa.clave_cooperatival}">Editar
 					cooperativa</a>
+					<a class="btn btn-info"
+					th:href="@{/socios/listar/}+${escuela.cooperativa.clave_cooperatival}+@{/}"
+					>Ver socios</a>
 						</div>
 					</div>
 				</div>

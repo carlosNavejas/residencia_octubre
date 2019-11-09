@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 import com.bolsadeideas.springboot.app.models.service.ServiciosServiceImpl;
@@ -29,6 +30,8 @@ import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 public class SocioController {
 	@Autowired
 	private ServiciosServiceImpl servicios;
+	List<String> guposAZ = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O",
+			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
 	@RequestMapping(value = "/form/{id}")
 	public String crear(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
@@ -38,27 +41,36 @@ public class SocioController {
 			flash.addFlashAttribute("error", "Ha ocurrido un error, intentelo mas tarde");
 			return "redirect:/home";
 		}
-
-		List<String> guposAZ = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ",
-				"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-
 		socio.setCooperativa(escuela.getCooperativa());
 		model.addAttribute("socio", socio);
-
 		model.addAttribute("grupos", guposAZ);
 		model.addAttribute("titulo", "Registrar socios");
 		return "Socios/formulario_socios_cooperativa";
 	}
 
 	// Listar socios de una cooperativa especifica
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	@RequestMapping(value = "/listar/{id}/", method = RequestMethod.GET)
+	public String listar(@PathVariable(value = "id") Long id, @RequestParam(name = "page", defaultValue = "0") int page,
+			Model model, RedirectAttributes flash) {
+		Cooperativa cooperativa;
+		if (id <= 0) {
+			flash.addFlashAttribute("error", "Ha ocurrido un error,Intentelo mas tarde");
+			return "redirect:/home";
+		}
+		cooperativa = servicios.findOneCooperativaById(id);
+		if (cooperativa == null) {
+			flash.addFlashAttribute("error", "Aun no has registrado una cooperativa");
+			return "redirect:/home";
+		}
+
 		Pageable pageRequest = PageRequest.of(page, 10);
-		Page<Socio> lescuelas = servicios.findAllSocios(pageRequest);
+
+		Page<Socio> lescuelas = servicios.findSocioByCooperativa(id, pageRequest);
 		PageRender<Socio> pageRender = new PageRender<Socio>("/escuelas/listar", lescuelas);
 		model.addAttribute("titulo", "Listado de socios");
 		model.addAttribute("socioss", lescuelas);
 		model.addAttribute("page", pageRender);
+		model.addAttribute("id",id);
 		return "/Socios/lista_socios_cooperativa";
 	}
 
@@ -68,8 +80,8 @@ public class SocioController {
 		String mensajeFlash = (socio.getId_socio() != null) ? "Editado con éxito!!!" : "Registro con éxito!!!";
 		servicios.saveSocioDeCooperativa(socio);
 		status.setComplete();
-		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/socios/listar";
+		flash.addFlashAttribute("info", mensajeFlash);
+		return "redirect:/socios/listar/" + socio.getCooperativa().getClave_cooperatival()+"/";
 	}
 
 	/* Eliminar Socio */
@@ -78,13 +90,11 @@ public class SocioController {
 		if (id > 0) {
 			Socio socio = servicios.findSocioById(id);
 			if (socio != null) {
-
 				servicios.deleteSocioById(id);
 				flash.addFlashAttribute("succes",
 						"Se ha elimida el registro!!!" + socio.getNombre() + " " + socio.getApellido_p());
 				return "redirect:/socios/listar";
 			}
-
 		}
 		flash.addFlashAttribute("error", "Ha ocurrido un error al eliminar la escuela!");
 		return "redirect:/home";
@@ -92,16 +102,11 @@ public class SocioController {
 
 	@RequestMapping(value = "/editar/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
-
 		Socio socio = servicios.findSocioById(id);
 		if (socio == null) {
 			flash.addFlashAttribute("error", "Ha ocurrido un error, intentelo mas tarde");
 			return "redirect:/home";
 		}
-
-		List<String> guposAZ = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ",
-				"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-
 		model.addAttribute("socio", socio);
 		model.addAttribute("grupos", guposAZ);
 		model.addAttribute("titulo", "Editar socios");

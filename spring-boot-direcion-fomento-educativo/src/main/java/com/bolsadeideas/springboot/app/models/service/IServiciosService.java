@@ -9,12 +9,17 @@ import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
+import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 
 public interface IServiciosService {
 
-	public List<Municipio> municipioFindByName(String municipio);
+	//Regiones
+	public List<Region>finAllRegiones();
+	//municipios
+	public List<Municipio> municipioFindByRegionId(Long id_region);
 
+	
 	public Escuela findByClaveEscuela(String clave);
 
 	public void guardarEscuela(Escuela escuela);
@@ -54,6 +59,6 @@ public interface IServiciosService {
 
 	public Page<Socio> findAllSocios(Pageable pageable);
 
-	public Socio findSocioByCurp(String curp);
+	public Page<Socio> findSocioByCooperativa(Long id_cooperativa,Pageable pageable);
 
 }

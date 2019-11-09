@@ -72,7 +72,7 @@
 			<div class="row py-5">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-4">
-					<button class="btn-danger btn btn-block">Cancelar</button>
+					<a class="btn btn-danger btn-block " th:href="@{/socios/listar/}+${socio.cooperativa.clave_cooperatival}+@{/}" th:text="Cancelar"></a>
 				</div>
 				<div class="col-sm-4">
 					<div th:if="${socio.id_socio != null}">

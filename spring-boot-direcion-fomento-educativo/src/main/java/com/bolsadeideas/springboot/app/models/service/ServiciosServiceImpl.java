@@ -13,25 +13,29 @@ import com.bolsadeideas.springboot.app.models.dao.IBibliotecaDao;
 import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
+import com.bolsadeideas.springboot.app.models.dao.IRegionDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
+import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 
 @Service
 public class ServiciosServiceImpl implements IServiciosService {
 	@Autowired
-	IMunicipioDao municipioDao;
+	private IMunicipioDao municipioDao;
 	@Autowired
-	IEscuelaDao escuelaDao;
+	private IEscuelaDao escuelaDao;
 	@Autowired
-	ICooperativaDao cooperativaDao;
+	private ICooperativaDao cooperativaDao;
 	@Autowired
-	IBibliotecaDao bibliotecaDao;
+	private IBibliotecaDao bibliotecaDao;
 	@Autowired
-	ISociosDao socioDao;
+	private ISociosDao socioDao;
+	@Autowired
+	private IRegionDao regionDao;
 
 	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByName(String municipio) {
@@ -147,8 +151,20 @@ public class ServiciosServiceImpl implements IServiciosService {
 		return socioDao.findAll(pageable);
 	}
 
-	public Socio findSocioByCurp(String curp) {
-		return null;// socioDao.fetchByCurp(curp);
+
+	public Page<Socio> findSocioByCooperativa(Long id_cooperativa, Pageable pageable) {
+		return socioDao.findByCooperativa(id_cooperativa, pageable);
+
+	}
+
+	public List<Region> finAllRegiones() {
+		
+		return (List<Region>)regionDao.findAll();
+	}
+
+	public List<Municipio> municipioFindByRegionId(Long id_region) {
+		
+		return municipioDao.fechtByIdregion(id_region);
 	}
 
 }

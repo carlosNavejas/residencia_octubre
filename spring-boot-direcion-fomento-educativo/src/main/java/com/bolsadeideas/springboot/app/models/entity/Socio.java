@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,18 +39,12 @@ public class Socio implements Serializable {
 	private String grupo;
 	@Column(length = 30)
 	private String titular;
-/*	@Column(length = 18)
-	private String curp;
-
-	public String getCurp() {
-		return curp;
-	}
-
-	public void setCurp(String curp) {
-		this.curp = curp;
-	}
-*/
 	private double aproteInicial;
+	/*@Column(length = 12)
+	private String estado;
+	fecha de registro
+	*/
+	
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Cooperativa cooperativa;
