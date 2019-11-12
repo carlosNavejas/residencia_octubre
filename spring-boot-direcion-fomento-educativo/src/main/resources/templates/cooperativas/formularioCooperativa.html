@@ -4,13 +4,14 @@
 
 
 </head>
-
+<style th:replace="cooperativas/js/scriptvalidaciones :: style"></style>
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 
 	<div class="container py-5 bg-light">
-		<form th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
+		<form id="form_cop" 
+			th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
 			method="post">
 			<!-- -->
 			<!--inicio Datos de la escuela -->
@@ -67,7 +68,9 @@
 			<div class="row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-2">
-					<a class="btn btn-info btn-block" th:href="@{/cooperativas/cooperativa/}+${escuela.id_escuela}"> Cancelar </a>
+					<a class="btn btn-info btn-block"
+						th:href="@{/cooperativas/cooperativa/}+${escuela.id_escuela}">
+						Cancelar </a>
 				</div>
 				<div class="col-sm-1"></div>
 				<div class="col-sm-2">

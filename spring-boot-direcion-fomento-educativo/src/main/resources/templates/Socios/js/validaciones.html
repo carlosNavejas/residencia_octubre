@@ -5,9 +5,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript" th:fragment="javascript">
+	<script type="text/javascript" th:fragment="javascript">
 		$(document).ready(function() {
-			
+			$('#nombre').inputlimiter({
+				limit : 15,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+
+			$('#apellido_p').inputlimiter({
+				limit : 12,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#apellido_m').inputlimiter({
+				limit : 12,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#titular').inputlimiter({
+				limit : 30,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
 
 		});
 	</script>

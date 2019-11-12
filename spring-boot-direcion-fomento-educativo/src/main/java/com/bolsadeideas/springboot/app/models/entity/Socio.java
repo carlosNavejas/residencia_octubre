@@ -1,7 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -40,14 +43,34 @@ public class Socio implements Serializable {
 	@Column(length = 30)
 	private String titular;
 	private double aproteInicial;
-	/*@Column(length = 12)
+	@Column(length = 12)
 	private String estado;
-	fecha de registro
-	*/
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha_registro;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Cooperativa cooperativa;
+
+	@PrePersist
+	public void prePersist() {
+		fecha_registro = new Date();
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Date getFecha_registro() {
+		return fecha_registro;
+	}
+
+	public void setFecha_registro(Date fecha_registro) {
+		this.fecha_registro = fecha_registro;
+	}
 
 	public Long getId_socio() {
 		return id_socio;

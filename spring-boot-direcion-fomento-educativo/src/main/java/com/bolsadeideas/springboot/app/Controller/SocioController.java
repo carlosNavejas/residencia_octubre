@@ -32,7 +32,7 @@ public class SocioController {
 	private ServiciosServiceImpl servicios;
 	List<String> guposAZ = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O",
 			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-
+List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
 	@RequestMapping(value = "/form/{id}")
 	public String crear(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
 		Socio socio = new Socio();
@@ -44,6 +44,7 @@ public class SocioController {
 		socio.setCooperativa(escuela.getCooperativa());
 		model.addAttribute("socio", socio);
 		model.addAttribute("grupos", guposAZ);
+		model.addAttribute("estadoE",estadosE);
 		model.addAttribute("titulo", "Registrar socios");
 		return "Socios/formulario_socios_cooperativa";
 	}
@@ -109,6 +110,7 @@ public class SocioController {
 		}
 		model.addAttribute("socio", socio);
 		model.addAttribute("grupos", guposAZ);
+		model.addAttribute("estadoE",estadosE);
 		model.addAttribute("titulo", "Editar socios");
 		return "Socios/formulario_socios_cooperativa";
 	}

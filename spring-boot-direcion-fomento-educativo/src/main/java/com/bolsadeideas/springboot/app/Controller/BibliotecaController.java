@@ -97,6 +97,10 @@ public class BibliotecaController {
 			escuela = servicios.findbyIdEscuela(id);
 			if (escuela != null) {
 				Biblioteca biblioteca = escuela.getBiblioteca();
+				if (biblioteca != null) {
+					flash.addFlashAttribute("error", "Aun no has registrado una biblioteca");
+					return "redirect:/home";
+				}
 				model.addAttribute("escuela", escuela);
 				model.addAttribute("biblioteca", biblioteca);
 				model.addAttribute("titulo", "Editar Biblioteca");

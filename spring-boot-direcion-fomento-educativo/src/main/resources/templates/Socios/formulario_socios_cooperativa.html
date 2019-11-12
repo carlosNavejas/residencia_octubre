@@ -32,7 +32,7 @@
 			</div>
 			<!-- fin nombre socio-->
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<label> Grado </label> <select class="form-control"
 						th:field="*{grado}">
 
@@ -47,10 +47,16 @@
 							th:text="${i}">
 					</select>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<label> Grupo </label> <select class="form-control"
 						th:field="*{grupo}">
 						<option th:each="g : ${grupos}" th:value="${g}" th:text="${g}">
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<label> Estado </label> <select class="form-control"
+						th:field="*{estado}">
+						<option th:each="g : ${estadoE}" th:value="${g}" th:text="${g}">
 					</select>
 				</div>
 			</div>
@@ -90,6 +96,8 @@
 			<!--Fin botones -->
 		</form>
 	</div>
+	<div th:replace="layout/layout2 :: js"></div>
 	<footer th:replace="layout/layout2 :: footer"></footer>
+	<script th:replace="Socios/js/validaciones :: javascript"></script>
 </body>
 </html>

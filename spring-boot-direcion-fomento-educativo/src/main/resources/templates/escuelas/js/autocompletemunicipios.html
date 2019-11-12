@@ -5,6 +5,15 @@
 	<script type="text/javascript" th:fragment="javascript">
 		$(document)
 				.ready(
+						
+						
+						//inicio validaciones limite
+							$('#nombre_escuela').inputlimiter({
+				limit : 45,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+						//fin vslidaciones limite
 						function() {
 							$('input').keypress(function(){
 								

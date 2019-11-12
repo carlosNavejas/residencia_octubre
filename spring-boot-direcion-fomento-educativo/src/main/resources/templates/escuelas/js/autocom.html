@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+
+			//limite de caracteres
+			$('#nombre_escuela').inputlimiter({
+				limit : 45,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#claveescuela').inputlimiter({
+				limit : 10,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#telefono').inputlimiter({
+				limit : 10,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#apellido_mdir').inputlimiter({
+				limit : 15,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#apellido_pdir').inputlimiter({
+				limit : 15,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#nombre_dir').inputlimiter({
+				limit : 20,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#calle').inputlimiter({
+				limit : 35,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#numeroc').inputlimiter({
+				limit : 4,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			//fin limite caracteres
+
+			$("#claveescuela").keyup(function() {
+				//pasar a mayusculas
+				$("#claveescuela").val($("#claveescuela").val().toUpperCase());
+			});
+
+			//liminar entrada de datos 
+
+		});
+	</script>
+</body>
+</html>

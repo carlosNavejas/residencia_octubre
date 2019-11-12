@@ -5,14 +5,25 @@
 </head>
 <body>
 	<script type="text/javascript" th:fragment="javascript">
-		$(document).ready(function() {
-			$('#nombre_bibioteca').on('input', function (e) {
-				 if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
-			    	 this.value = this.value.replace(/[^ a-z0-9áéíóúüñ]+/ig,"");
-			    }
-			});
+		$(document).ready(
+				function() {
+					$('#nombre_bibioteca').on(
+							'input',
+							function(e) {
+								if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
+									this.value = this.value.replace(
+											/[^ a-z0-9áéíóúüñ]+/ig, "");
+								}
+							});
+					
+					
 
-		});
+					$('#nombre_bibioteca').inputlimiter({
+						limit : 40,
+						remText : '%n caractere%s restantes.',
+						limitText : 'Campo limitado a %n caractere%s.'
+					});
+				});
 	</script>
 </body>
 </html>

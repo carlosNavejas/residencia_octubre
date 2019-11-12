@@ -1,25 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<style th:fragment="style">
+.cmxform fieldset p label span.error {
+	color: red;
+}
 
+form.cmxform {
+	width: 30em;
+}
+
+form.cmxform label {
+	width: auto;
+	display: block;
+	float: none;
+}
+</style>
 <body>
 	<script type="text/javascript" th:fragment="javascript">
-		$(document).ready(function() {
+		$(document).ready(
+				function() {
 
-			//
-			$("select#tipo").change(function() {
-				var tipo = $("select#tipo").val();
-				if (tipo == "Consesionada") {
-					//$("input#monto").show();
-					$("input#monto").attr("disabled", false);
-					$("input#monto").attr("required", true);
-				} else {
-					//$("input#monto").hide();
-					$("input#monto").attr("disabled", true);
-					$("input#monto").attr("required", false);
-				}
-			});
+					$("select#tipo").change(function() {
+						var tipo = $("select#tipo").val();
+						if (tipo == "Consesionada") {
+							//$("input#monto").show();
+							$("input#monto").attr("disabled", false);
+							$("input#monto").attr("required", true);
+						} else {
+							//$("input#monto").hide();
+							$("input#monto").attr("disabled", true);
+							$("input#monto").attr("required", false);
+						}
+					});
+					//fin cambio select
+					$('#nombre_cooperativa').on(
+							'input',
+							function(e) {
+								if (!/^[ a-z0-9αινσϊόρ]*$/i.test(this.value)) {
+									this.value = this.value.replace(
+											/[^ a-z0-9αινσϊόρ]+/ig, "");
+								}
+							});
 
-		});
+					$('#nombre_cooperativa').inputlimiter({
+						limit : 40,
+						remText : '%n caractere%s restantes.',
+						limitText : 'Campo limitado a %n caractere%s.'
+					});
+					//vslifst formularios
+					$("#form_cop").validate({
+						rules : {
+							nombre_cooperativa : {
+								required : true,
+								minlength : 4,
+								maxlength : 20
+							}
+						},
+						messages : {
+							nombre_cooperativa : {
+								required : "Este campo es requerido"/*,
+																				                           minlength: $.format("Necesitamos por lo menos {0} caracteres"),
+																				                           maxlength: $.format("{0} caracteres son demasiados!")*/
+							}
+						}
+					});
+
+					//fin validar formularios
+				});
 	</script>
 </body>
 </html>
