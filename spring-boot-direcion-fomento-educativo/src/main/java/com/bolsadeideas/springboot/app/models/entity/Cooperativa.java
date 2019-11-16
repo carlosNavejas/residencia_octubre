@@ -47,6 +47,8 @@ public class Cooperativa implements Serializable {
 	private Escuela escuela;
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Socio> lista_socios;
+	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Ingresos_egresos> lista_ingresos_egresos;
 
 	@PrePersist
 	public void prePersist() {
@@ -114,6 +116,15 @@ public class Cooperativa implements Serializable {
 
 	public Cooperativa() {
 		lista_socios = new ArrayList<Socio>();
+		lista_ingresos_egresos=new ArrayList<Ingresos_egresos>();
+	}
+
+	public List<Ingresos_egresos> getLista_ingresos_egresos() {
+		return lista_ingresos_egresos;
+	}
+
+	public void setLista_ingresos_egresos(List<Ingresos_egresos> lista_ingresos_egresos) {
+		this.lista_ingresos_egresos = lista_ingresos_egresos;
 	}
 
 	public List<Socio> getLista_socios() {

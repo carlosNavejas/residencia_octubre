@@ -7,7 +7,7 @@
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 	<div class="container bg-light">
-		<form th:action="@{/socios/guardar}" th:object="${socio}"
+		<form id="form_soc" th:action="@{/socios/guardar}" th:object="${socio}"
 			method="post">
 			<!-- nombre del socio-->
 			<div class="row">

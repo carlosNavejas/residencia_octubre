@@ -127,8 +127,13 @@
 					th:href="@{/cooperativas/editarCooperativa/}+${escuela.cooperativa.clave_cooperatival}">Editar
 					cooperativa</a>
 					<a class="btn btn-info"
-					th:href="@{/socios/listar/}+${escuela.cooperativa.clave_cooperatival}+@{/}"
+					
+	th:href="@{/socios/listar/}+${escuela.cooperativa.clave_cooperatival}+@{/}"			
 					>Ver socios</a>
+<!-- listarprint
+	 th:href="@{'/socios/listarprint/'+${escuela.cooperativa.clave_cooperatival}(format=pdf)}" 
+	 
+-->
 						</div>
 					</div>
 				</div>

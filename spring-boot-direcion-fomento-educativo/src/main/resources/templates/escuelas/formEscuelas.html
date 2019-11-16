@@ -12,7 +12,7 @@
 
 
 	<div class="container bg-light mt-4 py-5">
-		<form th:action="@{/escuelas/form}" th:object="${escuela}"  method="post">
+		<form id="form_esc" th:action="@{/escuelas/form}" th:object="${escuela}"  method="post">
 			<!--Inicio nombre de la escuela-->
 			<div class="form-group col-sm-12">
 				<label> Nombre de la escuela: </label> <input class="form-control"
@@ -43,7 +43,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Telefono de la escuela: </label> <input
-							class="form-control" type="number" th:field="*{telefono}" />
+							class="form-control" type="number" th:field="*{telefono}" min="10" />
 					</div>
 				</div>
 				<div class="col-sm-6">

@@ -20,6 +20,16 @@ form.cmxform label {
 		$(document).ready(
 				function() {
 
+					if($("input#monto").val().length > 0){
+						$("input#monto").attr("disabled", false);
+						$("input#monto").attr("required", true);
+					
+					}else{
+						$("input#monto").attr("disabled", true);
+						$("input#monto").attr("required", false);
+					
+					}
+					
 					$("select#tipo").change(function() {
 						var tipo = $("select#tipo").val();
 						if (tipo == "Consesionada") {
@@ -51,18 +61,11 @@ form.cmxform label {
 					$("#form_cop").validate({
 						rules : {
 							nombre_cooperativa : {
-								required : true,
-								minlength : 4,
-								maxlength : 20
+								required : true
+
 							}
 						},
-						messages : {
-							nombre_cooperativa : {
-								required : "Este campo es requerido"/*,
-																				                           minlength: $.format("Necesitamos por lo menos {0} caracteres"),
-																				                           maxlength: $.format("{0} caracteres son demasiados!")*/
-							}
-						}
+
 					});
 
 					//fin validar formularios

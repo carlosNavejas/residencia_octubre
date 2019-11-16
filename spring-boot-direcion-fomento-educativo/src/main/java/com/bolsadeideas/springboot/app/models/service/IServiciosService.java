@@ -8,18 +8,19 @@ import org.springframework.data.domain.Pageable;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
+import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 
 public interface IServiciosService {
 
-	//Regiones
-	public List<Region>finAllRegiones();
-	//municipios
+	// Regiones
+	public List<Region> finAllRegiones();
+
+	// municipios
 	public List<Municipio> municipioFindByRegionId(Long id_region);
 
-	
 	public Escuela findByClaveEscuela(String clave);
 
 	public void guardarEscuela(Escuela escuela);
@@ -59,6 +60,18 @@ public interface IServiciosService {
 
 	public Page<Socio> findAllSocios(Pageable pageable);
 
-	public Page<Socio> findSocioByCooperativa(Long id_cooperativa,Pageable pageable);
+	public Page<Socio> findSocioByCooperativa(Long id_cooperativa, Pageable pageable);
+	public List<Socio> listarSociosByCooperativa(Long id_cooperativa);
+
+	// CRUD ingresos egresos
+	public void saveIngresosEgresos(Ingresos_egresos ingresos_egresos);
+
+	public void deleteIngresosEgresos(Long id_ingresosegresos);
+
+	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos);
+
+	public Page<Ingresos_egresos> findAllIngresosEgresos(Pageable pageable);
+
+	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable);
 
 }

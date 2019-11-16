@@ -7,6 +7,8 @@
 <body>
 	<script type="text/javascript" th:fragment="javascript">
 		$(document).ready(function() {
+		
+		
 			$('#nombre').inputlimiter({
 				limit : 15,
 				remText : '%n caractere%s restantes.',
@@ -29,7 +31,33 @@
 				limitText : 'Campo limitado a %n caractere%s.'
 			});
 
+			//vslifst formularios
+			$("#form_soc").validate({
+				rules : {
+					nombre : {
+						required : true
+
+					},
+					apellido_p : {
+						required : true
+
+					},
+					apellido_m : {
+						required : true
+					}
+				}
+
+			});
+
 		});
+		
+/*
+		if ($("#monto").val().length >0) {
+			$('input:monto').attr('required', true);
+		}else{
+			$('input:monto').attr('required', false);
+		}*/
+
 	</script>
 </body>
 </html>

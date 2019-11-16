@@ -4,17 +4,18 @@
 
 </head>
 <!-- oncopy="return false" onpaste="return false" -->
-<body >
+<body>
 	<header th:replace="layout/layout2 :: header"></header>
-<div th:replace="layout/layout2 :: mensajesinf"></div>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
 
 	<!--inicio Container principal -->
 
 
 	<div class="container bg-light mt-4 py-5">
-		<form th:action="@{/escuelas/form}"th:object="${escuela}"  method="post">
-		
-		<input type="hidden" th:field="*{id_escuela}" />
+		<form id="form_esc" th:action="@{/escuelas/form}"
+			th:object="${escuela}" method="post">
+
+			<input type="hidden" th:field="*{id_escuela}" />
 			<!--Inicio nombre de la escuela-->
 			<div class="form-group col-sm-12">
 				<label> Nombre de la escuela: </label> <input class="form-control"
@@ -45,7 +46,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Telefono de la escuela: </label> <input
-							class="form-control" type="number" th:field="*{telefono}" />
+							class="form-control" type="number" th:field="*{telefono}" min="10" />
 					</div>
 				</div>
 				<div class="col-sm-6">
@@ -64,19 +65,19 @@
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Nombre del director: </label> <input class="form-control"
-							type="text" th:field="*{nombre_dir}" required/>
+							type="text" th:field="*{nombre_dir}" required />
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Apellido parteno: </label> <input class="form-control"
-							type="text" th:field="*{apellido_pdir}" required/>
+							type="text" th:field="*{apellido_pdir}" required />
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
 						<label> Apellido materno: </label> <input class="form-control"
-							type="text" th:field="*{apellido_mdir}" required/>
+							type="text" th:field="*{apellido_mdir}" required />
 					</div>
 				</div>
 			</div>
@@ -101,7 +102,7 @@
 					<div class="form-group">
 						<label> Municipios: </label>
 						<div id="cambio" name="cambio">
-						
+
 							<select id="municipio" name="municipio" class="form-control">
 								<option value="1">Acapulco</option>
 							</select>
@@ -117,7 +118,8 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label> Numero: </label> <input class="form-control" th:field="*{direccion.numero}" type="number"  required  />
+						<label> Numero: </label> <input class="form-control"
+							th:field="*{direccion.numero}" type="number" required />
 					</div>
 				</div>
 			</div>
@@ -126,10 +128,11 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					<a class="btn btn-info btn-block" th:href="@{/escuelas/listar}"> Cancelar </a>
+					<a class="btn btn-info btn-block" th:href="@{/escuelas/listar}">
+						Cancelar </a>
 				</div>
 				<div class="col-sm-3">
-					<input class="btn btn-info btn-block"  type="submit"
+					<input class="btn btn-info btn-block" type="submit"
 						value="Gaurdar Cambios" />
 				</div>
 				<div class="col-sm-3"></div>
@@ -143,7 +146,7 @@
 
 	<footer th:replace="layout/layout2 :: footer"></footer>
 	<div th:replace="layout/layout2 :: js"></div>
-	<script th:replace="escuelas/js/autocompletemunicipios :: javascript"></script>
+	<script th:replace="escuelas/js/autocom :: javascript"></script>
 
 </body>
 </html>

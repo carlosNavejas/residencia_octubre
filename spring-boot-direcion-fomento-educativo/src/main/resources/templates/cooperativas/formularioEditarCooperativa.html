@@ -7,7 +7,7 @@
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 	<div class="container py-5 bg-light">
-		<form th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
+		<form id="form_cop" th:action="@{/cooperativas/guardar}" th:object="${cooperativa}"
 			method="post">
 			<!-- -->
 			<!--inicio Datos de la escuela -->
@@ -52,7 +52,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Monto de consesion </label> <input class="form-control"
-							type="number" th:field="*{monto}" required="required" />
+							type="number" th:field="*{monto}" min="1"  required="required" />
 					</div>
 				</div>
 			</div>

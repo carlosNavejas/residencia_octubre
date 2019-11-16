@@ -32,7 +32,8 @@ public class SocioController {
 	private ServiciosServiceImpl servicios;
 	List<String> guposAZ = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O",
 			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
+	List<String> estadosE = Arrays.asList("ACTIVO", "INACTIVO");
+
 	@RequestMapping(value = "/form/{id}")
 	public String crear(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
 		Socio socio = new Socio();
@@ -44,7 +45,7 @@ List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
 		socio.setCooperativa(escuela.getCooperativa());
 		model.addAttribute("socio", socio);
 		model.addAttribute("grupos", guposAZ);
-		model.addAttribute("estadoE",estadosE);
+		model.addAttribute("estadoE", estadosE);
 		model.addAttribute("titulo", "Registrar socios");
 		return "Socios/formulario_socios_cooperativa";
 	}
@@ -71,7 +72,7 @@ List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
 		model.addAttribute("titulo", "Listado de socios");
 		model.addAttribute("socioss", lescuelas);
 		model.addAttribute("page", pageRender);
-		model.addAttribute("id",id);
+		model.addAttribute("id", id);
 		return "/Socios/lista_socios_cooperativa";
 	}
 
@@ -82,7 +83,7 @@ List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
 		servicios.saveSocioDeCooperativa(socio);
 		status.setComplete();
 		flash.addFlashAttribute("info", mensajeFlash);
-		return "redirect:/socios/listar/" + socio.getCooperativa().getClave_cooperatival()+"/";
+		return "redirect:/socios/listar/" + socio.getCooperativa().getClave_cooperatival() + "/";
 	}
 
 	/* Eliminar Socio */
@@ -110,9 +111,29 @@ List<String>estadosE=Arrays.asList("ACTIVO","INACTIVO");
 		}
 		model.addAttribute("socio", socio);
 		model.addAttribute("grupos", guposAZ);
-		model.addAttribute("estadoE",estadosE);
+		model.addAttribute("estadoE", estadosE);
 		model.addAttribute("titulo", "Editar socios");
 		return "Socios/formulario_socios_cooperativa";
 	}
+//para generar pdf
 
+	@RequestMapping(value = "/listarprint/{id}", method = RequestMethod.GET)
+	public String listarpdf(@PathVariable(value = "id") Long id,
+			@RequestParam(name = "page", defaultValue = "0") int page, Model model, RedirectAttributes flash) {
+		Cooperativa cooperativa;
+		if (id <= 0) {
+			flash.addFlashAttribute("error", "Ha ocurrido un error,Intentelo mas tarde");
+			return "redirect:/home";
+		}
+		cooperativa = servicios.findOneCooperativaById(id);
+		if (cooperativa == null) {
+			flash.addFlashAttribute("error", "Aun no has registrado una cooperativa");
+			return "redirect:/home";
+		}
+
+		List<Socio> listaSocios = servicios.listarSociosByCooperativa(id);
+		model.addAttribute("id", id);
+		model.addAttribute("lista", listaSocios);
+		return "/Socios/listasocios";
+	}
 }
