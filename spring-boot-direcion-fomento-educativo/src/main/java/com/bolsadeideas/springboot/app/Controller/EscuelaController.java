@@ -1,12 +1,21 @@
 package com.bolsadeideas.springboot.app.Controller;
 
+import java.util.Collection;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,11 +40,12 @@ import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 @RequestMapping(value = "/escuelas")
 @SessionAttributes("escuela")
 public class EscuelaController {
+
 	@Autowired
 	private ServiciosServiceImpl servicios;
 
 	/* Formulario para registrar la escuela */
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/form")
 	public String formulario_escuela(Model model) {
 		Escuela escuela = new Escuela();
@@ -44,8 +54,9 @@ public class EscuelaController {
 		return "escuelas/formEscuelas";
 	}
 
-	
 	/* Guarda la escuela */
+	// @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_INVITADO')")
+	@Secured({ "ROLE_ADMIN", "ROLE_INVITADO" })
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Escuela escuela, @RequestParam(name = "calle", required = false) String calle,
 			@RequestParam(name = "municipio", required = false) Long municipio,
@@ -77,13 +88,26 @@ public class EscuelaController {
 	}
 
 	/* Mostrar las escuelas */
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
-	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
+			HttpServletRequest request) {
 		Pageable pageRequest = PageRequest.of(page, 4);
+
+		if (hasRole("ROLE_INVITADO")) {
+
+		}
+		SecurityContextHolderAwareRequestWrapper securityContext = new SecurityContextHolderAwareRequestWrapper(request,
+				"ROLE_");
+		if (securityContext.isUserInRole("ADMIN")) {
+
+		}
+
 		Page<Escuela> lescuelas = servicios.findAll(pageRequest);
 		PageRender<Escuela> pageRender = new PageRender<Escuela>("/escuelas/listar", lescuelas);
 		model.addAttribute("titulo", "Listado de escuelas");
 		model.addAttribute("escuelas", lescuelas);
+
 		model.addAttribute("page", pageRender);
 		return "/escuelas/lista_escuelas";
 	}
@@ -117,5 +141,20 @@ public class EscuelaController {
 		model.addAttribute("escuela", escuela);
 		model.addAttribute("titulo", "Editar Cliente");
 		return "escuelas/formEscuelasEditar";
+	}
+
+	private boolean hasRole(String role) {
+		SecurityContext context = SecurityContextHolder.getContext();
+		if (context == null) {
+			return false;
+		}
+		org.springframework.security.core.Authentication auth = context.getAuthentication();
+		if (auth == null) {
+			return false;
+		}
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+
+		return authorities.contains(new SimpleGrantedAuthority(role));
+
 	}
 }

@@ -2,15 +2,16 @@ package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles",uniqueConstraints = {@UniqueConstraint(columnNames = {"user_idd","nombrerol"})})
 public class Rol implements Serializable {
 
 	/**
@@ -19,26 +20,25 @@ public class Rol implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_rol;
-	@Column(length = 15)
-	private String rol;
-	public Long getId_rol() {
-		return id_rol;
-	}
-	public void setId_rol(Long id_rol) {
-		this.id_rol = id_rol;
-	}
-	public String getRol() {
-		return rol;
-	}
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
-	public Rol(Long id_rol, String rol) {
+	private Long id;
+	private String nombrerol;
 	
-		this.id_rol = id_rol;
-		this.rol = rol;
+	public Long getId() {
+		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombrerol() {
+		return nombrerol;
+	}
+
+	public void setNombrerol(String nombrerol) {
+		this.nombrerol = nombrerol;
+	}
+
 	public Rol() {
 		
 	}

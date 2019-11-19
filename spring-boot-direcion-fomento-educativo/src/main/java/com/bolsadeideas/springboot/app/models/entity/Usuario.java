@@ -2,6 +2,7 @@ package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +11,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,13 +32,13 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_usuario;
-	@Column(length = 19)
+	@Column(length = 19, unique = true)
 	private String curp;
-	@Column(length = 40)
+	@Column(length = 50, unique = true)
 	@NotEmpty
 	private String correo;
 	@NotEmpty
-	@Column(length = 8)
+	@Column(length = 65)
 	private String contrasena;
 	@NotEmpty
 	@Column(length = 25)
@@ -48,90 +51,111 @@ public class Usuario implements Serializable {
 	private String apellido_materno;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_registro;
-	@NotEmpty
-	@Column(length = 2)
-	private String estado;
-	@OneToOne(targetEntity = Rol.class, fetch = FetchType.LAZY)
-	private Rol rol_usuario;
+	private boolean estado;
+
+	@OneToMany(targetEntity = Rol.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_idd")
+	private List<Rol> roles;
+
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Escuela.class)
 	private Escuela escuela;
+
 	public String getCurp() {
 		return curp;
 	}
+
 	public void setCurp(String curp) {
 		this.curp = curp;
 	}
+
 	public String getCorreo() {
 		return correo;
 	}
+
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+
 	public String getContrasena() {
 		return contrasena;
 	}
+
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido_paterno() {
 		return apellido_paterno;
 	}
+
 	public void setApellido_paterno(String apellido_paterno) {
 		this.apellido_paterno = apellido_paterno;
 	}
+
 	public String getApellido_materno() {
 		return apellido_materno;
 	}
+
 	public void setApellido_materno(String apellido_materno) {
 		this.apellido_materno = apellido_materno;
 	}
+
 	public Date getFecha_registro() {
 		return fecha_registro;
 	}
+
 	public void setFecha_registro(Date fecha_registro) {
 		this.fecha_registro = fecha_registro;
 	}
-	public String getEstado() {
+
+	public Long getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
+	public boolean getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	public Rol getRol_usuario() {
-		return rol_usuario;
+
+	public List<Rol> getRoles() {
+		return roles;
 	}
-	public void setRol_usuario(Rol rol_usuario) {
-		this.rol_usuario = rol_usuario;
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
+
 	public Escuela getEscuela() {
 		return escuela;
 	}
+
 	public void setEscuela(Escuela escuela) {
 		this.escuela = escuela;
 	}
+
 	public Usuario() {
-		
+
 	}
-	public Usuario(String curp, String correo, String contrasena, String nombre, String apellido_paterno,
-			String apellido_materno, Date fecha_registro, String estado, Rol rol_usuario, Escuela escuela) {
-		
-		this.curp = curp;
-		this.correo = correo;
-		this.contrasena = contrasena;
-		this.nombre = nombre;
-		this.apellido_paterno = apellido_paterno;
-		this.apellido_materno = apellido_materno;
-		this.fecha_registro = fecha_registro;
-		this.estado = estado;
-		this.rol_usuario = rol_usuario;
-		this.escuela = escuela;
+
+	@PrePersist
+	public void prePersist() {
+		fecha_registro = new Date();
+		estado = true;
 	}
-	
-	
+
 }

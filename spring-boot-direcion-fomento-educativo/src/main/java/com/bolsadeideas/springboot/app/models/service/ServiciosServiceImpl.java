@@ -16,6 +16,7 @@ import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
 import com.bolsadeideas.springboot.app.models.dao.IRegionDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
+import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
@@ -23,6 +24,7 @@ import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
+import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 @Service
 public class ServiciosServiceImpl implements IServiciosService {
@@ -40,6 +42,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 	private IRegionDao regionDao;
 	@Autowired
 	private IIngresosEgresosDao ingresosDao;
+	@Autowired
+	private IUsuarioDao usuarioDao;
 
 	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByName(String municipio) {
@@ -155,50 +159,96 @@ public class ServiciosServiceImpl implements IServiciosService {
 		return socioDao.findAll(pageable);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Socio> findSocioByCooperativa(Long id_cooperativa, Pageable pageable) {
 		return socioDao.findByCooperativa(id_cooperativa, pageable);
 
 	}
 
+	@Transactional(readOnly = true)
 	public List<Region> finAllRegiones() {
 
 		return (List<Region>) regionDao.findAll();
 	}
 
+	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByRegionId(Long id_region) {
 
 		return municipioDao.fechtByIdregion(id_region);
 	}
 
 	// CRUD ingresos y egresos
+	@Transactional
 	public void saveIngresosEgresos(Ingresos_egresos ingresos_egresos) {
 		ingresosDao.save(ingresos_egresos);
 
 	}
 
+	@Transactional
 	public void deleteIngresosEgresos(Long id_ingresosegresos) {
 		ingresosDao.deleteById(id_ingresosegresos);
 
 	}
 
+	@Transactional(readOnly = true)
 	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos) {
 
 		return ingresosDao.findById(id_ingresosEgresos).orElse(null);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Ingresos_egresos> findAllIngresosEgresos(Pageable pageable) {
 
 		return ingresosDao.findAll(pageable);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional(readOnly = true)
 	public List<Socio> listarSociosByCooperativa(Long id_cooperativa) {
 
 		return socioDao.findByCooperativaa(id_cooperativa);
+	}
+
+//crud Usuarios 
+
+	@Override
+	@Transactional
+	public void saveUsuario(Usuario usuario) {
+		usuarioDao.save(usuario);
+
+	}
+
+	@Override
+	@Transactional
+	public void deleteUsuarioById(Long id_socio) {
+		usuarioDao.deleteById(id_socio);
+
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Usuario findUsuarioById(Long id_socio) {
+
+		return usuarioDao.findById(id_socio).orElse(null);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Usuario> findAllUsuarios(Pageable pageable) {
+
+		return usuarioDao.findAll(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Usuario findUsuarioByCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findByCorreo(correo);
 	}
 
 }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout2 :: head">
 </head>
+
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
@@ -28,7 +29,7 @@
 							<th>Telefono</th>
 							<th>Editar</th>
 
-							<th>Eliminar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 
@@ -50,7 +51,7 @@
 							<a class="btn btn-xs btn-primary"
 								th:href="@{/escuelas/form}+${escuela.clave}" th:text="'Editar'"></a> -->
 							</td>
-							<td><a
+							<td><a sec:authorize="hasRole('ROLE_ADMIN')"
 								th:href="@{/escuelas/eliminar/}+${escuela.id_escuela}"
 								class="btn"
 								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')">

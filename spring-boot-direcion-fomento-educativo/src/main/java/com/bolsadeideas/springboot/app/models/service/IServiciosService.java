@@ -12,6 +12,7 @@ import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
+import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 public interface IServiciosService {
 
@@ -74,4 +75,17 @@ public interface IServiciosService {
 
 	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable);
 
+//CRUD usuarios
+	public void saveUsuario(Usuario usuario);
+
+	public void deleteUsuarioById(Long id_socio);
+
+	public Usuario findUsuarioById(Long id_socio);
+
+	public Page<Usuario> findAllUsuarios(Pageable pageable);
+	public Usuario findUsuarioByCorreo(String correo);
+	
+
+	
+	
 }
