@@ -15,6 +15,7 @@ import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
 import com.bolsadeideas.springboot.app.models.dao.IRegionDao;
+import com.bolsadeideas.springboot.app.models.dao.IRolesDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
@@ -23,6 +24,7 @@ import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
+import com.bolsadeideas.springboot.app.models.entity.Rol;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
@@ -44,6 +46,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 	private IIngresosEgresosDao ingresosDao;
 	@Autowired
 	private IUsuarioDao usuarioDao;
+	@Autowired
+	private IRolesDao rolDao;
 
 	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByName(String municipio) {
@@ -250,5 +254,12 @@ public class ServiciosServiceImpl implements IServiciosService {
 		// TODO Auto-generated method stub
 		return usuarioDao.findByCorreo(correo);
 	}
+
+	@Override
+	public void saveRolUser(Rol rol) {
+	rolDao.save(rol);
+		
+	}
+
 
 }

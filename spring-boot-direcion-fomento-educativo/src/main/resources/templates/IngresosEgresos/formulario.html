@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout2 :: head">
+
+</head>
+
+
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+
+
+	<div class="container bg-light">
+
+		<form id="form_ing" th:action="@{/ingresos/guardar}"
+			th:object="${ingresos}" method="post">
+			<div class="row">
+				<!--inicio row escuela-->
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Nombre de la escuela </label> <input class="form-control"
+							readonly="readonly"
+							th:value="${ingresos.cooperativa.escuela.nombre_escuela}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Clave de la escuela </label> <input class="form-control"
+							readonly="readonly"
+							th:value="${ingresos.cooperativa.escuela.claveescuela}" />
+					</div>
+				</div>
+			</div>
+			<!--fin row-->
+			<!--inicio row cooeprativa-->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label> Nombre de la cooperativa </label> <input
+							class="form-control" readonly="readonly"
+							th:value="${ingresos.cooperativa.nombre_cooperativa}" />
+					</div>
+				</div>
+			</div>
+			<!--Fin row coopeartiva-->
+			<!--inicio-->
+			<div class="row">
+				<div class="col-sm-">
+					<div class="form-group"></div>
+				</div>
+			</div>
+			<!--Fin-->
+			<!--inicio-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Tipo de registro </label> <select class="form-control"
+							th:field="*{tipoRegistro}">
+							<option th:each="g : ${tipos}" th:value="${g}" th:text="${g}">
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Ciclo escolar </label> <input th:field="*{ciclo}"
+							class="form-control" readonly="readonly" type="text" />
+					</div>
+				</div>
+			</div>
+			<!--Fin-->
+			<!--inicio-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Monto inicial </label> <input class="form-control"
+							type="number" th:field="*{montoinicial}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Fondo de reserva </label> <input class="form-control"
+							type="number" th:field="*{fondoreserva}" />
+					</div>
+				</div>
+			</div>
+			<!--Fin-->
+			<!--inicio-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Egreso del periodo </label> <input class="form-control"
+							type="number" th:field="*{egresodelperiodo}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Fondo Social </label> <input class="form-control"
+							type="number" th:field="*{fondosocial}" />
+					</div>
+				</div>
+			</div>
+			<!--Fin-->
+			<!--inicio-->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Fondo repartible </label> <input class="form-control"
+							type="number" th:field="*{fondorepartible}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Ingreso del periodo </label> <input class="form-control"
+							type="number" th:field="*{ingresodelperiodo}" />
+					</div>
+				</div>
+			</div>
+			<!--Fin-->
+			<!--numero de socios y monto -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Numero de socios </label> <input class="form-control"
+							type="number" th:field="*{numeroSocios}" />
+
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Monto inicial por socio </label> <input
+							class="form-control" type="number" th:field="*{montoInitSocios}" />
+
+					</div>
+				</div>
+			</div>
+			<!--Fin numero de socios y monto -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label> Seleccione La Lista De Socios De La Cooperativa
+							Firmada Y Sellada </label> <input class="form-control-file"
+							id="archivolista_socios" name="archivolista_socios"
+							onchange="return validarExt()" type="file" />
+
+					</div>
+				</div>
+
+			</div>
+			<!-- -->
+			<div class="row py-4">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<a class="btn btn-block btn-danger text-white"> Cancelar </a>
+				</div>
+				<div class="col-sm-3">
+					<input class="btn btn-block btn-info" type="submit"
+						value="Registrar" />
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</form>
+	</div>
+	<div aria-labelledby="exampleModal" class="modal fade"
+		id="exampleModal" role="dialog" tabindex="-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content bg-faded">
+				<div class="modal-header  bg-danger">
+
+					<label class="modal-title text-center text-white" id="labell">
+						Advertencia </label>
+
+					<button aria-label="close" class="close" data-dismiss="modal"
+						type="button">
+						<span class="text-white" aria-hidden="true"> × </span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h5>
+						Solo se permiten archivos con la extesion<span>'.pdf',
+							'.JPEG', '.JPG', '.PNG' </span>
+					</h5>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" data-dismiss="modal"
+						type="button">ACEPTAR</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:replace="layout/layout2 :: js"></div>
+	<script th:replace="/ingresosEgresos/js/validaciones :: javascript"></script>
+	<footer th:replace="layout/layout2 :: footer"></footer>
+</body>
+</html>

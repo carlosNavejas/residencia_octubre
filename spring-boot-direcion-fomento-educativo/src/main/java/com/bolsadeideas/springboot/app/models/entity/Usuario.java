@@ -149,7 +149,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario() {
-
+		estado = true;
 	}
 
 	@PrePersist

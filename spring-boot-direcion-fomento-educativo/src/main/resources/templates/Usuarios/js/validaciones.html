@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document)
+				.ready(
+						function() {
+$("#correo").keypress(function(){
+$('#correo').next('p').remove();
+});
+							$("#form_usu")
+									.on(
+											"submit",
+											function() {
+												var correoNew = $("#correo")
+														.val();
+
+												if (correoNew == null) {
+													$("#correo").focus();
+													return false;
+												} else {
+													$
+															.ajax(
+																	{
+																		method : "GET",
+																		url : "/usuarios/buscarCorreo/"
+																				+ correoNew,
+																		dataType : "json",
+
+																		cache : false
+																	})
+															.done(
+																	function(
+																			msg) {
+																		if (msg.correo != null) {
+																			$(
+																					"#correo")
+																					.focus();
+																			
+																		    	$("#correo").after("<p id='mensaje' name='mensaje'class='text-danger'>Este correo ya esta registrado !!!</p>");
+
+																			return false;
+																		}
+																	}).error:function (xhr, ajaxOptions, thrownError){
+																	    if(xhr.status==404) {
+																	        alert(thrownError);
+																	    }
+																	};
+
+													//return false;
+												}
+											});
+
+							$("#form_usu").validate({
+								rules : {
+
+									nombre : {
+										required : true
+										minlength: 25,
+										maxlength: 25
+
+									},
+									apellido_paterno:{
+										required:true
+									},
+									correo:{
+										required:true,
+										email: true
+									},
+									apellido_materno:{
+										required:true
+										
+									},
+									contrasena:{
+										required:true
+										
+										
+									},
+									contrasena2:{
+										required:true,
+										equalTo: "#password"
+										
+										
+									}
+								}
+
+							});
+
+							$('#calve').keyup(function() {
+								var calUp = $('#calve').val().toUpperCase();
+								$('#calve').val(calUp);
+
+							});
+							$("#buscar")
+									.click(
+											function() {
+												var clave = $("#calve").val();
+												if (clave.length != 10) {
+													$("#calve").focus();
+													return false;
+												}
+												$("div #errorr").hide();
+
+												$
+														.ajax(
+																{
+																	method : "GET",
+																	url : "/usuarios/cargarEscuela/"
+																			+ clave,
+																	dataType : "json",
+
+																	cache : false
+																})
+														.done(
+																function(msg) {
+																	if (msg.id_escuela != null) {
+																		//$().val();
+																		$(
+																				"#id_escuela")
+																				.val(
+																						msg.id_escuela);
+																		$(
+																				"#nombre_escuela")
+																				.val(
+																						msg.nombre_escuela);
+																		$(
+																				"#claveescuela")
+																				.val(
+																						msg.claveescuela);
+																		$(
+																				"#tipo")
+																				.val(
+																						msg.tipo);
+																		$(
+																				"#telefono")
+																				.val(
+																						msg.telefono);
+																		$(
+																				"#turno")
+																				.val(
+																						msg.turno);
+																	} else {
+																		$(
+																				"div #errorr")
+																				.removeAttr(
+																						"hidden");
+																		$(
+																				"div #errorr")
+																				.show();
+																		$(
+																				'#mensajeError')
+																				.html(
+																						"No se encontro la clave: "
+																								+ clave);
+																	}
+
+																});
+											});
+
+						});
+	</script>
+</body>
+</html>

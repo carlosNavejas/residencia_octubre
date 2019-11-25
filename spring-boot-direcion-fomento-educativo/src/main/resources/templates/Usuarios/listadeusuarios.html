@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout2 :: head"></head>
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<table class="table table-light">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Escuela</th>
+							<th>Clave</th>
+							<th>Nombre Usuario</th>
+							<th>Correo</th>
+							<th>Fecha de registro</th>
+							<th>Detalle</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="cliente: ${usuaurios}">
+							<td><!-- <a class="btn btn-primary"
+								th:href="@{/ver/}+${cliente.id_usuario}" th:text="${cliente.id}"></a>--></td>
+							<td th:text="${cliente.id_usuario}"></td>
+							
+							
+							<td
+								th:text="${cliente.nombre+' '+cliente.apellido_paterno+' '+cliente.apellido_materno}"></td>
+							<td th:text="${cliente.correo}"></td>
+							<td th:text="${cliente.fecha_registro}"></td>
+
+							<td th:text="${fecha_registro}"></td>
+
+
+							<td><a class="btn btn-xs btn-primary"
+								th:href="@{/form/}+${cliente.id_usuario}" th:text="'Editar'"></a></td>
+							<td><a class="btn btn-xs btn-danger"
+								th:href="@{/eliminar/}+${cliente.id_usuario}" th:text="'Eliminar'"
+								onclick="return confirm('Estas seguro que quieres eliminar el cliente')"></a>
+							</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+				<nav th:replace="layout/Paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+
+		<footer th:replace="layout/layout2 :: footer"></footer>
+
+	</div>
+	<div th:replace="layout/layout2 :: js"></div>
 </body>
 </html>

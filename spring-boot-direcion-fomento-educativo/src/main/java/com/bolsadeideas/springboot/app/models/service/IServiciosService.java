@@ -11,6 +11,7 @@ import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
+import com.bolsadeideas.springboot.app.models.entity.Rol;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
@@ -86,6 +87,7 @@ public interface IServiciosService {
 	public Usuario findUsuarioByCorreo(String correo);
 	
 
-	
+	//Save rol
+	public void saveRolUser(Rol rol);
 	
 }

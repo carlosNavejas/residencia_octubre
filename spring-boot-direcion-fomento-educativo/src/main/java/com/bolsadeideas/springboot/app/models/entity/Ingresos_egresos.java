@@ -34,6 +34,34 @@ public class Ingresos_egresos implements Serializable {
 	private String tipoRegistro;
 	private String archivolista_socios;
 
+	private Double numeroSocios;
+	private Double montoInitSocios;
+	private String nombremes;
+
+	public String getNombremes() {
+		return nombremes;
+	}
+
+	public void setNombremes(String nombremes) {
+		this.nombremes = nombremes;
+	}
+
+	public Double getNumeroSocios() {
+		return numeroSocios;
+	}
+
+	public void setNumeroSocios(double numeroSocios) {
+		this.numeroSocios = numeroSocios;
+	}
+
+	public Double getMontoInitSocios() {
+		return montoInitSocios;
+	}
+
+	public void setMontoInitSocios(double montoInitSocios) {
+		this.montoInitSocios = montoInitSocios;
+	}
+
 	public String getTipoRegistro() {
 		return tipoRegistro;
 	}
