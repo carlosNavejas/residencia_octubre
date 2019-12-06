@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.models.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -72,10 +73,12 @@ public interface IServiciosService {
 
 	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos);
 
-	public Page<Ingresos_egresos> findAllIngresosEgresos(Pageable pageable);
+	public Page<Ingresos_egresos> findAllIngresosEgresos(Long id,Pageable pageable);
 
 	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable);
-
+	
+	
+	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id,Date fechaInit,Date fechaEnd,Pageable pageable);
 //CRUD usuarios
 	public void saveUsuario(Usuario usuario);
 
@@ -89,5 +92,8 @@ public interface IServiciosService {
 
 	//Save rol
 	public void saveRolUser(Rol rol);
+	
+	public int contarSociosPorCooperativa(Long id);
+	
 	
 }

@@ -6,22 +6,30 @@
 </head>
 <body>
 	<script type="text/javascript" th:fragment="javascript">
+		var claveEscuela = $("#id_cooperativa").val();
+		var numeroSocios;
 		$(document).ready(function() {
-			validarSelectDefault();
+			
 			$("#tipoRegistro").change(function() {
 				//Inicio Curso", "Mensual", "Medio curso", "Fin de Curso
 				var tipo = $("#tipoRegistro").val();
 				if (tipo == "Inicio Curso") {
+					dejarSinRequired();
 					inicioCurso();
+					obtenerNumeroSocios();
+
 				}
 				if (tipo == "Mensual") {
+					dejarSinRequired();
 					mensual();
 				}
 				if (tipo == "Medio curso") {
+					dejarSinRequired();
 					medioCurso();
 
 				}
 				if (tipo == "Fin de Curso") {
+					dejarSinRequired();
 					finCurso();
 				}
 
@@ -30,16 +38,22 @@
 		function validarSelectDefault() {
 			var tipo = $("#tipoRegistro").val();
 			if (tipo == "Inicio Curso") {
+				dejarSinRequired();
 				inicioCurso();
+				obtenerNumeroSocios();
+
 			}
 			if (tipo == "Mensual") {
+				dejarSinRequired();
 				mensual();
 			}
 			if (tipo == "Medio curso") {
+				dejarSinRequired();
 				medioCurso();
 
 			}
 			if (tipo == "Fin de Curso") {
+				dejarSinRequired();
 				finCurso();
 			}
 		}
@@ -52,8 +66,6 @@
 				document.getElementById('archivolista_socios').value = null;
 				$("#exampleModal").modal();
 				return false;
-			} else {
-				alert("exito");
 			}
 		}
 
@@ -69,61 +81,162 @@
 		});
 
 		//limitar valores de datos a enteros con punto decimal
-		$('input[type=number]').numeric();
+		$('input[type=number]').numeric({
+			negative : false,
+			decimalPlaces : 2
+		});
+		$('input[type=number]').prop("min", "1");
 		//limitar tamano de inputs
 		$('input[type=number]').inputlimiter({
 			limit : 10,
+
 			remText : '%n caractere%s restantes.',
 			limitText : 'Campo limitado a %n caractere%s.'
 		});
-		/*
-		montoinicial
-		fondoreserva
-		egresodelperiodo
-		ingresodelperiodo
-		fondosocial
-		
-		fondorepartible
-		numeroSocios
-		montoInitSocios
-		
-		 */
+
+		function obtenerNumeroSocios() {
+			//alert(claveEscuela);
+
+			$.ajax({
+				method : "GET",
+				url : "/ingresos/cargarnumSocios/" + claveEscuela,
+				dataType : "json",
+
+				cache : false
+			}).done(function(msg) {
+				if (msg != null) {
+					numeroSocios = msg;
+					$("#numeroSocios").val(numeroSocios + "");
+				}
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				// Un callback .fail()
+			});
+		}
+	
+		 
+		 function editarRegistro(){
+			 var tipo = $("#tipoRegistro").val();
+			 if (tipo == "Inicio Curso") {
+					
+					inicioCurso();
+					
+
+				}
+				if (tipo == "Mensual") {
+					
+					mensual();
+				}
+				if (tipo == "Medio curso") {
+					
+					medioCurso();
+
+				}
+				if (tipo == "Fin de Curso") {
+					
+					finCurso();
+				}
+			
+		}
 		function inicioCurso() {
+
 			//$( "#" ).prop( "disabled", true );
-			$("#montoInitSocios").prop("required", true);
+			//$( "#" ).prop( "disabled", false );
+			//habilitados
+			//$("#numeroSocios").prop("required", false);
+			$("#montoinicial").prop("disabled", false);
+			$("#montoinicial").prop("required", true);
+			$("#fondoreserva").prop("disabled", false);
+			$("#fondoreserva").prop("disabled", false);
+			$("#fondosocial").prop("disabled", false);
+			$("#ingresodelperiodo").prop("disabled", false);
+			$("#numeroSocios").prop("disabled", false);
 			$("#numeroSocios").prop("required", true);
-			$("#archivolista_socios").prop("required", true);
+			$("#montoInitSocios").prop("disabled", false);
+			$("#montoInitSocios").prop("required", true);
+			$("#archivolista_socios").prop("disabled", false);
+			//$("#archivolista_socios").prop("required", true);
 			$("#egresodelperiodo").prop("disabled", true);
 			$("#fondorepartible").prop("disabled", true);
-			//$( "#" ).prop( "disabled", true );
-			//$( "#" ).prop( "disabled", true );
-
+			//$("#numeroSocios").val(numeroSocios + "");
 		}
-		function medioCurso() {
-			$("#montoInitSocios").prop("required", false);
-			$("#numeroSocios").prop("required", false);
-			$("#archivolista_socios").prop("required", false);
-			$("#montoInitSocios").prop("disabled", true);
+		/*
+		$("#montoinicial").prop("disabled",true);
+			$("#fondoreserva").prop("disabled",true);
+			$("#fondosocial").prop("disabled", true);
+			$("#ingresodelperiodo").prop("disabled",true);
 			$("#numeroSocios").prop("disabled", true);
+			$("#montoInitSocios").prop("disabled", true);
 			$("#archivolista_socios").prop("disabled", true);
+			$("#egresodelperiodo").prop("disabled", true);
+			$("#fondorepartible").prop("disabled", true);
+		 */
+		function medioCurso() {
+
+			$("#montoinicial").prop("disabled", true);
+			$("#numeroSocios").prop("disabled", true);
+			$("#montoInitSocios").prop("disabled", true);
+			$("#archivolista_socios").prop("disabled", true);
+			$("#fondorepartible").prop("disabled", true);
 			//
-			$("#egresodelperiodo").prop("disabled", false);
-			$("#fondorepartible").prop("disabled", false);
+
+			$("#fondoreserva").prop("required", true);
+			$("#egresodelperiodo").prop("required", true);
+			$("#fondosocial").prop("required", true);
+			$("#ingresodelperiodo").prop("required", true);
+
 		}
 		function finCurso() {
-			$("#montoInitSocios").prop("required", flase);
-			$("#numeroSocios").prop("required", false);
-			$("#archivolista_socios").prop("required", false);
-			//
+
+			$("#montoinicial").prop("disabled", true);
+			$("#numeroSocios").prop("disabled", true);
+			$("#montoInitSocios").prop("disabled", true);
+			$("#archivolista_socios").prop("disabled", true);
+			$("#fondoreserva").prop("required", true);
+			$("#egresodelperiodo").prop("required", true);
+			$("#fondosocial").prop("required", true);
+			$("#fondorepartible").prop("required", true);
+			$("#ingresodelperiodo").prop("required", true);
+
 		}
 		function mensual() {
-			$("#montoInitSocios").prop("required", false);
-			$("#numeroSocios").prop("required", false);
-			$("#archivolista_socios").prop("required", false);
-			$("#montoInitSocios").prop("disabled", true);
-			$("#numeroSocios").prop("disabled", true);
-			$("#archivolista_socios").prop("disabled", true);
 
+			$("#egresodelperiodo").prop("required", true);
+
+			$("#ingresodelperiodo").prop("required", true);
+			//
+			$("#montoinicial").prop("disabled", true);
+			$("#fondoreserva").prop("disabled", true);
+
+			$("#fondosocial").prop("disabled", true);
+			$("#fondorepartible").prop("disabled", true);
+
+			$("#numeroSocios").prop("disabled", true);
+			$("#montoInitSocios").prop("disabled", true);
+			$("#archivolista_socios").prop("disabled", true);
+		}
+		function dejarSinRequired() {
+
+			$("#montoinicial").prop("required", false);
+			$("#fondoreserva").prop("required", false);
+			$("#egresodelperiodo").prop("required", false);
+			$("#fondosocial").prop("required", false);
+			$("#fondorepartible").prop("required", false);
+			$("#ingresodelperiodo").prop("required", false);
+			$("#numeroSocios").prop("required", false);
+			$("#montoInitSocios").prop("required", false);
+			$("#archivolista_socios").prop("required", false);
+
+			//
+			$("#montoinicial").prop("disabled", false);
+			$("#fondoreserva").prop("disabled", false);
+			$("#egresodelperiodo").prop("disabled", false);
+			$("#fondosocial").prop("disabled", false);
+			$("#fondorepartible").prop("disabled", false);
+			$("#ingresodelperiodo").prop("disabled", false);
+			$("#numeroSocios").prop("disabled", false);
+			$("#montoInitSocios").prop("disabled", false);
+			$("#archivolista_socios").prop("disabled", false);
+			$('input[type="number"]').val('');
 		}
 	</script>
 </body>

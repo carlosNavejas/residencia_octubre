@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,20 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ingresos_egresos")
 public class Ingresos_egresos implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_ingreosegreos;
-
 	private String ciclo;
 	private Date fecharegistro;
 	private Double montoinicial;
@@ -32,11 +29,11 @@ public class Ingresos_egresos implements Serializable {
 	private Double fondoreserva;
 	private Double fondorepartible;
 	private String tipoRegistro;
-	private String archivolista_socios;
-
 	private Double numeroSocios;
 	private Double montoInitSocios;
+
 	private String nombremes;
+	private String archivolista_socios;
 
 	public String getNombremes() {
 		return nombremes;
@@ -163,6 +160,32 @@ public class Ingresos_egresos implements Serializable {
 
 	public Ingresos_egresos() {
 
+	}
+
+	@PrePersist
+	public void prePersist() {
+		fecharegistro = new Date();
+	}
+
+	public String obtenerPeriodoEscolar() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecharegistro);
+
+		int mes = calendar.get(Calendar.MONTH);
+
+		if (mes >= 7) {
+			return "Agosto-Diciembre";
+		}
+		return "Enero-Junio";
+	}
+
+	public String obtenerCicloEscolar() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecharegistro);
+		int inicio = calendar.get(Calendar.YEAR);
+		int fin = inicio + 1;
+
+		return inicio + "-" + fin;
 	}
 
 }

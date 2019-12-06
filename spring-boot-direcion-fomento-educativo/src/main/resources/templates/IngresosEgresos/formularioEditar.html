@@ -6,7 +6,7 @@
 </head>
 
 
-<body onload="validarSelectDefault()">
+<body onload="editarRegistro()">
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 
@@ -27,10 +27,12 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Clave de la escuela </label> <input class="form-control"
-							readonly="readonly" type="text" id="claveEscuela" name="claveEscuela"
-							th:value="${ingresos.cooperativa.escuela.claveescuela}" />
-							
-						<input type="text" id="id_cooperativa"  name="id_cooperativa"  th:value="${ingresos.cooperativa.clave_cooperatival}"/>
+							readonly="readonly" type="text" id="claveEscuela"
+							name="claveEscuela"
+							th:value="${ingresos.cooperativa.escuela.claveescuela}" /> <input
+							type="number" id="id_cooperativa" hidden="true"
+							name="id_cooperativa"
+							th:value="${ingresos.cooperativa.clave_cooperatival}" />
 					</div>
 				</div>
 			</div>
@@ -57,20 +59,31 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label> Tipo de registro </label> <select class="form-control"
+						<label> Tipo de registro </label>
+						<input class="form-control" readonly="readonly" th:field="*{tipoRegistro}" type="text"/>
+						<!--  <select class="form-control"
 							th:field="*{tipoRegistro}">
 							<option th:each="g : ${tipos}" th:value="${g}" th:text="${g}">
-						</select>
+						</select>-->
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Ciclo escolar </label> <input th:field="*{ciclo}"
 							class="form-control" readonly="readonly" type="text" />
+							
 					</div>
 				</div>
 			</div>
+			
+			<input id="date" name="date" th:value="*{fecharegistro}"
+							class="form-control" readonly="readonly" type="text" />
+			
+			
 			<!--Fin-->
+			<input th:field="*{id_ingreosegreos}" class="form-control"
+				readonly="readonly" type="number" />
+				<input type="text" hidden="true" th:field="*{fecharegistro}"/>
 			<!--inicio-->
 			<div class="row">
 				<div class="col-sm-6">
@@ -153,7 +166,7 @@
 			<div class="row py-4">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					<a class="btn btn-block btn-danger text-white" th:href="@{/cooperativas/cooperativa/}+${ingresos.cooperativa.clave_cooperatival}"> Cancelar </a>
+					<a class="btn btn-block btn-danger text-white" th:href="@{/cooperativas/cooperativa/}+${ingresos.cooperativa.clave_cooperatival}"> Cancelar </a> 
 				</div>
 				<div class="col-sm-3">
 					<input class="btn btn-block btn-info" type="submit"

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout2 :: head">
 </head>
 <body>
@@ -67,7 +68,8 @@
 						</p>
 					</div>
 					<div class="col-sm-6 py-3">
-						<button class="btn-info" hidden="true" >Editar datos de la escuela</button>
+						<button class="btn-info" hidden="true">Editar datos de
+							la escuela</button>
 					</div>
 				</div>
 
@@ -113,24 +115,30 @@
 
 					<!-- -->
 					<div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-4 py-4"></div>
-						<div class="col-sm-4 py-4">
+						<div class="col-sm-3 py-4">
 							<a
 								th:href="@{/cooperativas/eliminar/}+${escuela.cooperativa.clave_cooperatival}"
-								class="btn btn-danger"
+								class="btn btn-danger "
 								onclick="return confirm('El registro se eliminara permanentemente\n ¿Estas seguro que quieres eliminar la escuela?')">
-<!-- 								<i class="fas fa-trash-alt fa-lg"> </i> -->Eliminar
+								<!-- 								<i class="fas fa-trash-alt fa-lg"> </i> -->Eliminar
 
 							</a>
-							<a  class="btn btn-info"
-					th:href="@{/cooperativas/editarCooperativa/}+${escuela.cooperativa.clave_cooperatival}">Editar
-					cooperativa</a>
-					<a class="btn btn-info"
-					
-	th:href="@{/socios/listar/}+${escuela.cooperativa.clave_cooperatival}+@{/}"			
-					>Ver socios</a>
-<!-- listarprint
+						</div>
+						<div class="col-sm-3 py-4">
+							<a class="btn btn-info text-white"
+								th:href="@{/ingresos/}+${escuela.cooperativa.clave_cooperatival}+@{/historial-ingresosegresos/}">Ingresos-egresos</a>
+						</div>
+							<div class="col-sm-3 py-4">
+							<a class="btn btn-info"
+								th:href="@{/cooperativas/editarCooperativa/}+${escuela.cooperativa.clave_cooperatival}">Editar
+								cooperativa</a>
+						</div>
+						<div class="col-sm-3 py-4">
+
+							<a class="btn btn-info"
+								th:href="@{/socios/listar/}+${escuela.cooperativa.clave_cooperatival}+@{/}">Ver
+								socios</a>
+							<!-- listarprint
 	 th:href="@{'/socios/listarprint/'+${escuela.cooperativa.clave_cooperatival}(format=pdf)}" 
 	 
 -->

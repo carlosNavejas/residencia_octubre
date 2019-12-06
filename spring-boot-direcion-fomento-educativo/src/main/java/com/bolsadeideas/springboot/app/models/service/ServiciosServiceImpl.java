@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.models.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -188,34 +189,28 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	}
 
-	@Transactional
+	@Override
 	public void deleteIngresosEgresos(Long id_ingresosegresos) {
-		ingresosDao.deleteById(id_ingresosegresos);
+		// TODO Auto-generated method stub
 
 	}
-
-	@Transactional(readOnly = true)
+@Transactional(readOnly = true)
+	@Override
 	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos) {
-
+		// TODO Auto-generated method stub
 		return ingresosDao.findById(id_ingresosEgresos).orElse(null);
 	}
 
-	@Transactional(readOnly = true)
-	public Page<Ingresos_egresos> findAllIngresosEgresos(Pageable pageable) {
+	@Override
+	public Page<Ingresos_egresos> findAllIngresosEgresos(Long id, Pageable pageable) {
 
-		return ingresosDao.findAll(pageable);
+		return ingresosDao.findIngresosByCooperativa(id, pageable);
 	}
 
-	@Transactional(readOnly = true)
+	@Override
 	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Transactional(readOnly = true)
-	public List<Socio> listarSociosByCooperativa(Long id_cooperativa) {
-
-		return socioDao.findByCooperativaa(id_cooperativa);
 	}
 
 //crud Usuarios 
@@ -257,9 +252,28 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	@Override
 	public void saveRolUser(Rol rol) {
-	rolDao.save(rol);
-		
+		rolDao.save(rol);
+
 	}
 
+	@Override
+	public List<Socio> listarSociosByCooperativa(Long id_cooperativa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int contarSociosPorCooperativa(Long id) {
+
+		return socioDao.countSociosByCooperativa(id);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id, Date fechaInit, Date fechaEnd,
+			Pageable pageable) {
+
+		return ingresosDao.findIngresosBetweenCiclo(id, fechaInit, fechaEnd, pageable);
+	}
 
 }

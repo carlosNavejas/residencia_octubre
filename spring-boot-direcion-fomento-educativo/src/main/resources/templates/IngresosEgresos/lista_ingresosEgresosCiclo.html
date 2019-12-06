@@ -13,7 +13,8 @@
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3">
-				<a th:href="@{/ingresos/}+${id}+@{/registrar-ingresos}" class="btn btn-info btn-block">Nuevo registro</a>
+				<a th:href="@{/escuelas/form}" class="btn btn-info btn-block">Agregar
+					Escuela</a>
 			</div>
 
 		</div>
@@ -38,9 +39,9 @@
 
 							<td th:text="${escuela.cooperativa.nombre_cooperativa}"></td>
 							<td th:text="${escuela.fecharegistro}"></td>
-	<!-- 						<td th:text="${escuela.obtenerPeriodoEscolar()}"></td> -->
-						<!-- 	<td th:text="${escuela.obtenerCicloEscolar()}"></td> -->
-							<td> <a  th:href="@{/ingresos/}+${escuela.id_ingreosegreos}+@{/Editarregistrar-ingresos}" class="btn btn-info text-white">Editar</a> </td>
+							<td th:text="${escuela.obtenerPeriodoEscolar()}"></td>
+							<td th:text="${escuela.obtenerCicloEscolar()}"></td>
+							<td> <a class="btn btn-info text-white">Detalle</a> </td>
 							
 							<!-- <td th:text="${escuela.nombre_escuela}"></td>
 							<td th:text="${escuela.direccion.municipio.region.region}"></td>
