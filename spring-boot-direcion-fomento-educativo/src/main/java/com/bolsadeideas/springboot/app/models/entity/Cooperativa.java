@@ -50,6 +50,17 @@ public class Cooperativa implements Serializable {
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ingresos_egresos> lista_ingresos_egresos;
 
+	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Reparto_utilidades> lista_reparto;
+
+	public List<Reparto_utilidades> getLista_reparto() {
+		return lista_reparto;
+	}
+
+	public void setLista_reparto(List<Reparto_utilidades> lista_reparto) {
+		this.lista_reparto = lista_reparto;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		fecha_registro = new Date();
@@ -116,7 +127,8 @@ public class Cooperativa implements Serializable {
 
 	public Cooperativa() {
 		lista_socios = new ArrayList<Socio>();
-		lista_ingresos_egresos=new ArrayList<Ingresos_egresos>();
+		lista_ingresos_egresos = new ArrayList<Ingresos_egresos>();
+		lista_reparto = new ArrayList<Reparto_utilidades>();
 	}
 
 	public List<Ingresos_egresos> getLista_ingresos_egresos() {
@@ -148,6 +160,10 @@ public class Cooperativa implements Serializable {
 
 	public void setEscuela(Escuela escuela) {
 		this.escuela = escuela;
+	}
+
+	public void addReparto(Reparto_utilidades e) {
+		lista_reparto.add(e);
 	}
 
 }

@@ -28,24 +28,7 @@
 							.click(
 									function() {
 
-										//Validar tipo de usuario
-										var tipo = $("#rol_usser")
-												.val();
-										if (tipo == "ROLE_BIBLIOTECARIO"
-												|| tipo == "ROLE_TESORERO") {
-											if ($("#nombre_escuela")
-													.val().length > 0
-													&& $(
-															"#claveescuela")
-															.val().length > 0) {
-
-											} else {
-												$("#exampleModal2")
-														.modal("show");
-												return false;
-											}
-										}
-										//vslidar tipo de usuario
+										
 										var correoNew = $("#correo")
 												.val();
 
@@ -59,48 +42,7 @@
 										}
 
 									});
-							/*$("#form_usu")
-									.on(
-											"submit",
-											function() {
-
-												//Validar tipo de usuario
-												var tipo = $("#rol_usser")
-														.val();
-												if (tipo == "ROLE_BIBLIOTECARIO"
-														|| tipo == "ROLE_TESORERO") {
-													if ($("#nombre_escuela")
-															.val().length > 0
-															&& $(
-																	"#claveescuela")
-																	.val().length > 0) {
-
-													} else {
-														$("#exampleModal2")
-																.modal("show");
-														return false;
-													}
-												}
-												//vslidar tipo de usuario
-												var correoNew = $("#correo")
-														.val();
-
-												if (correoNew == null) {
-													$("#correo").focus();
-													return false;
-												} else {
-													acverificarCorreo(correoNew);
-
-													//  alert("antes if "+existeCorreo);
-													if (existeCorreo == true) {
-														alert("dentro if "
-																+ existeCorreo);
-														return false;
-													}
-													return false;
-												}
-
-											});*/
+					
 
 							$('#nombre').inputlimiter({
 								limit : 20,
@@ -143,12 +85,12 @@
 
 									},
 									contrasena : {
-										required : true
+										
 
 									},
 									contrasena2 : {
-										required : true,
-										equalTo : "#contrasena"
+										
+										equalTo : "#contrasenaa"
 
 									}
 								}
@@ -266,7 +208,8 @@
 		}
 
 		function verificarCorreo(correoNew) {
-			
+			var idusuario=$("#id_usuario").val();
+			//alert(idusuario);
 			$
 					.ajax({
 						method : "GET",
@@ -278,12 +221,18 @@
 					.done(
 							function(msg) {
 								if (msg.correo != null) {
-									$("#correo").focus();
-									$('#correo').next('p').remove();
-									$("#correo")
-											.after(
-													"<p id='mensaje' name='mensaje'class='text-danger'>Este correo ya esta registrado !!!</p>");
-
+									
+									if(msg.id_usuario!=idusuario){
+										
+										$("#correo").focus();
+										$('#correo').next('p').remove();
+										$("#correo")
+												.after(
+														"<p id='mensaje' name='mensaje'class='text-danger'>Este correo ya esta registrado por otro usuario !!!</p>");
+										
+									}
+									
+									
 									
 								}else{
 									document.getElementById('form_usu').submit();

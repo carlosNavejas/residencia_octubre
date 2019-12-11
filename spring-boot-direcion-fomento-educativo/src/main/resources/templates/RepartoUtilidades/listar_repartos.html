@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout2 :: head"></head>
+
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div class="contrainer">
+		<div th:replace="layout/layout2 :: mensajesinf"></div>
+
+
+
+
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-9"></div>
+					<div class="col-sm-3">
+						<a th:href="@{/escuelas/form}" class="btn btn-info btn-block">Agregar
+							Registro</a>
+					</div>
+
+				</div>
+				<table class="table  table-hover">
+					<thead>
+						<tr>
+							<th>Escuela</th>
+							<th>Clave</th>
+							
+							<th>Fecha de registro</th>
+							<th>Numero de socios</th>
+							<th>Cantidad Repartida por socio</th>
+							<th>Fondo repartible</th>
+							<th>Editar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente: ${usuaurios}">
+							<td th:if="${cliente.cooperativa.escuela!=null}"
+								th:text="${cliente.cooperativa.escuela.nombre_escuela}"></td>
+							<td th:if="${cliente.cooperativa.escuela==null}"></td>
+							<td th:if="${cliente.cooperativa.escuela!=null}"
+								th:text="${cliente.cooperativa.escuela.claveescuela}"></td>
+							<td th:if="${cliente.cooperativa.escuela==null}"></td>
+							
+							<td th:text="${cliente.fechaRegistro}"></td>
+							<td th:text="${cliente.numeroSocios}"></td>
+							<td th:text="${cliente.cantidadPorSocio}"></td>
+							<td th:text="${cliente.fondoRepartible}"></td>
+							<td><a class="btn btn-info text-white"
+								th:href="@{/reparto-utilidades/}+${cliente.id_reparto}+@{/editarregistro-reparto}">Editar</a>
+
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="layout/Paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+
+
+
+	</div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
+	<div th:replace="layout/layout2 :: js"></div>
+	<div th:replace="/RepartoUtilidades/js/validaciones :: js"></div>
+
+</body>
+</html>

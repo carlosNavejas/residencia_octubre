@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="layout/layout2 :: head"></head>
+
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div class="contrainer">
+		<div th:replace="layout/layout2 :: mensajesinf"></div>
+	</div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
+	<div th:replace="layout/layout2 :: js"></div>
+	<div th:replace="/RepartoUtilidades/js/validaciones :: js"></div>
+
+</body>
+</html>

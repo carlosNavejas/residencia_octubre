@@ -12,6 +12,7 @@ import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
+import com.bolsadeideas.springboot.app.models.entity.Reparto_utilidades;
 import com.bolsadeideas.springboot.app.models.entity.Rol;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
@@ -64,6 +65,7 @@ public interface IServiciosService {
 	public Page<Socio> findAllSocios(Pageable pageable);
 
 	public Page<Socio> findSocioByCooperativa(Long id_cooperativa, Pageable pageable);
+
 	public List<Socio> listarSociosByCooperativa(Long id_cooperativa);
 
 	// CRUD ingresos egresos
@@ -73,12 +75,12 @@ public interface IServiciosService {
 
 	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos);
 
-	public Page<Ingresos_egresos> findAllIngresosEgresos(Long id,Pageable pageable);
+	public Page<Ingresos_egresos> findAllIngresosEgresos(Long id, Pageable pageable);
 
 	public Page<Ingresos_egresos> findAllIngresosEgresosByCooperativaWithPeriodo(Pageable pageable);
-	
-	
-	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id,Date fechaInit,Date fechaEnd,Pageable pageable);
+
+	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id, Date fechaInit, Date fechaEnd, Pageable pageable);
+
 //CRUD usuarios
 	public void saveUsuario(Usuario usuario);
 
@@ -87,13 +89,18 @@ public interface IServiciosService {
 	public Usuario findUsuarioById(Long id_socio);
 
 	public Page<Usuario> findAllUsuarios(Pageable pageable);
-	public Usuario findUsuarioByCorreo(String correo);
-	
 
-	//Save rol
+	public Usuario findUsuarioByCorreo(String correo);
+
+	// Save rol
 	public void saveRolUser(Rol rol);
-	
+
 	public int contarSociosPorCooperativa(Long id);
-	
-	
+
+	// crud reparto de utilidades
+	public void saveRepartoUtilidades(Reparto_utilidades repartin);
+
+	public Reparto_utilidades findByClaveRepartoUtilidades(Long id_reparto);
+
+	public Page<Reparto_utilidades> findRepartoUtilidadesByIdCoopeartiva(Long idbuscar, Pageable pageable);
 }

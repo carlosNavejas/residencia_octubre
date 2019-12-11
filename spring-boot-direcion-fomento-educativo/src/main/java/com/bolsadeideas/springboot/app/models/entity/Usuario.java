@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class Usuario implements Serializable {
 	@Column(length = 15)
 	private String apellido_materno;
 	@Temporal(TemporalType.TIMESTAMP)
+	
 	private Date fecha_registro;
 	private boolean estado;
 
@@ -150,12 +152,32 @@ public class Usuario implements Serializable {
 
 	public Usuario() {
 		estado = true;
+		roles = new ArrayList<Rol>();
+	}
+
+	public void agregarRol(Rol rolinCanallin) {
+		roles.add(rolinCanallin);
 	}
 
 	@PrePersist
 	public void prePersist() {
 		fecha_registro = new Date();
 		estado = true;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id_usuario=" + id_usuario + ", curp=" + curp + ", correo=" + correo + ", contrasena="
+				+ contrasena + ", nombre=" + nombre + ", apellido_paterno=" + apellido_paterno + ", apellido_materno="
+				+ apellido_materno + ", fecha_registro=" + fecha_registro + ", estado=" + estado + ", roles=" + roles
+				+ ", escuela=" + escuela + "]";
+	}
+
+	public String obtenerRol() {
+
+		String []roless=roles.get(0).getNombrerol().split("_");
+		
+		return roless[1];
 	}
 
 }

@@ -16,6 +16,7 @@ import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
 import com.bolsadeideas.springboot.app.models.dao.IRegionDao;
+import com.bolsadeideas.springboot.app.models.dao.IRepartoutilidadesDao;
 import com.bolsadeideas.springboot.app.models.dao.IRolesDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
@@ -25,12 +26,15 @@ import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
+import com.bolsadeideas.springboot.app.models.entity.Reparto_utilidades;
 import com.bolsadeideas.springboot.app.models.entity.Rol;
 import com.bolsadeideas.springboot.app.models.entity.Socio;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 @Service
 public class ServiciosServiceImpl implements IServiciosService {
+	@Autowired
+	private IRepartoutilidadesDao repartosDao;
 	@Autowired
 	private IMunicipioDao municipioDao;
 	@Autowired
@@ -194,7 +198,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 		// TODO Auto-generated method stub
 
 	}
-@Transactional(readOnly = true)
+
+	@Transactional(readOnly = true)
 	@Override
 	public Ingresos_egresos findIngresosEgresosByID(Long id_ingresosEgresos) {
 		// TODO Auto-generated method stub
@@ -270,10 +275,30 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id, Date fechaInit, Date fechaEnd,
-			Pageable pageable) {
+	public Page<Ingresos_egresos> buscarIngresosEntreFechas(Long id, Date fechaInit, Date fechaEnd, Pageable pageable) {
 
 		return ingresosDao.findIngresosBetweenCiclo(id, fechaInit, fechaEnd, pageable);
+	}
+
+	@Transactional
+	@Override
+	public void saveRepartoUtilidades(Reparto_utilidades repartin) {
+		repartosDao.save(repartin);
+
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Reparto_utilidades findByClaveRepartoUtilidades(Long id_reparto) {
+
+		return repartosDao.findById(id_reparto).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Reparto_utilidades> findRepartoUtilidadesByIdCoopeartiva(Long idbuscar, Pageable pageable) {
+		
+		return repartosDao.findByCooperativaId(idbuscar, pageable);
 	}
 
 }

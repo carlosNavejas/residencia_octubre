@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -43,9 +44,11 @@ public class Escuela implements Serializable {
 	private String apellido_pdir;
 	@Column(length = 15)
 	private String apellido_mdir;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@OneToOne(fetch = FetchType.LAZY, targetEntity = Direccion.class, cascade = CascadeType.ALL)
 	private Direccion direccion;
+	
+	
 
 	@NotEmpty
 	@Column(length = 15)
@@ -53,14 +56,14 @@ public class Escuela implements Serializable {
 	@Column(length = 6)
 	private String matricula;
 	@OneToOne(targetEntity = Biblioteca.class, fetch = FetchType.LAZY, cascade = CascadeType.DETACH, mappedBy = "escuela")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Biblioteca biblioteca;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@OneToMany(targetEntity = Usuario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "escuela")
 	private List<Usuario> usuarios;
 
 	@OneToOne(mappedBy = "escuela", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Cooperativa cooperativa;
 
 	public String getTurno() {
@@ -137,6 +140,7 @@ public class Escuela implements Serializable {
 
 	public Escuela() {
 		cooperativa = null;
+		
 	}
 
 	public String getTelefono() {
@@ -199,4 +203,5 @@ public class Escuela implements Serializable {
 		this.cooperativa = cooperativa;
 	}
 
+	
 }

@@ -98,11 +98,11 @@
 							</h5>
 							<p class="card-text" th:text="${escuela.cooperativa.tipo}"></p>
 						</div>
-						<div class="col-sm-3">
-							<h5 class="card-title">
+						<div class="col-sm-3" >
+							<h5 th:if="${escuela.cooperativa.monto!=null}" class="card-title" >
 								<b> Monto </b>
 							</h5>
-							<p class="card-text" th:text="${escuela.cooperativa.monto}"></p>
+							<p th:if="${escuela.cooperativa.monto!=null}" class="card-text" th:text="${escuela.cooperativa.monto}"></p>
 						</div>
 						<div class="col-sm-3">
 							<h5 class="card-title">
@@ -144,6 +144,18 @@
 -->
 						</div>
 					</div>
+					<div class="row">
+					<!-- /reparto-utilidades/1/listar/ -->
+					<div class="col-sm-3">
+					<a class="btn btn-info"
+								th:href="@{/reparto-utilidades/}+${escuela.cooperativa.clave_cooperatival}+@{/listar/}">Reparto de utilidades
+								</a>
+							
+					</div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3"></div>
+					 </div>
 				</div>
 			</div>
 			<!-- fin por si hay registro de cooperativa -->

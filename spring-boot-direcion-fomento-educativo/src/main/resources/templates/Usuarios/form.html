@@ -8,6 +8,7 @@
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div class="container">
+		<div th:replace="layout/layout2 :: mensajesinf"></div>
 		<div class="row bg-light">
 			<div class="col-sm-6">
 				<div class="form-group">
@@ -29,7 +30,7 @@
 	</div>
 	<br>
 	<div class="container bg-light py-5">
-		<form id="form_usu" th:action="@{/usuario/guardar}"
+		<form id="form_usu" th:action="@{/usuarios/guardar}"
 			th:object="${usuario}" method="post">
 			<div class="row">
 				<div class="col-sm-12 text-center">
@@ -125,8 +126,8 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label> Contraseña </label> <input type="password" class="form-control"
-							th:field="*{contrasena}" />
+						<label> Contraseña </label> <input type="password"
+							class="form-control" th:field="*{contrasena}" />
 					</div>
 				</div>
 				<div class="col-sm-6">
@@ -141,12 +142,18 @@
 
 				<div class="col-sm-6" sec:authorize="hasRole('ROLE_ADMIN')">
 					<div class="form-group">
+
+		<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <div class="input-group-text">
+      <input type="checkbox" aria-label="Checkbox for following text input" th:field="*{estado}"/>
+     
+    </div>
+  </div>
+  <label class="form-control" >Estado del usuario</label>
+</div>
+	</div>
 						
-							
-							<label class="form-check-label">
-        <input type="checkbox"
-							th:field="*{estado}" class="form-check-input" /> Estado del Usuario
-      </label>
 					</div>
 				</div>
 				<div class="col-sm-6"></div>
@@ -157,16 +164,91 @@
 					<a class="btn btn-danger text-white btn-block"> Cancelar </a>
 				</div>
 				<div class="col-sm-3">
-					<input class="btn btn-block btn-info" type="submit"
-						value="Registrar" />
+					<button class="btn btn-block btn-info" id="btnregistrar" name="btnregistrar" type="submit">Registrar</button>
 
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
 		</form>
-	</div>
-	<footer th:replace="layout/layout2 :: footer"></footer>
-	<div th:replace="layout/layout2 :: js"></div>
-	<script th:replace="Usuarios/js/validaciones :: javascript"></script>
+
+
+
+		<!-- Modal de roles de usuario -->
+
+
+
+		<div aria-labelledby="exampleModal" class="modal fade"
+			id="exampleModal" role="dialog" tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content bg-faded">
+					<div class="modal-header  bg-info">
+
+						<label class="modal-title text-center text-white" id="labell">
+							LEA CUIDADOSAMENTE </label>
+
+						<button aria-label="close" class="close" data-dismiss="modal"
+							type="button">
+							<span class="text-white" aria-hidden="true"> × </span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="text-justify">
+							USTEDE DEBE SELECCIONARUN TIPO DE USUARIO ACORDE A LAS ACCIONES
+							QUE HARA EN EL SISTEMA, SI USTED ESTARA A CARGO DE LAS ACCIONES
+							DE COOPERATIVA DEBE SELECCIONAR <span>TESORERO</span> , SI USTED
+							ESTARA A CARGO DE LAS ACCIONES DE BIBLIOTECA DEBE SELECCIONAR <span>BIBLIOTECARIO</span>
+						</h5>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal"
+							type="button">DE ACUERDO</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Fin modal de roles de usuario -->
+
+
+		<!-- Modal de roles de usuario -->
+
+
+
+		<div aria-labelledby="exampleModal" class="modal fade"
+			id="exampleModal2" role="dialog" tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content bg-faded">
+					<div class="modal-header  bg-info">
+
+						<label class="modal-title text-center text-white" id="labell">
+							LEA CUIDADOSAMENTE </label>
+
+						<button aria-label="close" class="close" data-dismiss="modal"
+							type="button">
+							<span class="text-white" aria-hidden="true"> × </span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="text-justify">
+							AL MOMENTO DE REGISTRARSE DEBE DE TENER SU CUENTA ASOCIADA A UNA
+							ESCUELA, PUEDE BUSCARLA INGRESANDO SU <span>CLAVE DE LA
+								ESCUELA</span> Y PULSAR EL BOTON <span>BUSCAR</span>
+						</h5>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" data-dismiss="modal"
+							type="button">DE ACUERDO</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Fin modal de roles de usuario -->
+
+		<footer th:replace="layout/layout2 :: footer"></footer>
+		<div th:replace="layout/layout2 :: js"></div>
+		<script th:replace="Usuarios/js/validaciones :: javascript"></script>
 </body>
 </html>

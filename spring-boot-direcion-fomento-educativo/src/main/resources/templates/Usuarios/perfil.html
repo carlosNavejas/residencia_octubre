@@ -1,10 +1,153 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout2 :: head">
+
+
 </head>
 <body>
+	<header th:replace="layout/layout2 :: header"></header>
 
+	<div class="container bg-light py-5">
+		<form id="form_usu" th:action="@{/usuarios/guardarEdicion}"
+			th:object="${usuario}"    method="post">
+			
+			<div th:if="${rol.nombrerol!='ROLE_ADMIN'}">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<label class="h4"> Datos de la escuela </label>
+				</div>
+			</div>
+			<input type="number"  th:field="*{id_usuario}" hidden="true" />
+	<input type="number" hidden="true" 
+				th:value="${usuario.escuela.id_escuela}" /> 
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group">
+						<label class="text-center h4"> Nombre de la escuela </label> <input
+							class="form-control" type="text" th:value="${usuario.escuela.nombre_escuela}"
+							readonly="readonly" />
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Clave de la escuela </label> <input class="form-control"
+							type="text" 
+							th:value="${usuario.escuela.claveescuela}" readonly="readonly" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Tipo </label>  <input type="text" readonly="readonly"
+							class="form-control" 
+							th:value="${usuario.escuela.tipo}" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Telefo </label>  <input class="form-control" type="text"
+							th:value="${usuario.escuela.telefono}"  readonly="readonly" /> 
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Turno </label>  <input type="text" 
+							readonly="readonly" th:value="${usuario.escuela.turno}" class="form-control" />
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="row py-4">
+				<div class="col-sm-12 text-center">
+					<label class="h4"> Datos del Usuario </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Nombre </label> <input type="text" class="form-control"
+							th:field="*{nombre}" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido paterno </label> <input type="text"
+							th:field="*{apellido_paterno}" class="form-control" />
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label> Apellido materno </label> <input type="text"
+							th:field="*{apellido_materno}" class="form-control" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Correo </label> <input type="email" class="form-control"
+							th:field="*{correo}" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<label> Tipo de usuario </label> <select class="form-control"
+						id="rol_usser" name="rol_usser">
+						<option th:if="${rol.nombrerol=='ROLE_BIBLIOTECARIO'}" value="ROLE_BIBLIOTECARIO">Bibliotecario</option>
+						<option th:if="${rol.nombrerol=='ROLE_TESORERO'}"value="ROLE_TESORERO">Tesorero</option>
+						<option th:if="${rol.nombrerol=='ROLE_ADMIN'}"value="ROLE_ADMIN">ADMINISTRADOR</option>
+						
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Nueva Contraseña </label> <input type="password" class="form-control"
+							id="contrasenaa" name="contrasenaa" />
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Confirme Su Nueva  Contraseña </label> <input type="password"
+							class="form-control" id="contrasena2" name="contrasena2" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+
+				<div class="col-sm-6" sec:authorize="hasRole('ROLE_ADMIN')">
+					<div th:if="${rol.nombrerol!='ROLE_ADMIN'}" class="form-group">
+						
+							
+							<label class="form-check-label">
+        <input type="checkbox"
+							th:field="*{estado}" class="form-check-input" /> Estado del Usuario
+      </label>
+					</div>
+				</div>
+				<div class="col-sm-6"></div>
+			</div>
+			<div class="row py-4">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<a class="btn btn-danger text-white btn-block"> Cancelar </a>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-block btn-info" id="btnregistrar" name="btnregistrar" type="submit">Guardar Cambios</button>
+
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="layout/layout2 :: footer"></footer>
+		<div th:replace="layout/layout2 :: js"></div>
+		<script th:replace="Usuarios/js/validaciones2 :: javascript"></script>
 </body>
 </html>

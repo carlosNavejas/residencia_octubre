@@ -21,11 +21,9 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 @Service("jpaUserDetailsService")
 public class JpaUserDetailsService implements UserDetailsService {
-
 	@Autowired
 	private IUsuarioDao usuarioDao;
 	private Logger logger = LoggerFactory.getLogger(JpaUserDetailsService.class);
-
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
