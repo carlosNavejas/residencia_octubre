@@ -6,10 +6,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.bolsadeideas.springboot.app.models.entity.Acervo_bibliografico;
+import com.bolsadeideas.springboot.app.models.entity.Asignatura;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
+import com.bolsadeideas.springboot.app.models.entity.Item_acervo;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Reparto_utilidades;
@@ -103,4 +106,29 @@ public interface IServiciosService {
 	public Reparto_utilidades findByClaveRepartoUtilidades(Long id_reparto);
 
 	public Page<Reparto_utilidades> findRepartoUtilidadesByIdCoopeartiva(Long idbuscar, Pageable pageable);
+
+	// acervo bibliografico
+	public void saveAcervoBibliografico(Acervo_bibliografico acervo);
+
+	public Page<Reparto_utilidades> findPageAcervoBibliografico(Long idbuscar, Pageable pageable);
+
+	public void deleteAcervoBibliograficoByID(Long id_acervo);
+
+	// item Acervo bibliografico
+	public void saveItemAcervo(Item_acervo item);
+
+	public void deleteItemAcervo(Long id);
+
+	public void finfItemAcervo(Long id);
+
+	public List<Item_acervo> findAllItem_Acervo(Long id);
+
+	// Asignatura del acervo bibliografico
+	public void saveAsignatura(Asignatura asignatura);
+
+	public void deleteAsignatura(Asignatura asignatura);
+
+	public void findOneByIdAsignatura(Asignatura asignatura);
+
+	public List<Asignatura> findAllByIdAsignatura(Long id_biblioteca);
 }

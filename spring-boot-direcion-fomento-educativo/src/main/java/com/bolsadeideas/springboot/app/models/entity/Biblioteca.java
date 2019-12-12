@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+
+
 
 @Entity
 @Table(name = "bibliotecas")
@@ -36,6 +39,17 @@ public class Biblioteca implements Serializable {
 	private Date fecha_registro;
 	@OneToOne(fetch = FetchType.LAZY)
 	private Escuela escuela;
+
+	@OneToOne(mappedBy = "biblioteca", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Acervo_bibliografico acervo_bibliografico;
+
+	public Acervo_bibliografico getAcervo_bibliografico() {
+		return acervo_bibliografico;
+	}
+
+	public void setAcervo_bibliografico(Acervo_bibliografico acervo_bibliografico) {
+		this.acervo_bibliografico = acervo_bibliografico;
+	}
 
 	public Long getClave_biblioteca() {
 		return clave_biblioteca;
