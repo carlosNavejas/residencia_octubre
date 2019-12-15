@@ -74,7 +74,6 @@
 					<button class="btn btn-secondary dropdown-toggle" type="button"
 						id="dropdownMenuButton" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"
-						
 						sec:authentication="name"></button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" sec:authorize="!isAuthenticated()"
@@ -119,13 +118,52 @@
 	</div>
 
 	<div class="container" th:fragment="mensajesinf">
-		<div class="alert alert-success" th:if="${success!=null}"
+		<!-- <div class="alert alert-success" th:if="${success!=null}"
 			th:text="${success}"></div>
 		<div class="alert alert-danger" th:if="${error!=null}"
 			th:text="${error}"></div>
 		<div class="alert alert-warning" th:if="${warning!=null}"
 			th:text="${warning}"></div>
 		<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+
+ -->
+		<div th:if="${warning!=null}"
+			class=" alert alert-warning alert-dismissible fade show" role="alert">
+			<strong th:text="${warning}"></strong> fields below.
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<div th:if="${success!=null}" class="alert alert-success alert-dismissible fade show"
+			role="alert">
+			<strong th:text="${success}"></strong> 
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<div th:if="${error!=null}" class="alert alert-danger alert-dismissible fade show"
+			role="alert">
+			<strong th:text="${error}"></strong> 
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<div th:if="${info!=null}" class="alert alert-info alert-dismissible fade show"
+			role="alert">
+			<strong th:text="${info}"></strong> 
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+
 	</div>
 
 

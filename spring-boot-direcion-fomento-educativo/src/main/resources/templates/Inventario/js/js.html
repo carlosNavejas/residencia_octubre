@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <script th:fragment="javascript" type="text/javascript">
+        $(document).ready(
+        		function(){
+        			$("#otro").prop("required", false);
+                	$("#otro").hide();
+                	$("#lotro").hide();	
+                	$('#otro').on('input', function (e) {
+                	    if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
+                	        this.value = this.value.replace(/[^ a-záéíóúüñ]+/ig,"");
+                	    }
+                	});
+                	
+                	$("#mueble").change(
+                	function(){
+                		var mueble=$("#mueble").val();
+                		
+                		if(mueble=="-1"){
+                			$("#otro").prop("required", true);
+                        	$("#otro").show();
+                        	$("#lotro").show();
+                		}else{
+                			$("#otro").prop("required", false);
+                        	$("#otro").hide();
+                        	$("#lotro").hide();
+                		}
+                	}		
+                	);
+                	
+                	$('#otro').inputlimiter({
+            			limit : 30,
+
+            			remText : '%n caractere%s restantes.',
+            			limitText : 'Campo limitado a %n caractere%s.'
+            		});	
+        			
+                	$('#cantidad').inputlimiter({
+            			limit : 4,
+
+            			remText : '%n caractere%s restantes.',
+            			limitText : 'Campo limitado a %n caractere%s.'
+            		});
+                	
+                	$('#cantidad').numeric({
+        				negative : false
+        			});
+                	
+                	
+                	
+                	
+        		}
+                );
+        
+        
+        function NumText(string){//solo letras y numeros
+            var out = '';
+            //Se añaden las letras validas
+            var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';//Caracteres validos
+        	
+            for (var i=0; i<string.length; i++)
+               if (filtro.indexOf(string.charAt(i)) != -1) 
+        	     out += string.charAt(i);
+            return out;
+        }
+    </script>
+</body>
+
+</html>

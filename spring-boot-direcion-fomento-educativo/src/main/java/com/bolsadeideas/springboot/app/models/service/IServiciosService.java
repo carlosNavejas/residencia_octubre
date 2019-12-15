@@ -12,7 +12,10 @@ import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
+import com.bolsadeideas.springboot.app.models.entity.Inventario;
 import com.bolsadeideas.springboot.app.models.entity.Item_acervo;
+import com.bolsadeideas.springboot.app.models.entity.Item_inventario;
+import com.bolsadeideas.springboot.app.models.entity.Mueble;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Reparto_utilidades;
@@ -131,4 +134,19 @@ public interface IServiciosService {
 	public void findOneByIdAsignatura(Asignatura asignatura);
 
 	public List<Asignatura> findAllByIdAsignatura(Long id_biblioteca);
+
+	// inventario
+	public void saveInventario(Inventario inventario);
+
+	public void saveItemIventario(Item_inventario item);
+
+	public void deleteIntemInventario(Long id_item);
+
+	public Page<Item_inventario> findPageItemInventario(Long idbuscar, Pageable pageable);
+
+//muebles del inventario
+	public void saveMueble(Mueble mueble);
+public Mueble findOneMuebleByNombre(String nombre);
+	public List<Mueble> findAllMuebles();
+
 }

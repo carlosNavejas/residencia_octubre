@@ -14,16 +14,25 @@ import com.bolsadeideas.springboot.app.models.dao.IBibliotecaDao;
 import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
+import com.bolsadeideas.springboot.app.models.dao.IInventarioDao;
+import com.bolsadeideas.springboot.app.models.dao.IIteminventarioDao;
+import com.bolsadeideas.springboot.app.models.dao.IMueblesDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
 import com.bolsadeideas.springboot.app.models.dao.IRegionDao;
 import com.bolsadeideas.springboot.app.models.dao.IRepartoutilidadesDao;
 import com.bolsadeideas.springboot.app.models.dao.IRolesDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
+import com.bolsadeideas.springboot.app.models.entity.Acervo_bibliografico;
+import com.bolsadeideas.springboot.app.models.entity.Asignatura;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Ingresos_egresos;
+import com.bolsadeideas.springboot.app.models.entity.Inventario;
+import com.bolsadeideas.springboot.app.models.entity.Item_acervo;
+import com.bolsadeideas.springboot.app.models.entity.Item_inventario;
+import com.bolsadeideas.springboot.app.models.entity.Mueble;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
 import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.entity.Reparto_utilidades;
@@ -33,6 +42,12 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
 @Service
 public class ServiciosServiceImpl implements IServiciosService {
+	@Autowired
+	private IMueblesDao mueblesDao;
+	@Autowired
+	private IInventarioDao inventarioDao;
+	@Autowired
+	private IIteminventarioDao itemInventarioDao;
 	@Autowired
 	private IRepartoutilidadesDao repartosDao;
 	@Autowired
@@ -297,8 +312,121 @@ public class ServiciosServiceImpl implements IServiciosService {
 	@Transactional(readOnly = true)
 	@Override
 	public Page<Reparto_utilidades> findRepartoUtilidadesByIdCoopeartiva(Long idbuscar, Pageable pageable) {
-		
+
 		return repartosDao.findByCooperativaId(idbuscar, pageable);
+	}
+
+	@Override
+	public void saveAcervoBibliografico(Acervo_bibliografico acervo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Page<Reparto_utilidades> findPageAcervoBibliografico(Long idbuscar, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAcervoBibliograficoByID(Long id_acervo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void saveItemAcervo(Item_acervo item) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteItemAcervo(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void finfItemAcervo(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Item_acervo> findAllItem_Acervo(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveAsignatura(Asignatura asignatura) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteAsignatura(Asignatura asignatura) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void findOneByIdAsignatura(Asignatura asignatura) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Asignatura> findAllByIdAsignatura(Long id_biblioteca) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public void saveInventario(Inventario inventario) {
+		inventarioDao.save(inventario);
+
+	}
+
+	@Transactional
+	@Override
+	public void saveItemIventario(Item_inventario item) {
+		itemInventarioDao.save(item);
+
+	}
+
+	@Transactional
+	@Override
+	public void deleteIntemInventario(Long id_item) {
+		itemInventarioDao.deleteById(id_item);
+
+	}
+
+	@Override
+	public Page<Item_inventario> findPageItemInventario(Long idbuscar, Pageable pageable) {
+
+		return null;
+	}
+
+	@Transactional
+	@Override
+	public void saveMueble(Mueble mueble) {
+		mueblesDao.save(mueble);
+
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Mueble> findAllMuebles() {
+
+		return (List<Mueble>) mueblesDao.findAll();
+	}
+@Transactional(readOnly = true)
+	@Override
+	public Mueble findOneMuebleByNombre(String nombre) {
+
+		return mueblesDao.findByMueble(nombre);
 	}
 
 }

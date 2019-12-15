@@ -49,12 +49,22 @@ public class Cooperativa implements Serializable {
 	private List<Socio> lista_socios;
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ingresos_egresos> lista_ingresos_egresos;
+	@OneToOne(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Inventario intentario;
 
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reparto_utilidades> lista_reparto;
 
 	public List<Reparto_utilidades> getLista_reparto() {
 		return lista_reparto;
+	}
+
+	public Inventario getIntentario() {
+		return intentario;
+	}
+
+	public void setIntentario(Inventario intentario) {
+		this.intentario = intentario;
 	}
 
 	public void setLista_reparto(List<Reparto_utilidades> lista_reparto) {

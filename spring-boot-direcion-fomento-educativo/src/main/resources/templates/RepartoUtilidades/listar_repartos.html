@@ -19,7 +19,8 @@
 				<div class="row">
 					<div class="col-sm-9"></div>
 					<div class="col-sm-3">
-						<a th:href="@{/escuelas/form}" class="btn btn-info btn-block">Agregar
+					
+						<a th:href="@{/reparto-utilidades/}+${idCooperativa}+@{/registro-reparto}" class="btn btn-info btn-block">Agregar
 							Registro</a>
 					</div>
 
@@ -29,11 +30,12 @@
 						<tr>
 							<th>Escuela</th>
 							<th>Clave</th>
-							
+							<th>Cooperativa</th>
 							<th>Fecha de registro</th>
+							<th>Fondo repartible</th>
 							<th>Numero de socios</th>
 							<th>Cantidad Repartida por socio</th>
-							<th>Fondo repartible</th>
+							
 							<th>Editar</th>
 						</tr>
 					</thead>
@@ -42,14 +44,19 @@
 							<td th:if="${cliente.cooperativa.escuela!=null}"
 								th:text="${cliente.cooperativa.escuela.nombre_escuela}"></td>
 							<td th:if="${cliente.cooperativa.escuela==null}"></td>
+							
+							
 							<td th:if="${cliente.cooperativa.escuela!=null}"
 								th:text="${cliente.cooperativa.escuela.claveescuela}"></td>
 							<td th:if="${cliente.cooperativa.escuela==null}"></td>
-							
+							<td th:if="${cliente.cooperativa.escuela!=null}"
+								th:text="${cliente.cooperativa.nombre_cooperativa}"></td>
+							<td th:if="${cliente.cooperativa.escuela==null}"></td>
 							<td th:text="${cliente.fechaRegistro}"></td>
+							<td th:text="${cliente.fondoRepartible}"></td>
 							<td th:text="${cliente.numeroSocios}"></td>
 							<td th:text="${cliente.cantidadPorSocio}"></td>
-							<td th:text="${cliente.fondoRepartible}"></td>
+							
 							<td><a class="btn btn-info text-white"
 								th:href="@{/reparto-utilidades/}+${cliente.id_reparto}+@{/editarregistro-reparto}">Editar</a>
 

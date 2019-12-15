@@ -1,14 +1,19 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,28 +23,34 @@ import javax.persistence.TemporalType;
 @Table(name = "inventarios")
 public class Inventario implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long clave_inventario;
 	@Column(length = 100)
 	private String descripcion;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_registro;
-
 	@OneToOne(targetEntity = Cooperativa.class, fetch = FetchType.LAZY)
 	private Cooperativa cooperativa;
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "inventario_id")
+	List<Item_inventario> listaInventario;
 	public Long getClave_inventario() {
 		return clave_inventario;
 	}
 
 	public void setClave_inventario(Long clave_inventario) {
 		this.clave_inventario = clave_inventario;
+	}
+
+	public List<Item_inventario> getListaInventario() {
+		return listaInventario;
+	}
+
+	public void setListaInventario(List<Item_inventario> listaInventario) {
+		this.listaInventario = listaInventario;
 	}
 
 	public String getDescripcion() {
@@ -67,6 +78,7 @@ public class Inventario implements Serializable {
 	}
 
 	public Inventario() {
+		listaInventario=new ArrayList<Item_inventario>();
 		
 	}
 

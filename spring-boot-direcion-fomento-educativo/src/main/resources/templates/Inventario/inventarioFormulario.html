@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout2 :: head">
+
+</head>
+</head>
+<body>
+	<header th:replace="layout/layout2 :: header"> </header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+	<div class="container bg-light py-5">
+		<form th:object="${item}" action="#" method="post"
+			id="registro_inventario">
+			<div class="row">
+				<div class="col-sm-6">
+					<label> Mueble </label> <select class="custom-select" id="mueble"
+						name="mueble">
+						<option th:each="mueble: ${muebles}" th:value="${mueble.id}"
+							th:text="${mueble.mueble}"></option>
+
+					</select>
+				</div>
+				<div class="col-sm-6">
+					<label id="lotro" name="lotro">Ingrese el nombre del mueble</label>
+					<input class="form-control" type="text" id="otro" name="otro"></input>
+				</div>
+			</div>
+
+			<input type="number" th:field="*{id_item_inventario}" /> <input
+				type="number" id="cooperativa_id" name="cooperativa_id"
+				th:value="${cooperativa.clave_cooperatival}" />
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Estado </label> <select th:field="*{estado}"
+							class="form-control">
+							<option value="Bueno">Bueno</option>
+							<option value="Regular">Regulrar</option>
+							<option value="Malo">Malo</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label> Cantidad </label> <input class="form-control" max="200"
+							th:field="*{cantidad}" min="1" type="number" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<a class="btn btn-block btn-danger text-white" href="#">Cancelar</a>
+				</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<button type="submit" class="btn btn-block btn-info">Registrar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer th:replace="layout/layout2 :: footer"> </footer>
+	<div th:replace="layout/layout2 :: js"></div>
+	<script th:replace="/Inventario/js/js :: javascript">
+		
+	</script>
+</body>
+</html>

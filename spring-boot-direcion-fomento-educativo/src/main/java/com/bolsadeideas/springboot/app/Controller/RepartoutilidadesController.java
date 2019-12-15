@@ -34,6 +34,7 @@ public class RepartoutilidadesController {
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Reparto_utilidades> lescuelas = serviciosDaos.findRepartoUtilidadesByIdCoopeartiva(idbuscar, pageRequest);
 		PageRender<Reparto_utilidades> pageRender = new PageRender<Reparto_utilidades>("/usuarios/listar", lescuelas);
+		model.addAttribute("idCooperativa", idbuscar);
 		model.addAttribute("titulo", "Listado de usuarios");
 		model.addAttribute("usuaurios", lescuelas);
 		model.addAttribute("page", pageRender);

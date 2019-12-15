@@ -7,53 +7,66 @@
 <body>
 	<script type="text/javascript" th:fragment="js">
 		$(document).ready(function() {
-
-			$("#fondoRepartible").prop("required", true);
-			$("#numeroSocios").prop("required", true);
-			$("#cantidadPorSocio").prop("required", true);
-
-			$("#fondoRepartible").keyup(function() {
-				calcularPorSocio();
-			});
-			$("#numeroSocios").keyup(function() {
-				calcularPorSocio();
-			});
-
-			//limitar valores de datos a enteros con punto decimal
-			$('input[type=number]').numeric({
-				negative : false,
-				decimalPlaces : 2
-			});
-			
-			
 			/*
-			$("#fondoRepartible").prop("required", true);
-			$("#numeroSocios").prop("required", true);
-			$("#cantidadPorSocio").prop("required", true);
-
-			*/
-			$('input[type=number]').prop("min", "1");
-			//limitar tamano de inputs
-			$("#fondoRepartible").inputlimiter({
-				limit : 6,
-
-				remText : '%n caractere%s restantes.',
-				limitText : 'Campo limitado a %n caractere%s.'
+			 $("#fondoRepartible").prop("required", true);
+			 $("#numeroSocios").prop("required", true);
+			 $("#cantidadPorSocio").prop("required", true);
+			 */
+			 $("#fondoRepartible").keyup(function(){calcularPorSocio();});
+			 $("#numeroSocios").keyup(function(){calcularPorSocio();});
+			 
+			 var fondo=$("#fondoRepartible").val();
+			 if(fondo<1){
+				 limpiar()
+			 }
+			//validar solo numeros
+			$('#fondoRepartible').numeric({decimalPlaces: 2, negative: false});
+			$('#numeroSocios').numeric({decimal: false, negative: false});
+			$('#cantidadPorSocio').numeric({decimalPlaces: 2, negative: false});
+			$('#fondoRepartible').inputlimiter({
+				limit: 6,
+				remText: '%n caractere%s restantes.',
+				limitText: 'Campo limitado a %n caractere%s.'
 			});
-			$("#numeroSocios").inputlimiter({
-				limit : 4,
-
-				remText : '%n caractere%s restantes.',
-				limitText : 'Campo limitado a %n caractere%s.'
+			$('#numeroSocios').inputlimiter({
+				limit: 4,
+				remText: '%n caractere%s restantes.',
+				limitText: 'Campo limitado a %n caractere%s.'
 			});
-			$("#cantidadPorSocio").inputlimiter({
-				limit : 3,
-
-				remText : '%n caractere%s restantes.',
-				limitText : 'Campo limitado a %n caractere%s.'
+			$('#cantidadPorSocio').inputlimiter({
+				limit: 6,
+				remText: '%n caractere%s restantes.',
+				limitText: 'Campo limitado a %n caractere%s.'
 			});
+
+			$("#form_reparto").validate({
+				rules : {
+					fondoRepartible : "required",
+					numeroSocios : "required",
+					cantidadPorSocio : "required"
+				},
+				messages : {
+
+					fondoRepartible : {
+						required : "Ingrese el fondo repartible"
+					},
+					numeroSocios : {
+						required : "Ingrese el numero de socios"
+					},
+
+					cantidadPorSocio : {
+						required : "Este campo es obligatorio"
+					}
+				}
+			});
+
 		});
 
+		
+		function limpiar(){
+			$("#fondoRepartible").val('');
+			$("#numeroSocios").val('');
+			$("#cantidadPorSocio").val('');}
 		function calcularPorSocio() {
 			var fondo = $("#fondoRepartible").val();
 			var numsocios = $("#numeroSocios").val();
@@ -61,11 +74,12 @@
 			if (fondo > 0 && numsocios > 0) {
 				var y = fondo / numsocios;
 				$("#cantidadPorSocio").val(y.toFixed(2));
-			}else{
+				//.toFixed(2)
+			} else {
 				$("#cantidadPorSocio").val('');
 			}
 
-		}
+		};
 	</script>
 </body>
 </html>

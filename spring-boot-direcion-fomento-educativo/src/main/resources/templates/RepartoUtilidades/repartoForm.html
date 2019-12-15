@@ -10,14 +10,15 @@
 		<div th:replace="layout/layout2 :: mensajesinf"></div>
 
 		<!-- th:action="@{/usuarios/guardar}" -->
-		<form th:action="@{/reparto-utilidades/guardar}" id="form_usu" th:object="${reparto}" method="post">
+		<form th:action="@{/reparto-utilidades/guardar}" id="form_reparto"
+			th:object="${reparto}" method="post">
 
 			<div class="row">
 				<div class="col-sm-12 text-center">
 					<label class="h4"> Datos de la escuela </label>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
@@ -56,10 +57,9 @@
 					</div>
 				</div>
 
-<input type="text"
-							readonly="readonly" id="id_coo" name="id_coo"
-							th:value="${reparto.cooperativa.clave_cooperatival}" hidden="true"
-							class="form-control" />
+				<input type="text" readonly="readonly" id="id_coo" name="id_coo"
+					th:value="${reparto.cooperativa.clave_cooperatival}" hidden="true"
+					class="form-control" />
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Turno </label> <input type="text" id="turno"
@@ -116,7 +116,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label> Numero De Socios </label> <input type="number" 
+						<label> Numero De Socios </label> <input type="number"
 							th:field="*{numeroSocios}" class="form-control" />
 					</div>
 				</div>
@@ -128,26 +128,29 @@
 							th:field="*{cantidadPorSocio}" class="form-control" />
 					</div>
 				</div>
-				
+
 				<input id="date" name="date" th:value="*{fechaRegistro}"
-							class="form-control" readonly="readonly" type="text" />
-				
-				<input type="text" id="turno"
-							readonly="readonly"
-							th:field="*{id_reparto}"
-							class="form-control" />
+					class="form-control" hidden="true" readonly="readonly" type="text" />
+
+				<input type="text" hidden="true" id="turno" readonly="readonly"
+					th:field="*{id_reparto}" class="form-control" />
 				<div class="col-sm-6"></div>
 			</div>
-			
-			
+
+
 			<div class="row bg-light">
 				<div class="col-sm-3">
-					<a class="btn text-white btn-block btn-danger">Cancelar</a>
+					<a th:href="@{/reparto-utilidades/}+${reparto.cooperativa.clave_cooperatival}+@{/listar/}" class="btn text-white btn-block btn-danger">Cancelar</a>
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
-				<div class="col-sm-3">
-					<button class="btn text-white btn-block btn-info" type="submit" >Guardar Cambios</button>
+				<div th:if="${reparto.fondoRepartible>0}" class="col-sm-3">
+					<button class="btn text-white btn-block btn-info" type="submit">Guardar
+						Cambios</button>
+				</div>
+				
+				<div th:if="${reparto.fondoRepartible<1}" class="col-sm-3">
+					<button class="btn text-white btn-block btn-info" type="submit">Registrar</button>
 				</div>
 			</div>
 		</form>
