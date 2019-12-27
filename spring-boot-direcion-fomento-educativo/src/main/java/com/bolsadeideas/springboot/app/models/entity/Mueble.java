@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,9 +24,28 @@ public class Mueble implements Serializable {
 	private Long id;
 	@Column(length = 30)
 	private String mueble;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	private Item_inventario item;
+	
+	public Item_inventario getItem() {
+		return item;
+	}
+
+
+
+	public void setItem(Item_inventario item) {
+		this.item = item;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
+	
+	
+	
 	public void setId(Long id) {
 		this.id = id;
 	}

@@ -14,7 +14,7 @@ import com.bolsadeideas.springboot.app.models.dao.IBibliotecaDao;
 import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
-import com.bolsadeideas.springboot.app.models.dao.IInventarioDao;
+
 import com.bolsadeideas.springboot.app.models.dao.IIteminventarioDao;
 import com.bolsadeideas.springboot.app.models.dao.IMueblesDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
@@ -44,8 +44,7 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 public class ServiciosServiceImpl implements IServiciosService {
 	@Autowired
 	private IMueblesDao mueblesDao;
-	@Autowired
-	private IInventarioDao inventarioDao;
+
 	@Autowired
 	private IIteminventarioDao itemInventarioDao;
 	@Autowired
@@ -385,7 +384,6 @@ public class ServiciosServiceImpl implements IServiciosService {
 	@Transactional
 	@Override
 	public void saveInventario(Inventario inventario) {
-		inventarioDao.save(inventario);
 
 	}
 
@@ -403,12 +401,6 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	}
 
-	@Override
-	public Page<Item_inventario> findPageItemInventario(Long idbuscar, Pageable pageable) {
-
-		return null;
-	}
-
 	@Transactional
 	@Override
 	public void saveMueble(Mueble mueble) {
@@ -422,11 +414,25 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 		return (List<Mueble>) mueblesDao.findAll();
 	}
-@Transactional(readOnly = true)
+
+	@Transactional(readOnly = true)
 	@Override
 	public Mueble findOneMuebleByNombre(String nombre) {
 
 		return mueblesDao.findByMueble(nombre);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Item_inventario> findItemInventarioByCooperativa(Long idbuscar, Pageable pageable) {
+
+		return itemInventarioDao.findItemByCooperativa(idbuscar, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Item_inventario findItem_inventarioById(Long id_item) {
+		return itemInventarioDao.findById(id_item).orElse(null);
 	}
 
 }

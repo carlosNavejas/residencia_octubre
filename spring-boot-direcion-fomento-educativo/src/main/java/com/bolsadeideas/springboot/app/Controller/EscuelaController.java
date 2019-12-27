@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.Controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bolsadeideas.springboot.app.models.entity.Direccion;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
 import com.bolsadeideas.springboot.app.models.entity.Municipio;
+import com.bolsadeideas.springboot.app.models.entity.Region;
 import com.bolsadeideas.springboot.app.models.service.ServiciosServiceImpl;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
@@ -55,7 +57,7 @@ public class EscuelaController {
 	}
 
 	/* Guarda la escuela */
-	// @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_INVITADO')")
+
 	@Secured({ "ROLE_ADMIN", "ROLE_INVITADO" })
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Escuela escuela, @RequestParam(name = "calle", required = false) String calle,
@@ -99,7 +101,7 @@ public class EscuelaController {
 		}
 		SecurityContextHolderAwareRequestWrapper securityContext = new SecurityContextHolderAwareRequestWrapper(request,
 				"ROLE_");
-		
+
 		if (securityContext.isUserInRole("ADMIN")) {
 
 		}
@@ -158,4 +160,30 @@ public class EscuelaController {
 		return authorities.contains(new SimpleGrantedAuthority(role));
 
 	}
+
+	/* Formulario para Editar la escuela */
+	@RequestMapping(value = "/editar2/{id}")
+	public String editar2(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash) {
+		Escuela escuela = null;
+
+		if (id <= 0) {
+			flash.addFlashAttribute("error", "La escuela no existe");
+			return "redirect:/home";
+		}
+		escuela = servicios.findbyIdEscuela(id);
+		if (escuela == null) {
+			flash.addFlashAttribute("error", "La escuela no existe!");
+			return "redirect:/escuelas/listar";
+		}
+		List<Region> regiones = servicios.finAllRegiones();
+		List<Municipio> municipios = servicios
+				.municipioFindByRegionId(escuela.getDireccion().getMunicipio().getRegion().getId());
+
+		model.addAttribute("municipios", municipios);
+		model.addAttribute("regiones", regiones);
+		model.addAttribute("escuela", escuela);
+		model.addAttribute("titulo", "Editar Escuela");
+		return "escuelas/formEscuelasEditar2";
+	}
+
 }

@@ -8,10 +8,10 @@
 	<header th:replace="layout/layout2 :: header"> </header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 	<div class="container bg-light py-5">
-		<form th:object="${item}" action="#" method="post"
-			id="registro_inventario">
+		<form th:object="${item}" th:action="@{/inventario/guardar}"
+			method="post" id="registro_inventario">
 			<div class="row">
-				<div class="col-sm-6">
+				<!-- <div class="col-sm-6">
 					<label> Mueble </label> <select class="custom-select" id="mueble"
 						name="mueble">
 						<option th:each="mueble: ${muebles}" th:value="${mueble.id}"
@@ -22,11 +22,19 @@
 				<div class="col-sm-6">
 					<label id="lotro" name="lotro">Ingrese el nombre del mueble</label>
 					<input class="form-control" type="text" id="otro" name="otro"></input>
+				</div>-->
+				<div class="col-sm-6">
+					<label>Ingrese el nombre del mueble</label> <input
+						class="form-control" type="text" th:field="*{mueble.mueble}"
+						required="required"></input>
 				</div>
 			</div>
 
-			<input type="number" th:field="*{id_item_inventario}" /> <input
-				type="number" id="cooperativa_id" name="cooperativa_id"
+			<input hidden="true" type="text" id="fecha" name="fecha"
+				th:value="*{fecha_registro}" /> <input hidden="true" type="number"
+				th:field="*{mueble.id}" /> <input hidden="true" type="number"
+				th:field="*{id_item_inventario}" /> <input hidden="true" type="number"
+				id="cooperativa_id" name="cooperativa_id"
 				th:value="${cooperativa.clave_cooperatival}" />
 			<div class="row">
 				<div class="col-sm-6">
@@ -42,7 +50,7 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label> Cantidad </label> <input class="form-control" max="200"
-							th:field="*{cantidad}" min="1" type="number" />
+							th:field="*{cantidad}" min="1" type="number" required="required" />
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+			$('#claveescuela').on('input', function (e) {
+			    if (!/^[a-zA-Z0-9]*$/i.test(this.value)) {
+			        this.value = this.value.replace(/[^a-zA-Z0-9]+/ig,"");
+			    }
+			});
+			
+			
+			$('#apellido_pdir').on('input', function (e) {
+			    if (!/^[a-záéíóúüñ]*$/i.test(this.value)) {
+			        this.value = this.value.replace(/[^a-záéíóúüñ]+/ig,"");
+			    }
+			});
+			$('#nombre_dir').on('input', function (e) {
+			    if (!/^[a-záéíóúüñ]*$/i.test(this.value)) {
+			        this.value = this.value.replace(/[^a-záéíóúüñ]+/ig,"");
+			    }
+			});
+			$('#apellido_mdir').on('input', function (e) {
+			    if (!/^[a-záéíóúüñ]*$/i.test(this.value)) {
+			        this.value = this.value.replace(/[^a-záéíóúüñ]+/ig,"");
+			    }
+			});
+			//limite de caracteres
+			$('#nombre_escuela').inputlimiter({
+				limit : 45,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#claveescuela').inputlimiter({
+				limit : 10,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#telefono').inputlimiter({
+				limit : 10,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.',
+				digits:true
+			});
+			$('#apellido_mdir').inputlimiter({
+				limit : 15,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#apellido_pdir').inputlimiter({
+				limit : 15,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#nombre_dir').inputlimiter({
+				limit : 20,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#calle').inputlimiter({
+				limit : 35,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			$('#numeroc').inputlimiter({
+				limit : 4,
+				remText : '%n caractere%s restantes.',
+				limitText : 'Campo limitado a %n caractere%s.'
+			});
+			//fin limite caracteres
+
+			$("#claveescuela").keyup(function() {
+				//pasar a mayusculas
+				$("#claveescuela").val($("#claveescuela").val().toUpperCase());
+			});
+			
+			//validar formulario
+			$("#form_esc").validate({
+				rules : {
+					nombre_escuela: {
+						required : true
+
+					},
+					claveescuela : {
+						required : true
+
+					},
+					telefono : {
+						required : true,
+						minlength:10
+					}
+				}
+
+			});
+			//fin validar formulario
+
+			//liminar entrada de datos 
+			$("select#direccion.municipio.region.id").change(
+					function() {
+						var id_region = $(
+								"select#direccion.municipio.region.id").val();
+						alert("Si entro");
+						if (id_region == 1) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='1'>Acapulco</option></select>");
+						}
+
+						if (id_region == 2) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='12'>Ayutla de los Libres</option><option value='13'>Azoyú</option><option value='18'>Copala</option><option value='25'>Cuautepec</option><option value='23'>Cuajinicuilapa</option><option value='30'>Florencio Villarreal</option><option value='36'>Igualapa</option><option value='80'>Juchitán</option><option value='77'>Marquelia</option><option value='46'>Ometepec</option><option value='52'>San Luis Acatlán</option><option value='53'>San Marcos</option><option value='56'>Tecoanapa</option><option value='62'>Tlacoachistlahuaca</option><option value='71'>Xochistlahuaca</option></select>");
+						}
+						if (id_region == 3) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='11'>Atoyac de Álvarez</option><option value='14'>Benito Juárez</option><option value='16'>Coahuayutla de José María Izazaga</option><option value='21'>Coyuca de Benítez</option><option value='68'>La Unión de Isidoro Montes de Oca</option><option value='48'>Petatlán</option><option value='57'>Técpan de Galeana</option><option value='38'>Zihuatanejo de Azueta</option>");
+						}
+						if (id_region == 4) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='2'>Ahuacuotzingo</option><option value='28'>Chilapa de Álvarez</option>	<option value='29'>Chilpancingo de los Bravo</option>	<option value='75'>Eduardo Neri</option><option value='32'>General Heliodoro Castillo</option>	<option value='79'>José Joaquín de Herrera</option>	<option value='39'>Juan R. Escudero</option>	<option value='40'>Leonardo Bravo</option>	<option value='42'>Mártir de Cuilapan</option>	<option value='44'>Mochitlán</option>	<option value='51'>Quechultenango</option>	<option value='61'>Tixtla de Guerrero</option>	<option value='74'>Zitlala</option>	</select>");
+						}
+						if (id_region == 5) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'>"
+													+ "<option value='76'>Acatepec</option>"
+													+ "<option value='4'>Alcozauca de Guerrero</option>"
+													+ "<option value='5'>Alpoyeca</option>"
+													+ "<option value='9'>Atlamajalcingo del Monte</option>"
+													+ "<option value='10'>Atlixtac</option>"
+													+ "<option value='78'>Cochoapa el Grande</option>"
+													+ "<option value='20'>Copanatoyac</option>"
+													+ "<option value='24'>Cualác</option>"
+													+ "<option value='33'>Huamuxtitlán</option>"
+													+ "<option value='81'>Iliatenco</option>"
+													+ "<option value='41'>Malinaltepec</option>"
+													+ "<option value='43'>Metlatónoc</option>"
+													+ "<option value='45'>Olinalá</option>"
+													+ "<option value='63'>Tlacoapa</option>"
+													+ "<option value='65'>Tlalixtaquilla de Maldonado</option>"
+													+ "<option value='66'>Tlapa de Comonfort</option>"
+													+ "<option value='69'>Xalpatláhuac</option>"
+													+ "<option value='70'>Xochihuehuetlán</option>"
+													+ "<option value='72'>Zapotitlán Tablas</option>");
+						}
+						if (id_region == 6) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='6'>Apaxtla</option><option value='8'>Atenango del Río</option><option value='15'>Buenavista de Cuéllar</option><option value='17'>Cocula</option><option value='19'>Copalillo</option><option value='26'>Cuetzala del Progreso</option><option value='34'>Huitzuco de los Figueroa</option><option value='35'>Iguala de la Independencia</option><option value='31'>General Canuto A. Neri</option><option value='37'>Ixcateopan de Cuauhtémoc</option><option value='47'>Pedro Ascencio Alquisiras</option><option value='49'>Pilcaya</option><option value='55'>Taxco de Alarcón</option><option value='58'>Teloloapan</option><option value='59'>Tepecoacuilco de Trujano</option><option value='60'>Tetipac</option>");
+						}
+						if (id_region == 7) {
+							$("#cambio")
+									.html(
+											"<select id='municipio' name='municipio' class='form-control'><option value='3'>Ajuchitlán del Progreso</option><option value='7'>Arcelia</option><option value='22'>Coyuca de Catalán</option><option value='27'>Cutzamala de Pinzón</option><option value='50'>Pungarabato</option><option value='54'>San Miguel Totolapan</option><option value='64'>Tlalchapa</option><option value='67'>Tlapehuala</option><option value='73'>Zirándaro</option></select>");
+						}
+					});
+
+		});
+		
+		function seleccionarRegion(){
+			var id_region=document.getElementById("direccion.municipio.region.id").value;
+			if (id_region == 1) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='1'>Acapulco</option></select>");
+			}
+
+			if (id_region == 2) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='12'>Ayutla de los Libres</option><option value='13'>Azoyú</option><option value='18'>Copala</option><option value='25'>Cuautepec</option><option value='23'>Cuajinicuilapa</option><option value='30'>Florencio Villarreal</option><option value='36'>Igualapa</option><option value='80'>Juchitán</option><option value='77'>Marquelia</option><option value='46'>Ometepec</option><option value='52'>San Luis Acatlán</option><option value='53'>San Marcos</option><option value='56'>Tecoanapa</option><option value='62'>Tlacoachistlahuaca</option><option value='71'>Xochistlahuaca</option></select>");
+			}
+			if (id_region == 3) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='11'>Atoyac de Álvarez</option><option value='14'>Benito Juárez</option><option value='16'>Coahuayutla de José María Izazaga</option><option value='21'>Coyuca de Benítez</option><option value='68'>La Unión de Isidoro Montes de Oca</option><option value='48'>Petatlán</option><option value='57'>Técpan de Galeana</option><option value='38'>Zihuatanejo de Azueta</option>");
+			}
+			if (id_region == 4) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='2'>Ahuacuotzingo</option><option value='28'>Chilapa de Álvarez</option>	<option value='29'>Chilpancingo de los Bravo</option>	<option value='75'>Eduardo Neri</option><option value='32'>General Heliodoro Castillo</option>	<option value='79'>José Joaquín de Herrera</option>	<option value='39'>Juan R. Escudero</option>	<option value='40'>Leonardo Bravo</option>	<option value='42'>Mártir de Cuilapan</option>	<option value='44'>Mochitlán</option>	<option value='51'>Quechultenango</option>	<option value='61'>Tixtla de Guerrero</option>	<option value='74'>Zitlala</option>	</select>");
+			}
+			if (id_region == 5) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'>"
+										+ "<option value='76'>Acatepec</option>"
+										+ "<option value='4'>Alcozauca de Guerrero</option>"
+										+ "<option value='5'>Alpoyeca</option>"
+										+ "<option value='9'>Atlamajalcingo del Monte</option>"
+										+ "<option value='10'>Atlixtac</option>"
+										+ "<option value='78'>Cochoapa el Grande</option>"
+										+ "<option value='20'>Copanatoyac</option>"
+										+ "<option value='24'>Cualác</option>"
+										+ "<option value='33'>Huamuxtitlán</option>"
+										+ "<option value='81'>Iliatenco</option>"
+										+ "<option value='41'>Malinaltepec</option>"
+										+ "<option value='43'>Metlatónoc</option>"
+										+ "<option value='45'>Olinalá</option>"
+										+ "<option value='63'>Tlacoapa</option>"
+										+ "<option value='65'>Tlalixtaquilla de Maldonado</option>"
+										+ "<option value='66'>Tlapa de Comonfort</option>"
+										+ "<option value='69'>Xalpatláhuac</option>"
+										+ "<option value='70'>Xochihuehuetlán</option>"
+										+ "<option value='72'>Zapotitlán Tablas</option>");
+			}
+			if (id_region == 6) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='6'>Apaxtla</option><option value='8'>Atenango del Río</option><option value='15'>Buenavista de Cuéllar</option><option value='17'>Cocula</option><option value='19'>Copalillo</option><option value='26'>Cuetzala del Progreso</option><option value='34'>Huitzuco de los Figueroa</option><option value='35'>Iguala de la Independencia</option><option value='31'>General Canuto A. Neri</option><option value='37'>Ixcateopan de Cuauhtémoc</option><option value='47'>Pedro Ascencio Alquisiras</option><option value='49'>Pilcaya</option><option value='55'>Taxco de Alarcón</option><option value='58'>Teloloapan</option><option value='59'>Tepecoacuilco de Trujano</option><option value='60'>Tetipac</option>");
+			}
+			if (id_region == 7) {
+				$("#cambio")
+						.html(
+								"<select th:field='*{direccion.municipio.id_municipio}' class='form-control'><option value='3'>Ajuchitlán del Progreso</option><option value='7'>Arcelia</option><option value='22'>Coyuca de Catalán</option><option value='27'>Cutzamala de Pinzón</option><option value='50'>Pungarabato</option><option value='54'>San Miguel Totolapan</option><option value='64'>Tlalchapa</option><option value='67'>Tlapehuala</option><option value='73'>Zirándaro</option></select>");
+			}
+	
+			
+		}
+	</script>
+</body>
+</html>

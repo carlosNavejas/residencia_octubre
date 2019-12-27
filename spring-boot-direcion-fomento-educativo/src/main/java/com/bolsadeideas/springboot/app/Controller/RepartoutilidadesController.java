@@ -1,5 +1,8 @@
 package com.bolsadeideas.springboot.app.Controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +51,9 @@ public class RepartoutilidadesController {
 			if (cooperativa == null) {
 				return "redirect:/home";
 			}
+			
+			
+			
 			Reparto_utilidades reparto = new Reparto_utilidades();
 			reparto.setCooperativa(cooperativa);
 			model.addAttribute("reparto", reparto);
@@ -58,9 +64,21 @@ public class RepartoutilidadesController {
 	}
 
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
-	public String guardar(@RequestParam(name = "id_coo", required = true) String id_coo, Reparto_utilidades reparto,
+	public String guardar(@RequestParam(name="fecha",required = false)String fecha, @RequestParam(name = "id_coo", required = true) String id_coo, Reparto_utilidades reparto,
 			Model model, RedirectAttributes flash, SessionStatus status) {
 
+		if (fecha != null) {
+			SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-MM-dd");
+
+			Date fechaAntesMod = new Date();
+			try {
+				fechaAntesMod = dateformat2.parse(fecha);
+				reparto.setFechaRegistro(fechaAntesMod);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
 		String mensaje = (reparto.getId_reparto() != null) ? "Editado con exito"
 				: "Se ha registrado el reparto de utilidades";
 		Cooperativa cooperativa = serviciosDaos.findOneCooperativaById(Long.parseLong(id_coo));

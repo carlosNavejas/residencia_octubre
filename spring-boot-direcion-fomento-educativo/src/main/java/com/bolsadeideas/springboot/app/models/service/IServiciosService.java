@@ -140,13 +140,17 @@ public interface IServiciosService {
 
 	public void saveItemIventario(Item_inventario item);
 
+	public Item_inventario findItem_inventarioById(Long id_item);
+
 	public void deleteIntemInventario(Long id_item);
 
-	public Page<Item_inventario> findPageItemInventario(Long idbuscar, Pageable pageable);
+	public Page<Item_inventario> findItemInventarioByCooperativa(Long idbuscar, Pageable pageable);
 
 //muebles del inventario
 	public void saveMueble(Mueble mueble);
-public Mueble findOneMuebleByNombre(String nombre);
+
+	public Mueble findOneMuebleByNombre(String nombre);
+
 	public List<Mueble> findAllMuebles();
 
 }

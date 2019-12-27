@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -40,8 +41,8 @@ public class Cooperativa implements Serializable {
 	private Double monto;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_registro;
-	@OneToOne(targetEntity = Inventario.class, mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Inventario inventario;
+	//@OneToOne(targetEntity = Inventario.class, mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//private Inventario inventario;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	private Escuela escuela;
@@ -49,23 +50,29 @@ public class Cooperativa implements Serializable {
 	private List<Socio> lista_socios;
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Ingresos_egresos> lista_ingresos_egresos;
-	@OneToOne(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Inventario intentario;
+//	@OneToOne(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//private Inventario intentario;
 
 	@OneToMany(mappedBy = "cooperativa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Reparto_utilidades> lista_reparto;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	
+	List<Item_inventario> listaInventario;
+
+	public List<Item_inventario> getListaInventario() {
+		return listaInventario;
+	}
+
+	public void setListaInventario(List<Item_inventario> listaInventario) {
+		this.listaInventario = listaInventario;
+	}
 
 	public List<Reparto_utilidades> getLista_reparto() {
 		return lista_reparto;
 	}
 
-	public Inventario getIntentario() {
-		return intentario;
-	}
 
-	public void setIntentario(Inventario intentario) {
-		this.intentario = intentario;
-	}
 
 	public void setLista_reparto(List<Reparto_utilidades> lista_reparto) {
 		this.lista_reparto = lista_reparto;
@@ -116,23 +123,17 @@ public class Cooperativa implements Serializable {
 		this.fecha_registro = fecha_registro;
 	}
 
-	public Inventario getInventario() {
-		return inventario;
-	}
-
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
-	}
+	
 
 	public Cooperativa(Long clave_cooperatival, String nombre_cooperativa, String tipo, Double monto,
-			Date fecha_registro, Inventario inventario) {
+			Date fecha_registro) {
 
 		this.clave_cooperatival = clave_cooperatival;
 		this.nombre_cooperativa = nombre_cooperativa;
 		this.tipo = tipo;
 		this.monto = monto;
 		this.fecha_registro = fecha_registro;
-		this.inventario = inventario;
+		
 	}
 
 	public Cooperativa() {
@@ -161,7 +162,7 @@ public class Cooperativa implements Serializable {
 	public String toString() {
 		return "Cooperativa [clave_cooperatival=" + clave_cooperatival + ", nombre_cooperativa=" + nombre_cooperativa
 				+ ", tipo=" + tipo + ", monto=" + monto + ", fecha_registro=" + fecha_registro + ", inventario="
-				+ inventario + "]";
+				 + "]";
 	}
 
 	public Escuela getEscuela() {

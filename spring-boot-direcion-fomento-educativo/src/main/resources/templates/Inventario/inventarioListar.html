@@ -1,11 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout2 :: head">
 
 </head>
 <body>
 	<header th:replace="layout/layout2 :: header"></header>
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
+
+
+
+
+	<div class="container py-4">
+		<div class="row">
+			<div class="col-sm-9"></div>
+			<div class="col-sm-3">
+				<a th:href="@{/escuelas/form}" class="btn btn-info btn-block">Agregar</a>
+			</div>
+
+		</div>
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<table class="table table-light">
+					<thead>
+						<tr>
+							<th>Mueble</th>
+							<th>Estado</th>
+							<th>Cantidad</th>
+							<th>Fecha de registro</th>
+
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="escuela: ${escuelas}">
+
+							<td th:text="${escuela.mueble.mueble}"></td>
+							<td th:text="${escuela.estado}"></td>
+							<td th:text="${escuela.cantidad}"></td>
+							<td th:text="${escuela.fecha_registro}"></td>
+							<td><a class="btn  text-white btn-danger"
+								th:href="@{/inventario/eliminar/}+${escuela.id_item_inventario}"
+								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')">
+									<!-- <i class="fas fa-trash-alt fa-lg"> </i>--> Eliminar
+							</a></td>
+							<td><a class="btn text-white btn-info"
+								th:href="@{/inventario/}+${escuela.id_item_inventario}+@{/editar-inventario}"
+								th:text="Editar"></a></td>
+
+
+
+
+						</tr>
+
+
+					</tbody>
+				</table>
+				<nav th:replace="layout/Paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+
+
+
+	</div>
 
 
 	<div th:replace="layout/layout2 :: js"></div>
