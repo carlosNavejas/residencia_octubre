@@ -25,7 +25,7 @@ public class Municipio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_municipio;
 	@NotEmpty
-	@Column(length = 40)
+	@Column(length = 60)
 	private String municipio;
 	
 	@ManyToOne(targetEntity = Region.class,fetch =FetchType.LAZY )

@@ -22,7 +22,7 @@ public class Mueble implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length = 30)
+	@Column(length = 50)
 	private String mueble;
 	
 	@OneToOne(fetch = FetchType.LAZY)

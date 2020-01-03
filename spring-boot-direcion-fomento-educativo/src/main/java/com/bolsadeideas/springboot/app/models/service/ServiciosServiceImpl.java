@@ -10,11 +10,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.bolsadeideas.springboot.app.models.dao.IAsignaturaDao;
 import com.bolsadeideas.springboot.app.models.dao.IBibliotecaDao;
 import com.bolsadeideas.springboot.app.models.dao.ICooperativaDao;
 import com.bolsadeideas.springboot.app.models.dao.IEscuelaDao;
 import com.bolsadeideas.springboot.app.models.dao.IIngresosEgresosDao;
-
+import com.bolsadeideas.springboot.app.models.dao.IItemAcervoDao;
 import com.bolsadeideas.springboot.app.models.dao.IIteminventarioDao;
 import com.bolsadeideas.springboot.app.models.dao.IMueblesDao;
 import com.bolsadeideas.springboot.app.models.dao.IMunicipioDao;
@@ -23,7 +24,7 @@ import com.bolsadeideas.springboot.app.models.dao.IRepartoutilidadesDao;
 import com.bolsadeideas.springboot.app.models.dao.IRolesDao;
 import com.bolsadeideas.springboot.app.models.dao.ISociosDao;
 import com.bolsadeideas.springboot.app.models.dao.IUsuarioDao;
-import com.bolsadeideas.springboot.app.models.entity.Acervo_bibliografico;
+
 import com.bolsadeideas.springboot.app.models.entity.Asignatura;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
@@ -44,6 +45,9 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 public class ServiciosServiceImpl implements IServiciosService {
 	@Autowired
 	private IMueblesDao mueblesDao;
+
+	@Autowired
+	private IItemAcervoDao itemacervoDaoo;
 
 	@Autowired
 	private IIteminventarioDao itemInventarioDao;
@@ -67,6 +71,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 	private IUsuarioDao usuarioDao;
 	@Autowired
 	private IRolesDao rolDao;
+	@Autowired
+	private IAsignaturaDao asignaturaDao;
 
 	@Transactional(readOnly = true)
 	public List<Municipio> municipioFindByName(String municipio) {
@@ -277,8 +283,8 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	@Override
 	public List<Socio> listarSociosByCooperativa(Long id_cooperativa) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return socioDao.findByCooperativaa(id_cooperativa);
 	}
 
 	@Override
@@ -316,50 +322,26 @@ public class ServiciosServiceImpl implements IServiciosService {
 	}
 
 	@Override
-	public void saveAcervoBibliografico(Acervo_bibliografico acervo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Page<Reparto_utilidades> findPageAcervoBibliografico(Long idbuscar, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteAcervoBibliograficoByID(Long id_acervo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void saveItemAcervo(Item_acervo item) {
-		// TODO Auto-generated method stub
+		itemacervoDaoo.save(item);
 
 	}
 
 	@Override
 	public void deleteItemAcervo(Long id) {
-		// TODO Auto-generated method stub
+		itemacervoDaoo.deleteById(id);
 
 	}
 
 	@Override
-	public void finfItemAcervo(Long id) {
-		// TODO Auto-generated method stub
+	public Item_acervo finfItemAcervo(Long id) {
+		return itemacervoDaoo.findById(id).orElse(null);
 
-	}
-
-	@Override
-	public List<Item_acervo> findAllItem_Acervo(Long id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public void saveAsignatura(Asignatura asignatura) {
-		// TODO Auto-generated method stub
+		asignaturaDao.save(asignatura);
 
 	}
 
@@ -371,14 +353,13 @@ public class ServiciosServiceImpl implements IServiciosService {
 
 	@Override
 	public void findOneByIdAsignatura(Asignatura asignatura) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<Asignatura> findAllByIdAsignatura(Long id_biblioteca) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Asignatura> findAllAsignatura() {
+
+		return (List<Asignatura>) asignaturaDao.findAll();
 	}
 
 	@Transactional
@@ -433,6 +414,46 @@ public class ServiciosServiceImpl implements IServiciosService {
 	@Override
 	public Item_inventario findItem_inventarioById(Long id_item) {
 		return itemInventarioDao.findById(id_item).orElse(null);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Item_acervo> findItemAcervoByBiblioteca(Long idbuscar, Pageable pageable) {
+
+		return itemacervoDaoo.findItemByBiblioteca(idbuscar, pageable);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public int findEscuelaCountByRegion(Long idRegion) {
+		return escuelaDao.findEscuelaByRegion(idRegion);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public int findCooperativasescuelasByRegion(Long id_region) {
+
+		return cooperativaDao.findCountCooperativasByEscuelaRegion(id_region);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public int findBibliotecasescuelasByRegion(Long id_region) {
+
+		return bibliotecaDao.findCountBibliotecasByEscuelaRegion(id_region);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Item_acervo> findItemAcervoByClaveBiblioteca(Long id_biblioteca) {
+
+		return itemacervoDaoo.findItemAcervoByBiblioteca(id_biblioteca);
+	}
+
+	@Override
+	public List<Item_inventario> findInventarioByCooperativaID(Long id_Cooperativa) {
+
+		return itemInventarioDao.findItemByCooperativaInventario(id_Cooperativa);
 	}
 
 }

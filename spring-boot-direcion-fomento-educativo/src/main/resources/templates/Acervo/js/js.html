@@ -4,12 +4,25 @@
 </head>
 <body>
 
-<script type="text/javascript" th:fragment="js">
-		$(document).ready(
+	<script type="text/javascript" th:fragment="js">
+		$(document)
+				.ready(
+						function() {
+							$("#cantidad").val("1");
 
-			);
+							$("select")
+									.change(
+											function() {
+												var elementtt = document
+														.getElementById("asignatura.id_asignatura").value;
+												if (elementtt == -1) {
+													$("#exampleModal").modal();
 
-</script>
+													//$("#exampleModalll").modal();
+												}
+											});
+						});
+	</script>
 
 </body>
 

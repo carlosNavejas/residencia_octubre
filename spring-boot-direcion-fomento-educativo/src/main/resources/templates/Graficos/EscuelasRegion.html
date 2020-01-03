@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout2 :: head">
+
+</head>
+
+<script th:src="@{/js/Chart.min.js}"></script>
+<script th:src="@{/js/utils.js}"></script>
+<style>
+canvas {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+</style>
+<body>
+	<header th:replace="layout/layout2 :: header"></header>
+	<div th:replace="layout/layout2 :: mensajesinf"></div>
+	<div class="container bg-ligth">
+		<p class="text-center h1 py-5">Escuelas Por Region</p>
+
+		<div class="row">
+			<canvas class="col-sm-12" id="canvas">
+            </canvas>
+		</div>
+
+
+
+
+	</div>
+
+
+	<div class="container py-5">
+
+		<div class="row">
+			<div class="col-sm-4">
+				<button class="btn btn-block btn-info">Cancelar</button>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+
+				<a class="btn btn-block btn-info" target="_blank"
+					th:href="@{/escuelas-por-regiones/(format=pdf)}"
+					>Generar Reporte</a>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.onload = function() {
+
+			var titulos = new Array();
+			var numeros = new Array();
+			$('input[type="text"]').each(function() {
+
+				titulos.push($(this).val());
+			});
+			$('input[type="number"]').each(function() {
+
+				numeros.push($(this).val());
+			});
+
+			var color = Chart.helpers.color;
+			var barChartData = {
+				labels : titulos,
+				datasets : [ {
+					label : 'Numero De Escuelas Por Region',
+					backgroundColor : color(window.chartColors.orange).alpha(
+							0.5).rgbString(),
+					borderColor : window.chartColors.yellow,
+					borderWidth : 2,
+					data : numeros
+				} ]
+
+			};
+
+			//hasta que cargue el contenido
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type : 'bar',
+				data : barChartData,
+				options : {
+					responsive : true,
+					legend : {
+						position : 'top',
+					},
+					title : {
+						display : true
+
+					}
+				}
+			});
+
+		};
+	</script>
+	<table hidden="true" class="table table-bordered">
+		<thead>
+			<tr>
+				<th>text</th>
+				<th>number</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="escuela: ${escuelas}">
+
+				<td><input type="number" th:value="${escuela.cantidadEscuelas}" />
+				</td>
+				<td><input type="text" th:value="${escuela.municipio}" /></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<div th:replace="layout/layout2 :: js"></div>
+
+	<footer th:replace="layout/layout2 :: footer"></footer>
+
+
+</body>
+</html>

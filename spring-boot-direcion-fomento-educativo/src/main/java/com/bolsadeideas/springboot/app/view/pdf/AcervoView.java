@@ -1,23 +1,20 @@
 package com.bolsadeideas.springboot.app.view.pdf;
 
 import java.awt.Color;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Phaser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
-import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
+import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Escuela;
-import com.bolsadeideas.springboot.app.models.entity.RegionesEscuelas;
-import com.bolsadeideas.springboot.app.models.entity.Socio;
+import com.bolsadeideas.springboot.app.models.entity.Item_acervo;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
@@ -28,8 +25,8 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("/Pdfs/sociosPorCooperativa")
-public class SociosPdfView extends AbstractPdfView {
+@Component("/Pdfs/AcervoBiblioteca")
+public class AcervoView extends AbstractPdfView {
 
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer,
@@ -57,19 +54,18 @@ public class SociosPdfView extends AbstractPdfView {
 		document.add(l1);
 		document.add(Chunk.NEWLINE);
 
-		// Cabecera
 		PdfPCell celdaRenger = null;
 
-		ArrayList<Socio> listaSocios = (ArrayList<Socio>) model.get("socios");
-		// datos de la escuela
-		Socio so = listaSocios.get(0);
-		Cooperativa co = so.getCooperativa();
-		Escuela escuela = co.getEscuela();
+		List<Item_acervo> listaAcervo = (ArrayList<Item_acervo>) model.get("acervo");
+		// Datos de la escuela y bibliteoca
+		Item_acervo item = listaAcervo.get(0);
+		Biblioteca biblioteca = item.getBiblioteca();
+		Escuela escuela = biblioteca.getEscuela();
 		PdfPTable tablaDatosEscuela = new PdfPTable(2);
 		celdaRenger = new PdfPCell(new Phrase("Datos de la escuela"));
-		celdaRenger.setColspan(2);
-		celdaRenger.setPadding(4f);
 		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
+		celdaRenger.setPadding(8f);
+		celdaRenger.setColspan(2);
 		tablaDatosEscuela.addCell(celdaRenger);
 		tablaDatosEscuela.addCell("Escuela: ");
 		tablaDatosEscuela.addCell(escuela.getNombre_escuela().toString().toLowerCase());
@@ -82,81 +78,50 @@ public class SociosPdfView extends AbstractPdfView {
 		tablaDatosEscuela.addCell(escuela.getTipo());
 		tablaDatosEscuela.addCell("Telefono");
 		tablaDatosEscuela.addCell(escuela.getTelefono());
-
-		celdaRenger = new PdfPCell(new Phrase("Datos de la cooperativa"));
+		celdaRenger = new PdfPCell(new Phrase("Datos de la biblioteca"));
+		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
+		celdaRenger.setPadding(8f);
 		celdaRenger.setColspan(2);
-		celdaRenger.setPadding(4f);
-		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
 		tablaDatosEscuela.addCell(celdaRenger);
-		tablaDatosEscuela.addCell("Cooperativa");
-		tablaDatosEscuela.addCell(co.getNombre_cooperativa());
-		tablaDatosEscuela.addCell("Tipo");
-		tablaDatosEscuela.addCell(co.getTipo());
+		tablaDatosEscuela.addCell("Biblioteca");
+		tablaDatosEscuela.addCell(biblioteca.getNombre_bibioteca());
 		tablaDatosEscuela.addCell("Fecha de registro");
-		tablaDatosEscuela.addCell(co.getFecha_registro().toString());
-		tablaDatosEscuela.setWidths(new float[] { 1, 2.5f });
-		tablaDatosEscuela.setSpacingAfter(15f);
+		tablaDatosEscuela.addCell(biblioteca.getFecha_registro().toString());
+		tablaDatosEscuela.setSpacingAfter(18f);
+		
+		tablaDatosEscuela.setWidths(new float[] { 1,2f });
 		document.add(tablaDatosEscuela);
-		// fin datos de la escuela y cooperativa
-		PdfPTable tabla = new PdfPTable(5);
+		// fin Datos de la escuela y bibliteoca
 
-		celdaRenger = new PdfPCell(new Phrase("Nombre"));
+		PdfPTable tabla = new PdfPTable(3);
+
+		celdaRenger = new PdfPCell(new Phrase("ASIGNATURA"));
 		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
 		celdaRenger.setPadding(8f);
 		tabla.addCell(celdaRenger);
-		celdaRenger = new PdfPCell(new Phrase("Grado"));
+		celdaRenger = new PdfPCell(new Phrase("CANTIDAD"));
 		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
 		celdaRenger.setPadding(8f);
 		tabla.addCell(celdaRenger);
-		celdaRenger = new PdfPCell(new Phrase("Grupo"));
+		celdaRenger = new PdfPCell(new Phrase("FECHA DE REGISTRO"));
 		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
 		celdaRenger.setPadding(8f);
 		tabla.addCell(celdaRenger);
-		celdaRenger = new PdfPCell(new Phrase("Titular"));
 
-		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
-		celdaRenger.setPadding(8f);
-		tabla.addCell(celdaRenger);
-		celdaRenger = new PdfPCell(new Phrase("Fecha de registro"));
-		celdaRenger.setBackgroundColor(new Color(3, 252, 211));
-		celdaRenger.setPadding(8f);
-		tabla.addCell(celdaRenger);
-		int totalEscuelas = 0;
-
-		Font fuentes = new Font();
-
-		fuentes.setSize(40f);
-
-		Phrase phrase = null;
-
-		for (Socio socio : listaSocios) {
-
-			phrase = new Phrase(socio.getNombre() + " " + socio.getApellido_p() + " " + socio.getApellido_m());
-			tabla.addCell(phrase);
-			phrase = new Phrase(socio.getGrado());
-
-			tabla.addCell(phrase);
-
-			phrase = new Phrase(socio.getGrupo());
-
-			tabla.addCell(phrase);
-
-			phrase = new Phrase(socio.getTitular());
-
-			tabla.addCell(phrase);
-
-			phrase = new Phrase(socio.getFecha_registro().toString());
-
-			tabla.addCell(phrase);
-			totalEscuelas++;
+		int cantidadAcervo = 0;
+		for (Item_acervo item_acervo : listaAcervo) {
+			tabla.addCell(new Phrase(item_acervo.getAsignatura().getAsignatura()));
+			tabla.addCell(new Phrase(item_acervo.getCantidad() + ""));
+			tabla.addCell(new Phrase(item_acervo.getFechaRegistro().toString()));
+			cantidadAcervo++;
 		}
-		celdaRenger = new PdfPCell(new Phrase("Total de socios: " + totalEscuelas));
-		celdaRenger.setPadding(5f);
-		celdaRenger.setColspan(5);
+		celdaRenger = new PdfPCell(new Phrase("Total: " + cantidadAcervo));
 		celdaRenger.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
-		tabla.addCell(celdaRenger);
+		celdaRenger.setColspan(3);
+		celdaRenger.setPadding(8f);
 
-		tabla.setWidths(new float[] { 2f, 1, 1, 2f, 2f });
+		tabla.addCell(celdaRenger);
+		tabla.setWidths(new float[] { 2f, 1, 2f });
 		document.add(tabla);
 
 	}

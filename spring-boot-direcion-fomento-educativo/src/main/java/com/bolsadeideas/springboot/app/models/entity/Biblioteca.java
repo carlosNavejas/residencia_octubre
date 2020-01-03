@@ -1,9 +1,10 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,14 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
-
-
 
 @Entity
 @Table(name = "bibliotecas")
@@ -40,15 +40,15 @@ public class Biblioteca implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	private Escuela escuela;
 
-	@OneToOne(mappedBy = "biblioteca", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Acervo_bibliografico acervo_bibliografico;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	List<Item_acervo> listaAcervo;
 
-	public Acervo_bibliografico getAcervo_bibliografico() {
-		return acervo_bibliografico;
+	public List<Item_acervo> getListaAcervo() {
+		return listaAcervo;
 	}
 
-	public void setAcervo_bibliografico(Acervo_bibliografico acervo_bibliografico) {
-		this.acervo_bibliografico = acervo_bibliografico;
+	public void setListaAcervo(List<Item_acervo> listaAcervo) {
+		this.listaAcervo = listaAcervo;
 	}
 
 	public Long getClave_biblioteca() {
@@ -89,12 +89,16 @@ public class Biblioteca implements Serializable {
 		this.nombre_bibioteca = nombre_bibioteca;
 		this.fecha_registro = fecha_registro;
 		this.escuela = escuela;
+		listaAcervo = new ArrayList<Item_acervo>();
 	}
 
 	public Biblioteca() {
-
+		listaAcervo = new ArrayList<Item_acervo>();
 	}
 
+	
+	
+	
 	@PrePersist
 	public void prePersist() {
 		fecha_registro = new Date();

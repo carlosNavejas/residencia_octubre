@@ -55,26 +55,60 @@
 		</nav>
 -->
 		<nav class="dark-primary-color navbar navbar-expand-lg navbar-dark">
-			<a class="navbar-brand" href="#">Dirección de Fomento Educativo</a>
+			<a class="navbar-brand h3" href="#">Dirección de Fomento Educativo</a>
 			<button class="navbar-toggler" type="button" data-toogle="collapse"
 				arial-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home
-					</a></li>
-
-					<li class="nav-item "><a class="nav-link" href="#">Home </a></li>
-					<li class="nav-item "><a class="nav-link" href="#">Home </a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle h4 text-white" href="#"
+						id="navbarDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> Escuelas </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Lista de escuelas</a> <a
+								class="dropdown-item" href="#">Agregar Escuela</a>
+						</div></li>
+						<!--  -->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle h4 text-white" href="#"
+						id="navbarDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> Cooperativa </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Detalle de la cooperativa</a> <a
+								class="dropdown-item" href="#">Socios de cooperativa</a>
+								<a class="dropdown-item" href="#">Inventario</a>
+								<a class="dropdown-item" href="#">Ingresos y Egresos</a>
+						</div></li>
+<!--  -->
+				<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle h4 text-white" href="#"
+						id="navbarDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> Biblioteca </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Acervo bibliografico</a> 
+						</div></li>
+<!--  -->
 				</ul>
 
 
 				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button"
+					<button sec:authorize="!isAuthenticated()"
+						class="btn btn-secondary dropdown-toggle" type="button"
+						id="dropdownMenuButton" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">Iniciar Sesion</button>
+
+
+					<button sec:authorize="isAuthenticated()"
+						class="btn btn-secondary dropdown-toggle" type="button"
 						id="dropdownMenuButton" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"
 						sec:authentication="name"></button>
+
+
+
+
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" sec:authorize="!isAuthenticated()"
 							th:href="@{/login}">Iniciar Sesion</a>
@@ -136,27 +170,27 @@
 			</button>
 		</div>
 
-		<div th:if="${success!=null}" class="alert alert-success alert-dismissible fade show"
-			role="alert">
-			<strong th:text="${success}"></strong> 
+		<div th:if="${success!=null}"
+			class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong th:text="${success}"></strong>
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
 
-		<div th:if="${error!=null}" class="alert alert-danger alert-dismissible fade show"
-			role="alert">
-			<strong th:text="${error}"></strong> 
+		<div th:if="${error!=null}"
+			class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong th:text="${error}"></strong>
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
 
-		<div th:if="${info!=null}" class="alert alert-info alert-dismissible fade show"
-			role="alert">
-			<strong th:text="${info}"></strong> 
+		<div th:if="${info!=null}"
+			class="alert alert-info alert-dismissible fade show" role="alert">
+			<strong th:text="${info}"></strong>
 			<button type="button" class="close" data-dismiss="alert"
 				aria-label="Close">
 				<span aria-hidden="true">&times;</span>

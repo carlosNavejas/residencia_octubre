@@ -58,7 +58,7 @@ public class EscuelaController {
 
 	/* Guarda la escuela */
 
-	@Secured({ "ROLE_ADMIN", "ROLE_INVITADO" })
+	@Secured( "ROLE_ADMIN" )
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public String guardar(@Valid Escuela escuela, @RequestParam(name = "calle", required = false) String calle,
 			@RequestParam(name = "municipio", required = false) Long municipio,

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout2 :: head">
 
 </head>
@@ -8,7 +9,7 @@
 	<div th:replace="layout/layout2 :: mensajesinf"></div>
 
 	<div class="container py-4">
-		<div class="row">
+		<div class="row py-5">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-3">
 				<a th:href="@{/socios/form/}+${id}" class="btn btn-info btn-block">Agregar
@@ -37,8 +38,8 @@
 							<td th:text="${socio.grado}"></td>
 							<td th:text="${socio.grupo}"></td>
 							<td th:text="${socio.titular}"></td>
-							<td><a th:href="@{/socios/editar/}+${socio.id_socio}" class="btn btn-info">Editar</a>
-							</td>
+							<td><a th:href="@{/socios/editar/}+${socio.id_socio}"
+								class="btn btn-info">Editar</a></td>
 							<td><a th:href="@{/socios/eliminar/}+${socio.id_socio}"
 								class="btn"
 								onclick="return confirm('El registro se eliminara permanentemente\n¿Estas seguro que quieres eliminar la escuela?')">
@@ -57,7 +58,18 @@
 	</div>
 
 
-
+	<div class="container">
+		<div class="row py-5">
+			<div class="col-sm-3">
+				<a class="btn btn-block btn-danger text-white">Regresar</a>
+			</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3">
+				<a class="btn btn-block btn-info text-white" target="_blank" th:href="@{/1/socios-por-cooperativa/(format=pdf)}">Generar Reporte</a>
+			</div>
+		</div>
+	</div>
 	<footer th:replace="layout/layout2 :: footer"></footer>
 	<div th:replace="layout/layout2 :: js"></div>
 </body>

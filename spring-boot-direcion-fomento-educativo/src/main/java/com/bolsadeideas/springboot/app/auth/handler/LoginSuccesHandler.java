@@ -11,16 +11,17 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
+
 @Component
-public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler{
+public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		SessionFlashMapManager flasMapManager=new SessionFlashMapManager();
-		FlashMap flashMap=new FlashMap();
-		flashMap.put("info", "Bienvenido "+authentication.getName()+" !!!");
+		SessionFlashMapManager flasMapManager = new SessionFlashMapManager();
+		FlashMap flashMap = new FlashMap();
+	//	flashMap.put("info", "Bienvenido " + authentication.getName() + " !!!");
 		flasMapManager.saveOutputFlashMap(flashMap, request, response);
-	logger.info("El usuario '"+authentication.getName()+"' ha iniciado sesion con exito");
+		logger.info("El usuario '" + authentication.getName() + "' ha iniciado sesion con exito");
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 

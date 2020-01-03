@@ -57,7 +57,6 @@ public class Cooperativa implements Serializable {
 	private List<Reparto_utilidades> lista_reparto;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	
 	List<Item_inventario> listaInventario;
 
 	public List<Item_inventario> getListaInventario() {

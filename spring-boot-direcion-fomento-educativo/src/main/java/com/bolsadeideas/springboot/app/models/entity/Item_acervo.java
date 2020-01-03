@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,7 +26,18 @@ public class Item_acervo implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaRegistro;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Biblioteca.class, fetch = FetchType.LAZY)
+	private Biblioteca biblioteca;
+
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
+	}
+
+	@OneToOne(fetch = FetchType.LAZY)
 	private Asignatura asignatura;
 
 	private int cantidad;
@@ -71,7 +82,5 @@ public class Item_acervo implements Serializable {
 	public void iniciarFecha() {
 		fechaRegistro = new Date();
 	}
-
-	
 
 }

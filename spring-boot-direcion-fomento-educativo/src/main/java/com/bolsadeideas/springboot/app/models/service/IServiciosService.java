@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import com.bolsadeideas.springboot.app.models.entity.Acervo_bibliografico;
 import com.bolsadeideas.springboot.app.models.entity.Asignatura;
 import com.bolsadeideas.springboot.app.models.entity.Biblioteca;
 import com.bolsadeideas.springboot.app.models.entity.Cooperativa;
@@ -111,20 +109,23 @@ public interface IServiciosService {
 	public Page<Reparto_utilidades> findRepartoUtilidadesByIdCoopeartiva(Long idbuscar, Pageable pageable);
 
 	// acervo bibliografico
-	public void saveAcervoBibliografico(Acervo_bibliografico acervo);
+	// public void saveAcervoBibliografico(Acervo_bibliografico acervo);
 
-	public Page<Reparto_utilidades> findPageAcervoBibliografico(Long idbuscar, Pageable pageable);
+	// public Page<Reparto_utilidades> findPageAcervoBibliografico(Long idbuscar,
+	// Pageable pageable);
 
-	public void deleteAcervoBibliograficoByID(Long id_acervo);
+	// public void deleteAcervoBibliograficoByID(Long id_acervo);
 
 	// item Acervo bibliografico
 	public void saveItemAcervo(Item_acervo item);
 
 	public void deleteItemAcervo(Long id);
 
-	public void finfItemAcervo(Long id);
+	public Item_acervo finfItemAcervo(Long id);
 
-	public List<Item_acervo> findAllItem_Acervo(Long id);
+	public List<Item_acervo> findItemAcervoByClaveBiblioteca(Long id_biblioteca);
+
+	public Page<Item_acervo> findItemAcervoByBiblioteca(Long idbuscar, Pageable pageable);
 
 	// Asignatura del acervo bibliografico
 	public void saveAsignatura(Asignatura asignatura);
@@ -133,7 +134,7 @@ public interface IServiciosService {
 
 	public void findOneByIdAsignatura(Asignatura asignatura);
 
-	public List<Asignatura> findAllByIdAsignatura(Long id_biblioteca);
+	public List<Asignatura> findAllAsignatura();
 
 	// inventario
 	public void saveInventario(Inventario inventario);
@@ -143,6 +144,7 @@ public interface IServiciosService {
 	public Item_inventario findItem_inventarioById(Long id_item);
 
 	public void deleteIntemInventario(Long id_item);
+	public List<Item_inventario>findInventarioByCooperativaID(Long id_Cooperativa);
 
 	public Page<Item_inventario> findItemInventarioByCooperativa(Long idbuscar, Pageable pageable);
 
@@ -152,5 +154,12 @@ public interface IServiciosService {
 	public Mueble findOneMuebleByNombre(String nombre);
 
 	public List<Mueble> findAllMuebles();
+
+	// Reportes
+	public int findEscuelaCountByRegion(Long idRegion);
+
+	public int findCooperativasescuelasByRegion(Long id_region);
+
+	public int findBibliotecasescuelasByRegion(Long id_region);
 
 }
